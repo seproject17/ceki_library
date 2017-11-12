@@ -21,7 +21,7 @@
 
 ## Архитектура
 
-![Архитектура](CEKI\ Library.png)
+![Архитектура](/CEKI\ Library.png)
 
 ## Полезные ссылки
  1. [A Top Shelf Web Stack—Rails 5 API + ActiveAdmin + Create React App](https://medium.com/superhighfives/a-top-shelf-web-stack-rails-5-api-activeadmin-create-react-app-de5481b7ec0b) 
