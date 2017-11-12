@@ -21,7 +21,18 @@
 
 ## Архитектура
 
-![Архитектура](/CEKI\ Library.png)
+### Стек технологий
+
+ 1. Ruby / RoR 4
+ 2. Capistrano 
+ 3. Puma
+ 4. React + React Router + Redux (optional)
+ 5. nginx
+ 6. OpenSSH
+ 7. Ubuntu 14.04 / 16.04
+ 8. Git
+ 9. PostgreSQL
+ 10. Redis (optional)
 
 ## Полезные ссылки
  1. [A Top Shelf Web Stack—Rails 5 API + ActiveAdmin + Create React App](https://medium.com/superhighfives/a-top-shelf-web-stack-rails-5-api-activeadmin-create-react-app-de5481b7ec0b) 
