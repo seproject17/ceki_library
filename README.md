@@ -23,7 +23,7 @@
 
 ### Стек технологий
 
- 1. Ruby / RoR 4
+ 1. Ruby / RoR 5
  2. Capistrano 
  3. Puma
  4. React + React Router + Redux (optional)
