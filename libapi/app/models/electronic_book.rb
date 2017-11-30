@@ -1,0 +1,2 @@
+class ElectronicBook < ApplicationRecord
+end
