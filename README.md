@@ -45,5 +45,8 @@
  1. [A Top Shelf Web Stack—Rails 5 API + ActiveAdmin + Create React App](https://medium.com/superhighfives/a-top-shelf-web-stack-rails-5-api-activeadmin-create-react-app-de5481b7ec0b) 
  2. [Build a RESTful JSON API With Rails 5 - Part One](https://scotch.io/tutorials/build-a-restful-json-api-with-rails-5-part-one)
  3. [Ruby on Rails Swagger](https://github.com/domaindrivendev/rswag)
+ 4. https://rubyplus.com/articles/4311-Securing-an-API-in-Rails-5-using-Token-Based-Authentication
+ 5. http://culttt.com/2016/01/20/implementing-roles-and-permissions-in-ruby-on-rails/
+ 6. http://www.mccartie.com/2016/11/03/token-based-api-authentication.html
 
 
