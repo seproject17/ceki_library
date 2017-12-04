@@ -40,6 +40,54 @@
  git clone https://github.com/seproject17/ceki_library/
  cd ceki_library
  ```
+ 
+ 2. Установите brew (если у вас Mac)
+ ```bash
+ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+ ```
+ 
+ 3. Обновите ruby 
+ ```bash
+ brew update
+ brew install ruby-build
+ brew install rbenv
+ rbenv install 2.4.2
+ rbenv global 2.4.2
+ ```
+ 
+ 4. Установите rails
+ ```bash
+ gem install bundler
+ gem install rails
+ ```
+ 
+ 5. Установите postgresql
+ ```bash
+ brew install postgres
+ ```
+ 
+ 6. Войдите в клиент postgresql
+ ```bash
+ psql postgres
+ ```
+ 
+ 7. Создайте пользователя 
+ ```sql
+ CREATE USER ceki WITH password 'seproject17' CREATEDB LOGIN;
+ ```
+ 
+ 8. Выйдите из клиента
+ ```sql
+ \q
+ ```
+ 
+ 9. Запустите сервер
+ ```bash
+ rails s
+ ```
+ 
+ 10. Наберите в браузере localhost:3000 и вы увидет веселую картинку, значит все OK
+ 11. Наберите в браузере localhost:3000/api_docs и вы увидете документацию к API
 
 ## Полезные ссылки
  1. [A Top Shelf Web Stack—Rails 5 API + ActiveAdmin + Create React App](https://medium.com/superhighfives/a-top-shelf-web-stack-rails-5-api-activeadmin-create-react-app-de5481b7ec0b) 
