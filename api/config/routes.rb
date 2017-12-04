@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  apipie
   resources :reviews
   resources :e_books
   resources :books

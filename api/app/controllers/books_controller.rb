@@ -1,7 +1,11 @@
 class BooksController < ApplicationController
+
   before_action :set_book, only: [:show, :update, :destroy]
 
   # GET /books
+  api :GET, '/books', 'Get all books'
+  error :code => 401, :desc => 'Unauthorized'
+  error :code => 404, :desc => 'Not Found'
   def index
     @books = Book.all
 
@@ -9,11 +13,17 @@ class BooksController < ApplicationController
   end
 
   # GET /books/1
+  api :GET, '/books/:id', 'Find book by id'
+  error :code => 401, :desc => 'Unauthorized'
+  error :code => 404, :desc => 'Not Found'
   def show
     render json: @book
   end
 
   # POST /books
+  api :POST, '/books', 'Create book'
+  error :code => 401, :desc => 'Unauthorized'
+  error :code => 404, :desc => 'Not Found', :meta => {:anything => 'you can think of'}
   def create
     @book = Book.new(book_params)
 
@@ -25,6 +35,9 @@ class BooksController < ApplicationController
   end
 
   # PATCH/PUT /books/1
+  api :PUT, '/books/:id', 'Update book'
+  error :code => 401, :desc => 'Unauthorized'
+  error :code => 404, :desc => 'Not Found'
   def update
     if @book.update(book_params)
       render json: @book
@@ -34,6 +47,9 @@ class BooksController < ApplicationController
   end
 
   # DELETE /books/1
+  api :DELETE, '/books/:id', 'Delete book'
+  error :code => 401, :desc => 'Unauthorized'
+  error :code => 404, :desc => 'Not Found'
   def destroy
     @book.destroy
   end
