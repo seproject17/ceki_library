@@ -9,10 +9,8 @@ Rails.application.routes.draw do
     get '/users/:id/books/read', action: :find_read_books
     get '/users/:id/books/borrowed', action: :find_borrowed_books
   end
-  resources :users do
-  	post '/users/login', action: :login
-  	post '/users/logout', action: :logout
-  	put '/users/change_password', action: :change_password
-  	put '/users/change_email', action: :change_email
-  end
+  resources :users
+  post 'login' => 'users#login'
+  put 'change_password' => 'users#change_password'
+  put 'change_email' => 'users#change_email'
 end
