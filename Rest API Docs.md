@@ -10,7 +10,7 @@
 | URL  | Description |
 | ---  | ----------- |
 | [GET /users](#get-users)  | Find all users |
-| GET /users/{id} | Find one user with specific id |
+| [GET /users/{id}](#get-users-id) | Find one user with specific id |
 | POST /users | Create new user account |
 | PUT /users/{id} | Update user account |
 | DELETE /users/{id} | Delete user account |
