@@ -9,7 +9,7 @@
 
 | URL  | Description |
 | ---  | ----------- |
-| GET /users  | Find all users |
+| [GET /users](#get_\/_users)  | Find all users |
 | GET /users/{id} | Find one user with specific id |
 | POST /users | Create new user account |
 | PUT /users/{id} | Update user account |
