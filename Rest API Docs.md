@@ -2,7 +2,28 @@
 ===============
 Библиотека ЦЭКИ
 
-**Version:** v1
+**Version:** v1.0.0
+
+## Summary
+### Users
+
+| URL  | Description |
+| GET /users  | Find all users |
+| GET /users/{id} | Find one user with specific id |
+| POST /users | Create new user account |
+| PUT /users/{id} | Update user account |
+| DELETE /users/{id} | Delete user account |
+| POST /users/login | Login in system |
+| POST /users/{id}/change_username | Change username |
+| POST /users/{id}/change_password | Change password |
+
+### Books
+
+### Book Items
+
+### Book Item Operations
+
+### Reviews
 
 ### /users
 ---
@@ -14,50 +35,3 @@
 | Code | Description |
 | ---- | ----------- |
 | 200 | Успешная операция |
-
-### /users/{id}
----
-##### ***GET***
-**Summary:** Вернуть учетную запись пользователя
-
-**Parameters**
-
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| id | path | Уникальный идентификатор пользователя | Yes | integer (in64) |
-
-**Responses**
-
-| Code | Description |
-| ---- | ----------- |
-| 200 | Success response |
-
-##### ***PUT***
-**Summary:** Обновить учетную запись пользователя
-
-**Parameters**
-
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| id | path | Уникальный идентификатор пользователя | Yes | integer (in64) |
-
-**Responses**
-
-| Code | Description |
-| ---- | ----------- |
-| 200 | Success response |
-
-##### ***DELETE***
-**Summary:** Удалить учетную запись пользователя
-
-**Parameters**
-
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| id | path | Уникальный идентификатор пользователя | Yes | integer (in64) |
-
-**Responses**
-
-| Code | Description |
-| ---- | ----------- |
-| 200 | Success response |
