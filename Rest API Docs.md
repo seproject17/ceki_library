@@ -60,7 +60,6 @@
 
 ## Detailed 
 ### Users
---- 
 
 #### GET /users
 ---
@@ -70,4 +69,74 @@
 
 | Code | Description |
 | ---- | ----------- |
-| 200 | Успешная операция |
+| 200 | Success |
+
+#### GET /users/{id}
+---
+**Summary:** Find one user with specific id
+
+**Responses**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+
+#### POST /users
+---
+**Summary:** Create new user account
+
+**Responses**
+
+| Code | Description |
+| ---- | ----------- |
+| 201 | New user account created |
+
+#### PUT /users/{id}
+---
+**Summary:** Update user account
+
+**Responses**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | User account updated |
+
+#### DELETE /users/{id}
+---
+**Summary:** Delete user account
+
+**Responses**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | User account deleted |
+
+#### POST /users/login
+---
+**Summary:** Login in system
+
+**Responses**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | User was logged in |
+
+#### PUT /users/{id}/change_email
+---
+**Summary:** Change users email
+
+**Responses**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+
+#### PUT /users/{id}/change_password
+---
+**Summary:** Change users password
+
+**Responses**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
