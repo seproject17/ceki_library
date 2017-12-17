@@ -8,6 +8,7 @@
 ### Users
 
 | URL  | Description |
+| ---  | ----------- |
 | GET /users  | Find all users |
 | GET /users/{id} | Find one user with specific id |
 | POST /users | Create new user account |
