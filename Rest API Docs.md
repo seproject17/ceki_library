@@ -60,10 +60,10 @@
 
 ## Detailed 
 ### Users
+--- 
 
-#### /users
+#### GET /users
 ---
-##### ***GET***
 **Summary:** Find all users
 
 **Responses**
