@@ -2,7 +2,7 @@
 ## ВАЖНО
 Возможный стек технологий:
  1. Rails API 
- 2. React + React Router + Redux (optional) на Node
+ 2. Vue.js
  3. nginx
  4. PostgreSQL
  5. Хостим бек-сервер на ?
@@ -26,7 +26,7 @@
  1. Ruby / RoR 5
  2. Capistrano 
  3. Puma
- 4. React + React Router + Redux (optional)
+ 4. Vue.js
  5. nginx
  6. OpenSSH
  7. Ubuntu 14.04 / 16.04
@@ -89,6 +89,9 @@
  
  10. Наберите в браузере localhost:3000 и вы увидет веселую картинку, значит все OK
  11. Наберите в браузере localhost:3000/api_docs и вы увидете документацию к API
+
+### API
+[Документация по API](/Rest\ API\ Docs.md)
 
 ## Полезные ссылки
  1. [A Top Shelf Web Stack—Rails 5 API + ActiveAdmin + Create React App](https://medium.com/superhighfives/a-top-shelf-web-stack-rails-5-api-activeadmin-create-react-app-de5481b7ec0b) 
