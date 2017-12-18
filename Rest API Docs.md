@@ -667,7 +667,7 @@ PDF file
 **Request body**
 ```json
 {
-    "user_id": 1
+    "user_id": 1,
     "comment": "Excellent!",
     "mark": 10
 }
@@ -705,7 +705,7 @@ PDF file
 **Request body**
 ```json
 {
-    "user_id": 1
+    "user_id": 1,
     "comment": "Excellent!",
     "mark": 10
 }
