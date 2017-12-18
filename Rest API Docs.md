@@ -9,14 +9,14 @@
 
 | URL  | Description |
 | ---  | ----------- |
-| [GET /users](#get_users)  | Find all users |
-| [GET /users/{id}](#get_users) | Find one user with specific id |
-| [POST /users](#get_users) | Create new user account |
-| [PUT /users/{id}](#get_users) | Update user account |
-| [DELETE /users/{id}](#get_users) | Delete user account |
-| [POST /users/login](#get_users) | Login in system |
-| [POST /users/{id}/change_username](#get_users) | Change username |
-| [POST /users/{id}/change_password](#get_users) | Change password |
+| [GET /users](#get-users)  | Find all users |
+| [GET /users/{id}](#get-users) | Find one user with specific id |
+| [POST /users](#get-users) | Create new user account |
+| [PUT /users/{id}](#get-users) | Update user account |
+| [DELETE /users/{id}](#get-users) | Delete user account |
+| [POST /users/login](#get-users) | Login in system |
+| [POST /users/{id}/change_username](#get-users) | Change username |
+| [POST /users/{id}/change_password](#get-users) | Change password |
 
 ### Books
 
