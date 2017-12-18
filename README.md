@@ -91,7 +91,7 @@
  11. Наберите в браузере localhost:3000/api_docs и вы увидете документацию к API
 
 ### API
-[Документация по API](/Rest\ API\ Docs.md)
+[Документация по API](./Rest\ API\ Docs.md)
 
 ## Полезные ссылки
  1. [A Top Shelf Web Stack—Rails 5 API + ActiveAdmin + Create React App](https://medium.com/superhighfives/a-top-shelf-web-stack-rails-5-api-activeadmin-create-react-app-de5481b7ec0b) 
