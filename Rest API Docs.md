@@ -9,14 +9,14 @@
 
 | URL  | Description |
 | ---  | ----------- |
-| [GET /users](#users)  | Find all users |
-| [GET /users/{id}](#users) | Find one user with specific id |
-| [POST /users](#users) | Create new user account |
-| [PUT /users/{id}](#users) | Update user account |
-| [DELETE /users/{id}](#users) | Delete user account |
-| [POST /users/login](#users) | Login in system |
-| [POST /users/{id}/change_username](#users) | Change username |
-| [POST /users/{id}/change_password](#users) | Change password |
+| [GET /users](#get_users)  | Find all users |
+| [GET /users/{id}](#get_users) | Find one user with specific id |
+| [POST /users](#get_users) | Create new user account |
+| [PUT /users/{id}](#get_users) | Update user account |
+| [DELETE /users/{id}](#get_users) | Delete user account |
+| [POST /users/login](#get_users) | Login in system |
+| [POST /users/{id}/change_username](#get_users) | Change username |
+| [POST /users/{id}/change_password](#get_users) | Change password |
 
 ### Books
 
@@ -65,21 +65,61 @@
 ---
 **Summary:** Find all users
 
+**Response body**
+```json
+[
+  {
+    "id": 1,
+    "name": "Иван",
+    "surname": "Иванов",
+    "email": "ivan@mail.ru",
+    "role": "admin"
+  },
+  {
+    "id": 2,
+    "name": "Мария",
+    "surname": "Федорова",
+    "email": "maria@mail.ru",
+    "role": "librarian"
+  },
+  {
+    "id": 3,
+    "name": "Алексей",
+    "surname": "Алексеевич",
+    "email": "alex@mail.ru",
+    "role": "visitor"
+  }
+]
+```
+
 **Responses**
 
 | Code | Description |
 | ---- | ----------- |
 | 200 | Success |
+| 401 | Unauthorized |
 
 #### GET /users/{id}
 ---
 **Summary:** Find one user with specific id
 
+**Response body**
+```json
+{
+  "id": 3,
+  "name": "Алексей",
+  "surname": "Алексеевич",
+  "email": "alex@mail.ru",
+  "role": "visitor"
+}
+```
+
 **Responses**
 
 | Code | Description |
 | ---- | ----------- |
 | 200 | Success |
+| 401 | Unauthorized |
 
 #### POST /users
 ---
