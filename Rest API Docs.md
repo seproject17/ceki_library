@@ -204,28 +204,61 @@
 ---
 **Summary:** Login in system
 
-**Responses**
+**Request body**
+```json
+{
+  "email": "ivan@mail.ru",
+  "password": "1234"
+}
+```
+
+**Response body**
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQifQ.WI3T7vsaXPtHX1ReJZ6uh8Tg_2OuCoElY2DF5zBAnLo"
+}
+```
+**Response status**
 
 | Code | Description |
 | ---- | ----------- |
 | 200 | User was logged in |
+| 404 | User was not found |
 
 #### PUT /users/{id}/change_email
 ---
 **Summary:** Change users email
 
-**Responses**
+**Request body**
+```json
+{
+  "email": "ivan@mail.ru"
+}
+```
+
+**Response status**
 
 | Code | Description |
 | ---- | ----------- |
 | 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
 
 #### PUT /users/{id}/change_password
 ---
 **Summary:** Change users password
 
-**Responses**
+**Request body**
+```json
+{
+  "password": "1234"
+}
+```
+
+**Response status**
 
 | Code | Description |
 | ---- | ----------- |
 | 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
