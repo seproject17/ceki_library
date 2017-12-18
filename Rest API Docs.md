@@ -30,9 +30,8 @@
 | [POST /books/{id}/file](#get-books) | Upload book file |
 | [GET /books/{id}/file](#get-books) | Download book file |
 | [DELETE /books/{id}/file](#get-books) | Delete book file |
-| [POST /books/{id}/borrow](#get-books)  | Borrow book |
-| [POST /books/{id}/return](#get-books)  | Return book |
-| [GET /books/free](#get-books) | Find all books which have at least one free item |
+| [POST /books/borrow](#get-books)  | Borrow book |
+| [POST /books/return](#get-books)  | Return book |
 | [GET /books/{id}/readers](#get-books) | Find all book readers |
 | [GET /users/{id}/books/read](#get-books)  | Find all books read by specific user |
 | [GET /users/{id}/books/borrowed](#get-books)  | Find all books borrowed by specific user |
@@ -414,6 +413,92 @@
 #### DELETE /books/{id}
 ---
 **Summary:** Delete book
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+
+#### GET /books/{id}/file
+---
+**Summary:** Download book file
+
+**Response body**
+PDF file
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+
+#### POST /books/{id}/file
+---
+**Summary:** Upload book file in PDF
+
+**Request body**
+PDF file
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+
+#### DELETE /books/{id}/file
+---
+**Summary:** Delete book file
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+
+#### POST /books/borrow
+---
+**Summary:** Load book for specific period
+
+**Request body**
+```json
+{
+  "user_id": 1,
+  "book_id": 1,
+  "start_date": "2017-10-10",
+  "end_date": "2017-10-11"
+}
+```
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+
+#### POST /books/return
+---
+**Summary:** Return book
+
+**Request body**
+```json
+{
+  "user_id": 1,
+  "book_id": 1,
+  "return_date": "2017-10-12"
+}
+```
+
 **Response status**
 
 | Code | Description |
