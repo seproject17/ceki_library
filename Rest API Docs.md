@@ -22,21 +22,21 @@
 
 | URL  | Description |
 | ---  | ----------- |
-| GET /books  | Find all books |
-| GET /books/{id} | Find one book with specific id |
-| POST /books | Create new user book |
-| PUT /books/{id} | Update book |
-| DELETE /books/{id} | Delete book |
-| POST /books/{id}/file | Upload book file |
-| GET /books/{id}/file | Download book file |
-| DELETE /books/{id}/file | Delete book file |
-| POST /books/{id}/borrow | Borrow book |
-| POST /books/{id}/return | Return book |
-| GET /books/free | Find all books which have at least one free item |
-| GET /books/{id}/readers | Find all book readers |
-| GET /users/{id}/books/read | Find all books read by specific user |
-| GET /users/{id}/books/borrowed | Find all books borrowed by specific user |
-| GET /users/{id}/books/added | Find all books which added by specific user |
+| [GET /books](#get-books)   | Find all books |
+| [GET /books/{id}](#get-books)  | Find one book with specific id |
+| [POST /books](#get-books) | Create new user book |
+| [PUT /books/{id}](#get-books)  | Update book |
+| [DELETE /books/{id}](#get-books)  | Delete book |
+| [POST /books/{id}/file](#get-books) | Upload book file |
+| [GET /books/{id}/file](#get-books) | Download book file |
+| [DELETE /books/{id}/file](#get-books) | Delete book file |
+| [POST /books/{id}/borrow](#get-books)  | Borrow book |
+| [POST /books/{id}/return](#get-books)  | Return book |
+| [GET /books/free](#get-books) | Find all books which have at least one free item |
+| [GET /books/{id}/readers](#get-books) | Find all book readers |
+| [GET /users/{id}/books/read](#get-books)  | Find all books read by specific user |
+| [GET /users/{id}/books/borrowed](#get-books)  | Find all books borrowed by specific user |
+| [GET /users/{id}/books/added](#get-books) | Find all books which added by specific user |
 
 ### Book Items
 
