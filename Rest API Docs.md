@@ -92,7 +92,7 @@
 ]
 ```
 
-**Responses**
+**Response status**
 
 | Code | Description |
 | ---- | ----------- |
@@ -114,7 +114,7 @@
 }
 ```
 
-**Responses**
+**Response status**
 
 | Code | Description |
 | ---- | ----------- |
@@ -125,31 +125,80 @@
 ---
 **Summary:** Create new user account
 
-**Responses**
+**Request body**
+
+```json
+{
+  "name": "Алексей",
+  "surname": "Алексеевич",
+  "email": "alex@mail.ru",
+  "password": "veryverylongpassword",
+  "role": "visitor"
+}
+```
+
+**Response body**
+
+```json
+{
+  "name": "Алексей",
+  "surname": "Алексеевич",
+  "email": "alex@mail.ru",
+  "role": "visitor"
+}
+```
+
+**Response status**
 
 | Code | Description |
 | ---- | ----------- |
 | 201 | New user account created |
+| 401 | Unauthorized |
+| 403 | Forbidden |
 
 #### PUT /users/{id}
 ---
 **Summary:** Update user account
 
+**Request body**
+
+```json
+{
+  "name": "Алексей",
+  "surname": "Алексеевич"
+}
+```
+
+**Response body**
+
+```json
+{
+  "name": "Алексей",
+  "surname": "Алексеевич",
+  "email": "alex@mail.ru",
+  "role": "visitor"
+}
+```
+
 **Responses**
 
 | Code | Description |
 | ---- | ----------- |
-| 200 | User account updated |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
 
 #### DELETE /users/{id}
 ---
-**Summary:** Delete user account
+**Summary:** Delete user account with specific id
 
 **Responses**
 
 | Code | Description |
 | ---- | ----------- |
-| 200 | User account deleted |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
 
 #### POST /users/login
 ---
