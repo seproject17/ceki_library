@@ -294,3 +294,130 @@
 | 200 | Success |
 | 401 | Unauthorized |
 
+#### GET /books/{id}
+---
+**Summary:** Find book with specific id
+
+**Response body**
+```json
+{
+    "isbn": 9783161484100,
+    "title": "Machine Learning with Python Cookbook. Practical Solutions from Preprocessing to Deep Learning",
+    "author": "Chris Albon",
+    "publisher": "O'Reilly Media",
+    "publisher_date": "2017",
+    "annotations": "The Python programming language and its libraries, including pandas and scikit-learn, provide a  production-grade environment to help you accomplish a broad range of machine-learning tasks. With this comprehensive cookbook, data scientists and software engineers familiar with Python will benefit from almost 200 practical recipes for building a comprehensive machine-learning pipeline—everything from data preprocessing and feature engineering to model evaluation and deep learning",
+    "tags": [
+      "python",
+      "machine learning",
+      "deep learning"
+    ]
+ }
+```
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+
+#### POST /books
+---
+**Summary:** Add new book
+
+**Request body**
+```json
+{
+    "isbn": 9783161484100,
+    "title": "Machine Learning with Python Cookbook. Practical Solutions from Preprocessing to Deep Learning",
+    "author": "Chris Albon",
+    "publisher": "O'Reilly Media",
+    "publisher_date": "2017",
+    "annotations": "The Python programming language and its libraries, including pandas and scikit-learn, provide a  production-grade environment to help you accomplish a broad range of machine-learning tasks. With this comprehensive cookbook, data scientists and software engineers familiar with Python will benefit from almost 200 practical recipes for building a comprehensive machine-learning pipeline—everything from data preprocessing and feature engineering to model evaluation and deep learning",
+    "tags": [
+      "python",
+      "machine learning",
+      "deep learning"
+    ]
+ }
+```
+
+**Response body**
+```json
+{
+    "isbn": 9783161484100,
+    "title": "Machine Learning with Python Cookbook. Practical Solutions from Preprocessing to Deep Learning",
+    "author": "Chris Albon",
+    "publisher": "O'Reilly Media",
+    "publisher_date": "2017",
+    "annotations": "The Python programming language and its libraries, including pandas and scikit-learn, provide a  production-grade environment to help you accomplish a broad range of machine-learning tasks. With this comprehensive cookbook, data scientists and software engineers familiar with Python will benefit from almost 200 practical recipes for building a comprehensive machine-learning pipeline—everything from data preprocessing and feature engineering to model evaluation and deep learning",
+    "tags": [
+      "python",
+      "machine learning",
+      "deep learning"
+    ]
+ }
+```
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+
+#### PUT /books/{id}
+---
+**Summary:** Update book
+
+**Request body**
+```json
+{
+    "isbn": 9783161484100,
+    "title": "Machine Learning with Python Cookbook. Practical Solutions from Preprocessing to Deep Learning",
+    "author": "Chris Albon",
+    "publisher": "O'Reilly Media",
+    "publisher_date": "2017",
+    "annotations": "The Python programming language and its libraries, including pandas and scikit-learn, provide a  production-grade environment to help you accomplish a broad range of machine-learning tasks. With this comprehensive cookbook, data scientists and software engineers familiar with Python will benefit from almost 200 practical recipes for building a comprehensive machine-learning pipeline—everything from data preprocessing and feature engineering to model evaluation and deep learning",
+    "tags": [
+      "python",
+      "machine learning",
+      "deep learning"
+    ]
+ }
+```
+
+**Response body**
+```json
+{
+    "isbn": 9783161484100,
+    "title": "Machine Learning with Python Cookbook. Practical Solutions from Preprocessing to Deep Learning",
+    "author": "Chris Albon",
+    "publisher": "O'Reilly Media",
+    "publisher_date": "2017",
+    "annotations": "The Python programming language and its libraries, including pandas and scikit-learn, provide a  production-grade environment to help you accomplish a broad range of machine-learning tasks. With this comprehensive cookbook, data scientists and software engineers familiar with Python will benefit from almost 200 practical recipes for building a comprehensive machine-learning pipeline—everything from data preprocessing and feature engineering to model evaluation and deep learning",
+    "tags": [
+      "python",
+      "machine learning",
+      "deep learning"
+    ]
+ }
+```
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+
+#### DELETE /books/{id}
+---
+**Summary:** Delete book
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
