@@ -51,8 +51,7 @@
 
 | URL  | Description |
 | ---  | ----------- |
-| GET /reviews  | Find all reviews |
-| GET /reviews/{id} | Find review with specific id |
+| GET /books/{id}/reviews  | Find all reviews for specific book |
 | POST /reviews/book/{bookId} | Create new review |
 | PUT /reviews/{id} | Update review |
 | DELETE /reviews/{id} | Delete review |
@@ -621,6 +620,108 @@ PDF file
   }
 ]
 ```
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+
+### Reviews
+
+#### GET /books/{id}/reviews
+---
+**Summary:** Find all reviews for specific book
+
+**Response body**
+```json
+[
+  {
+    "id": 1,
+    "user": {
+      "id": 1,
+      "name": "Иван",
+      "surname": "Иванов",
+      "email": "ivan@mail.ru"
+    },
+    "comment": "Excellent!",
+    "mark": 10
+  }
+]
+```
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+
+#### POST /books/{id}/reviews
+---
+**Summary:** Create new review
+
+**Request body**
+```json
+{
+    "user_id": 1
+    "comment": "Excellent!",
+    "mark": 10
+}
+```
+
+**Response body**
+```json
+[
+  {
+    "id": 1,
+    "user": {
+      "id": 1,
+      "name": "Иван",
+      "surname": "Иванов",
+      "email": "ivan@mail.ru"
+    },
+    "comment": "Excellent!",
+    "mark": 10
+  }
+]
+```
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+
+#### PUT /books/{id}/reviews
+---
+**Summary:** Update review
+
+**Request body**
+```json
+{
+    "user_id": 1
+    "comment": "Excellent!",
+    "mark": 10
+}
+```
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+
+#### DELETE /reviews/{id}
+---
+**Summary:** Delete review with specific id
 
 **Response status**
 
