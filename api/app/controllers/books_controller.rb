@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
 
+  before_action :allowed_only_staff, only: [:update, :destroy]
   before_action :set_book, only: [:show, :update, :destroy, :find_items]
 
   # GET /books
@@ -83,8 +84,7 @@ class BooksController < ApplicationController
   error :code => 404, :desc => 'Not Found'
 
   def find_read_books
-    user = User.find(params[:id])
-    render json: user.books.where(id: BookOperation.select('book_id').where(user_id: user.id))
+    render json: @current_user.books.where(id: BookOperation.select('book_id').where(user_id: user.id))
   end
 
   # GET /books/:id/items/borrowed

@@ -1,15 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  isbn: MyString
   title: MyString
   author: MyString
   publisher: MyString
-  year: 2017-12-02
+  year: 2017-12-19
   annotations: MyString
 
 two:
+  isbn: MyString
   title: MyString
   author: MyString
   publisher: MyString
-  year: 2017-12-02
+  year: 2017-12-19
   annotations: MyString

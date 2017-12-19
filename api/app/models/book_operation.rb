@@ -1,3 +1,3 @@
 class BookOperation < ApplicationRecord
-  enum operation: [:create, :borrow, :return, :update, :destroy], _suffix: true
+  enum type: [:add, :update, :delete, :borrow, :return], _suffix: true
 end

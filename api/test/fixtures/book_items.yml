@@ -1,9 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  loan_start_date: 2017-12-05
-  loan_end_date: 2017-12-05
+  file: MyString
+  pages: 1
+  location: MyString
+  type: 
 
 two:
-  loan_start_date: 2017-12-05
-  loan_end_date: 2017-12-05
+  file: MyString
+  pages: 1
+  location: MyString
+  type: 

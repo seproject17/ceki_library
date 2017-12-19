@@ -1,3 +1,5 @@
+require 'faker'
+
 # Users
 User.create id: 1, name: 'admin name', surname: 'admin surname', email: 'admin@mail.ru', password: 'admin', role: 'admin'
 User.create id: 2, name: 'visitor name', surname: 'visitor surname', email: 'visitor@mail.ru', password: 'visitor'

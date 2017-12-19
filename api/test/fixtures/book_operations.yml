@@ -1,7 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  op_date: 2017-12-05
+  type: 
+  start_date: 2017-12-19
+  end_date: 2017-12-19
+  comments: MyString
 
 two:
-  op_date: 2017-12-05
+  type: 
+  start_date: 2017-12-19
+  end_date: 2017-12-19
+  comments: MyString

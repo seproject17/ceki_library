@@ -1,2 +1,0 @@
-class EBook < ApplicationRecord
-end

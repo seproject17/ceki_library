@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  resources :book_items
-  apipie
   resources :reviews
-  resources :e_books
   resources :books do
     get '/books/:id/items', action: :find_items
     get '/books/:id/items/free', action: :find_free_items
