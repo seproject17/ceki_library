@@ -3,7 +3,8 @@
 Библиотека ЦЭКИ
 
 **Version:** v1.0.0
-**Auth Type** JWT Token Auth in Header 
+
+**Auth Type:** JWT Token Auth in Header 
 
 ## Summary
 ### Users
