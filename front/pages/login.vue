@@ -5,6 +5,7 @@
     <el-input placeholder="Email" v-model="auth.email"></el-input>
     <el-input placeholder="Пароль" type="password" v-model="auth.password"></el-input>
     <el-button @click="tryAuth">Войти</el-button>
+    <span class="error" v-if="error">Ошибка авторизации</span>
   </div>
   </div>
 </template>
@@ -15,13 +16,20 @@
         auth: {
           email: '',
           password: ''
-        }
+        },
+        error: false
       }
     },
     methods: {
       async tryAuth() {
-        let resp = await this.$axios.post('/login')
-        console.log(resp)
+        this.error = false
+        try {
+          let resp = await this.$axios.post('/users/login', this.auth)
+          this.$axios.setHeader('Authorization', resp.token)
+          this.$router.push('/')
+        } catch (e) {
+          this.error = true
+        }
       }
     }
 	}
@@ -44,6 +52,10 @@
 
     h1 {
       color: white;
+    }
+
+    .error {
+      color: red;
     }
   } 
 </style>
