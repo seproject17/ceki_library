@@ -39,7 +39,7 @@
     background-color: rgba(54, 55, 88, 0.4);
     padding: 5em;
 
-    margin: auto;
+    margin: 150px auto;
     text-align: center;
 
     h1 {
