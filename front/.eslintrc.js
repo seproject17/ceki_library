@@ -1,25 +1,31 @@
-// https://eslint.org/docs/user-guide/configuring
-
 module.exports = {
-  root: true,
-  parser: 'babel-eslint',
   parserOptions: {
+    parser: 'babel-eslint',
+    ecmaVersion: 8,
     sourceType: 'module'
   },
   env: {
     browser: true,
   },
-  // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-  extends: 'standard',
-  // required to lint *.vue files
-  plugins: [
-    'html'
-  ],
-  // add your custom rules here
+  extends: ['standard', 'plugin:vue/strongly-recommended'],
   rules: {
-    // allow async-await
+    'no-mixed-operators': 'off',
+    'no-undef': 'off',
+    'eol-last': 'off',
+    'no-floating-decimal': 'off',
+    'space-before-function-paren': 'off',
+    'no-new': 'off',
+    'no-unmodified-loop-condition': 'off',
+    'no-unused-vars': 'warn',
+    'no-trailing-spaces': 'warn',
     'generator-star-spacing': 'off',
-    // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-unused-expressions': 'warn',
+    'one-var': 'warn',
+    'indent': 'warn',
+    'vue/max-attributes-per-line': 'off',
+    'vue/require-default-prop': 'off',
+    'vue/require-prop-types': 'off',
+    'vue/valid-v-model': 'off',
+    'vue/html-self-closing': 'warn'
   }
 }
