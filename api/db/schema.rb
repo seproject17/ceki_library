@@ -10,32 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180128215955) do
+ActiveRecord::Schema.define(version: 20180128215961) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "book_items", force: :cascade do |t|
-    t.string "file"
-    t.integer "pages"
-    t.string "location"
-    t.string "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "book_operations", force: :cascade do |t|
-    t.string "type"
-    t.date "start_date"
-    t.date "end_date"
-    t.string "comments"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.bigint "book_item_id"
-    t.index ["book_item_id"], name: "index_book_operations_on_book_item_id"
-    t.index ["user_id"], name: "index_book_operations_on_user_id"
-  end
 
   create_table "books", force: :cascade do |t|
     t.string "isbn"
@@ -46,6 +24,8 @@ ActiveRecord::Schema.define(version: 20180128215955) do
     t.string "annotations"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "cover_path", null: false
+    t.string "file_path"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -67,7 +47,5 @@ ActiveRecord::Schema.define(version: 20180128215955) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "book_operations", "book_items"
-  add_foreign_key "book_operations", "users"
   add_foreign_key "reviews", "users"
 end
