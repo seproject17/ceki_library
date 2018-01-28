@@ -67,7 +67,7 @@
 **Params**
 
 | Param name | Description | Type | Example |
-| ---------- | ----------- |
+| ---------- | ----------- | ---- | ------- |
 | name | Name matcher | string | name[0]=ohn+Smith&name[1]=Anna+Wats&name[2]=An |
 | count | Count of users | integer | count=12 | 
 | offset | Offset | integer | offset=3 |
