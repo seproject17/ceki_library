@@ -64,6 +64,15 @@
 ---
 **Summary:** Find all users
 
+**Params**
+
+| Param name | Description | Type | Example |
+| ---------- | ----------- |
+| name | Name matcher | string | name[0]=ohn+Smith&name[1]=Anna+Wats&name[2]=An |
+| count | Count of users | integer | count=12 | 
+| offset | Offset | integer | offset=3 |
+| role | Role matcher (expected as array, set of avaiable values: admin, visitor, librarian)| string | role[0]=admin&role[1]=visitor |
+
 **Response body**
 ```json
 [
