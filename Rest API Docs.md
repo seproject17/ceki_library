@@ -41,9 +41,8 @@
 
 | URL  | Description |
 | ---  | ----------- |
-| GET /book_items  | Find all book items |
+| GET /books/{id}/books_item | Find book items for specific book
 | GET /book_items/{id} | Find a book item with specific id |
-| POST /book_items/book/{bookId} | Create new user book item |
 | PUT /book_items/{id} | Update book item |
 | DELETE /book_items/{id} | Delete book item |
 
@@ -52,7 +51,7 @@
 | URL  | Description |
 | ---  | ----------- |
 | GET /books/{id}/reviews  | Find all reviews for specific book |
-| POST /reviews/book/{bookId} | Create new review |
+| POST /book/{bookId}/review | Create new review |
 | PUT /reviews/{id} | Update review |
 | DELETE /reviews/{id} | Delete review |
 
@@ -266,6 +265,14 @@
 #### GET /books
 ---
 **Summary:** Find all books registered in library
+
+**Params**
+|Param name|Description|
+|---|---|
+|name|Name matcher|
+|count|Count of books which are presented|
+|offset|Offset|
+|sort|Sort mode|
 
 **Response body**
 ```json
