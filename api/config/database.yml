@@ -17,6 +17,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  host: postgres
   username: ceki
   password: seproject7
   # For details on connection pooling, see Rails configuration guide
