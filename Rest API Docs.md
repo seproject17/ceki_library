@@ -41,10 +41,10 @@
 
 | URL  | Description |
 | ---  | ----------- |
-| GET /books/{id}/books_item | Find book items for specific book
-| GET /book_items/{id} | Find a book item with specific id |
-| PUT /book_items/{id} | Update book item |
-| DELETE /book_items/{id} | Delete book item |
+| [GET /books/{id}/books_item](#book-items) | Find book items for specific book
+| [GET /book_items/{id}](#book-items) | Find a book item with specific id |
+| [PUT /book_items/{id}](#book-items) | Update book item |
+| [DELETE /book_items/{id}](#book-items) | Delete book item |
 
 ### Reviews
 
