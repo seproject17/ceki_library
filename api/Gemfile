@@ -22,6 +22,9 @@ gem 'jwt'
 gem 'swagger-docs'
 gem 'apipie-rails'
 
+# File upload
+gem 'carrierwave'
+
 group :development, :test do
   gem 'capistrano'
   gem 'capistrano-rails'

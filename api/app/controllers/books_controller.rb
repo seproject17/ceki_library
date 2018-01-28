@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
 
+  before_action :verify_token
   before_action :allowed_only_staff, only: [:update, :destroy]
   before_action :set_book, only: [:show, :update, :destroy]
 

@@ -1,11 +1,12 @@
-class ApplicationController < ActionController::API
+class ApplicationController < ActionController::Base
   require 'auth_token'
 
   protected
 
   def verify_token
-    head :unauthorized if request.headers['Authorization'].nil? ||
-        !AuthToken.valid?(request.headers['Authorization'].split(' ').last)
+    token = cookies[:token]
+    head :unauthorized if token.nil? ||
+        !AuthToken.valid?(token.split(' ').last)
   end
 
   def current_user
