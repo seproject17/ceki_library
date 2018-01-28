@@ -9,7 +9,7 @@ services:
     depends_on:
       - postgres
   postgres:
-    image: postgres:9.4
+    image: postgres:latest
     volumes:
       - pg-data:/var/lib/postgresql/data
     environment:
