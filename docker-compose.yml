@@ -18,7 +18,7 @@ services:
       - POSTGRES_DB=ceki_dev
   front:
     build: ./front
-    command: npm run dev
+    command: npm run nuxt
     volumes:
       - ./front:/app
       - node-modules:/app/node_modules
