@@ -267,12 +267,13 @@
 **Summary:** Find all books registered in library
 
 **Params**
-|Param name|Description|
-|---|---|
-|name|Name matcher|
-|count|Count of books which are presented|
-|offset|Offset|
-|sort|Sort mode|
+
+| Param name | Description |
+| ---------- | ----------- |
+| name | Name matcher |
+| count | Count of books which are presented |
+| offset | Offset |
+| sort | Sort mode |
 
 **Response body**
 ```json
