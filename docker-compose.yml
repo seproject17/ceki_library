@@ -24,6 +24,7 @@ services:
       - node-modules:/app/node_modules
     environment:
       - HOST=0.0.0.0
+      - API_URL_BROWSER=/api
   nginx:
     image: nginx
     depends_on:
