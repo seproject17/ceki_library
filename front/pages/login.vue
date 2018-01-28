@@ -1,6 +1,6 @@
 <template>
 	<div>
-    Добро пожалвать в библиотеку ЦЭКИ!
+    Добро пожаловать в библиотеку ЦЭКИ!
   
   <div class="login-form">
     <el-input placeholder="Email" v-model="auth.email"></el-input>
