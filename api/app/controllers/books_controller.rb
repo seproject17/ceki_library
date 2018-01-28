@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
 
   before_action :allowed_only_staff, only: [:update, :destroy]
-  before_action :set_book, only: [:show, :update, :destroy, :find_items]
+  before_action :set_book, only: [:show, :update, :destroy]
 
   # GET /books
   api :GET, '/books', 'Get all books'
@@ -10,7 +10,6 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
-
     render json: @books
   end
 
@@ -60,24 +59,6 @@ class BooksController < ApplicationController
     @book.destroy
   end
 
-  # GET /books/:id/items
-  api :GET, '/books/:id/items', 'Find all items'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
-
-  def find_items
-    render json: @book.book_items
-  end
-
-  # GET /books/:id/items/free
-  api :GET, '/books/:id/items/free', 'Find all free items'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
-
-  def find_free_items
-    render json: @book.book_items
-  end
-
   # GET /books/:id/items/free
   api :GET, '/users/:id/books/read', 'Find books read by user'
   error :code => 401, :desc => 'Unauthorized'
@@ -104,7 +85,12 @@ class BooksController < ApplicationController
   error :code => 404, :desc => 'Not Found'
 
   def borrow_book
-
+    book = Book.find(params[:id])
+    if book.free_count > 0
+      render json: book, status: :ok
+    else
+      head :forbidden
+    end
   end
 
   # POST /users/:id/books/items/:id/return

@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20180128215961) do
     t.string "annotations"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "cover_path", null: false
+    t.string "cover_path"
     t.string "file_path"
   end
 
