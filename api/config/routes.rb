@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
   resources :users
   post 'users/login' => 'users#login'
+  post 'users/logout' => 'users#logout'
   put 'users/change_password' => 'users#change_password'
   put 'users/change_email' => 'users#change_email'
 end

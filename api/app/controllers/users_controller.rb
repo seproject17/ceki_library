@@ -4,10 +4,10 @@ class UsersController < ApplicationController
 
   # before_action :set_user, only: [:show, :update, :destroy]
 
-  before_action :verify_token, except: [:login]
-  before_action :current_user, except: [:login]
+  before_action :verify_token, except: [:login, :logout]
+  before_action :current_user, except: [:login, :logout]
   before_action :set_user, only: [:show, :update, :destroy, :change_email, :change_password]
-  before_action :allowed_only_admin, except: [:index, :show, :login, :show, :change_password, :change_email]
+  before_action :allowed_only_admin, except: [:index, :show, :login, :logout, :show, :change_password, :change_email]
   before_action :allow_only_own_account, only: [:update, :destroy, :change_email, :change_password]
 
   # GET /users
