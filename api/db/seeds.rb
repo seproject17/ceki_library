@@ -8,3 +8,5 @@ ActiveRecord::Base.connection.execute('ALTER SEQUENCE users_id_seq RESTART WITH 
 
 # Books
 Book.create(title: 'Идиот', author: 'Ф. М. Достоевский', publisher: 'MGM')
+Book.create(title: 'Шушкевич', author: 'Ф. М. КЕку', publisher: 'MGM')
+Book.create(title: 'Димасик', author: 'Романчик', publisher: 'MGM')
