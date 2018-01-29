@@ -1,4 +1,7 @@
+require 'action_dispatch'
+
 class UsersController < ApplicationController
+
   # before_action :set_user, only: [:show, :update, :destroy]
 
   before_action :verify_token, except: [:login]
@@ -23,7 +26,7 @@ class UsersController < ApplicationController
   error :code => 404, :desc => 'Not Found'
 
   def show
-    render json: @user
+    render json: @current_user
   end
 
   # POST /users
@@ -78,10 +81,19 @@ class UsersController < ApplicationController
     password = credentials['password']
     user = User.find_by_email email
     if user && user.authenticate(password)
-      render json: {'token': AuthToken.issue_token({'user_id': user.id})}, status: :ok
+      cookies[:token] = AuthToken.issue_token({'user_id': user.id})
+      render json:
+                 {
+                     'user': user
+                 },
+             status: :ok
     else
       head :unauthorized
     end
+  end
+
+  def logout
+    cookies.delete :token
   end
 
   api :POST, '/users/logout', 'Logout user'
