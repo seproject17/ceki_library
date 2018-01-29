@@ -13,6 +13,7 @@
 | ---  | ----------- |
 | [GET /users](#get-users)  | Find all users |
 | [GET /users/{id}](#get-users) | Find one user with specific id |
+| [GET /users/current](#get-users) | Get current user |
 | [POST /users](#get-users) | Create new user account |
 | [PUT /users/{id}](#get-users) | Update user account |
 | [DELETE /users/{id}](#get-users) | Delete user account |
@@ -111,6 +112,28 @@
 #### GET /users/{id}
 ---
 **Summary:** Find one user with specific id
+
+**Response body**
+```json
+{
+  "id": 3,
+  "name": "Алексей",
+  "surname": "Алексеевич",
+  "email": "alex@mail.ru",
+  "role": "visitor"
+}
+```
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+
+#### GET /users/current
+---
+**Summary:** Get current user
 
 **Response body**
 ```json
@@ -251,6 +274,7 @@
 **Request body**
 ```json
 {
+  "password": "ivan",
   "email": "ivan@mail.ru"
 }
 ```
@@ -270,6 +294,7 @@
 **Request body**
 ```json
 {
+  "old_password": "qwerty"
   "password": "1234"
 }
 ```
