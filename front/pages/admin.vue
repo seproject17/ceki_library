@@ -2,7 +2,7 @@
     <div class="admin-container">
         <div class="admin-page-content">
             <div class="admin-buttons">
-                <el-button @click="showCreateBookModal">Создать</el-button>
+                <el-button @click="showCreateBookModal">Добавить книгу</el-button>
             </div>
             <div class="admin-buttons-result">
             </div>
@@ -43,22 +43,16 @@ export default {
                     {
                         label: 'Создать',
                         success({ title, author, description, isbn, publisher }, store, modal) {
-                            console.log('ddsds', {
-                                title,
-                                author,
-                                anotations: description,
-                                isbn,
-                                publisher
-                            });
 
                             modal.$axios.$post('/books', {
                                 title,
                                 author,
-                                anotations: description,
+                                annotations: description,
                                 isbn,
                                 publisher
                             }).then((l) => {
                                 console.log(l);
+                                modal.close();
                             });
                             console.log('Создано', title, author, description, modal, store);
                         }

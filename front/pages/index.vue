@@ -6,7 +6,9 @@
             </template>
         </el-input>
         <div class="books-container">
-            <nuxt-link to="{ name: 'book' }" class="book-item" v-for="book in books" :key="book.id">
+            <nuxt-link :to="{ name: 'books-id', params: { id: book.id} }"
+                       class="book-item" v-for="book in books"
+                       :key="book.id">
                 <div class="book-image"></div>
                 <p>
                     {{book.title}}
