@@ -25,6 +25,7 @@ services:
     environment:
       - HOST=0.0.0.0
       - API_URL_BROWSER=/api
+      - API_URL=http://api:3000/
   nginx:
     image: nginx
     depends_on:
