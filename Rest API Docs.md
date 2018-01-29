@@ -4,7 +4,7 @@
 
 **Version:** v1.0.0
 
-**Auth Type:** JWT Token Auth in Header 
+**Auth Type:** JWT Token Auth in Cookie 
 
 ## Summary
 ### Users
@@ -17,6 +17,7 @@
 | [PUT /users/{id}](#get-users) | Update user account |
 | [DELETE /users/{id}](#get-users) | Delete user account |
 | [POST /users/login](#get-users) | Login in system |
+| [POST /users/logout](#get-users) | Logout |
 | [POST /users/{id}/change_username](#get-users) | Change username |
 | [POST /users/{id}/change_password](#get-users) | Change password |
 
@@ -232,6 +233,16 @@
 | ---- | ----------- |
 | 200 | User was logged in |
 | 404 | User was not found |
+
+#### POST /users/logout
+---
+**Summary:** Logout
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 204 | OK, logged out |
 
 #### PUT /users/{id}/change_email
 ---
