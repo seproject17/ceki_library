@@ -13,6 +13,7 @@
 | ---  | ----------- |
 | [GET /users](#get-users)  | Find all users |
 | [GET /users/{id}](#get-users) | Find one user with specific id |
+| [GET /users/current](#get-users) | Get current user |
 | [POST /users](#get-users) | Create new user account |
 | [PUT /users/{id}](#get-users) | Update user account |
 | [DELETE /users/{id}](#get-users) | Delete user account |
