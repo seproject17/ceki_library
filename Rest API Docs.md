@@ -130,6 +130,28 @@
 | 200 | Success |
 | 401 | Unauthorized |
 
+#### GET /users/current
+---
+**Summary:** Get current user
+
+**Response body**
+```json
+{
+  "id": 3,
+  "name": "Алексей",
+  "surname": "Алексеевич",
+  "email": "alex@mail.ru",
+  "role": "visitor"
+}
+```
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+
 #### POST /users
 ---
 **Summary:** Create new user account
@@ -251,6 +273,7 @@
 **Request body**
 ```json
 {
+  "password": "ivan",
   "email": "ivan@mail.ru"
 }
 ```
@@ -270,6 +293,7 @@
 **Request body**
 ```json
 {
+  "old_password": "qwerty"
   "password": "1234"
 }
 ```
