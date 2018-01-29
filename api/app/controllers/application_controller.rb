@@ -9,9 +9,12 @@ class ApplicationController < ActionController::Base
         !AuthToken.valid?(token.split(' ').last)
   end
 
-  def current_user
-    user_id = AuthToken.data(request.headers['Authorization'].split(' ').last)['user_id']
+  def set_current_user
+    token = cookies[:token]
+    user_id = AuthToken.data(token.split(' ').last)['user_id']
+    p "Current user with #{user_id}"
     @current_user = User.find user_id
+    p "User was found"
   end
 
   def allowed_only_admin

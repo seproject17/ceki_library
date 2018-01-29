@@ -5,10 +5,9 @@ class UsersController < ApplicationController
   # before_action :set_user, only: [:show, :update, :destroy]
 
   before_action :verify_token, except: [:login, :logout]
-  before_action :current_user, except: [:login, :logout]
-  before_action :set_user, only: [:show, :update, :destroy, :change_email, :change_password]
-  before_action :allowed_only_admin, except: [:index, :show, :login, :logout, :show, :change_password, :change_email]
-  before_action :allow_only_own_account, only: [:update, :destroy, :change_email, :change_password]
+  before_action :set_current_user, except: [:login, :logout]
+  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :allowed_only_admin, except: [:index, :show, :login, :logout, :show, :change_email, :change_password]
 
   # GET /users
   api :GET, '/users', 'Find all users'
@@ -16,7 +15,7 @@ class UsersController < ApplicationController
   error :code => 404, :desc => 'Not Found'
 
   def index
-    @users = User.all.select :id, :name, :surname, :email
+    @users = User.all.select :id, :name, :surname, :email, :role
     render json: @users
   end
 
@@ -26,7 +25,23 @@ class UsersController < ApplicationController
   error :code => 404, :desc => 'Not Found'
 
   def show
-    render json: @current_user
+    user = User.find params[:id]
+    render json: {
+        'id': user.id,
+        'name': user.name,
+        'surname': user.surname,
+        'email': user.email,
+        'role': user.role
+    }, status: :ok
+  end
+
+  # GET /users/current
+  api :GET, '/user', 'Get user'
+  error :code => 401, :desc => 'Unauthorized'
+  error :code => 404, :desc => 'Not Found'
+
+  def show_current
+    render json: @current_user, status: :ok
   end
 
   # POST /users
@@ -36,6 +51,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(JSON.parse request.body.string)
+
+    if User.exists? :email => @user.email
+      head :forbidden
+    end
 
     if @user.save
       render json: @user, status: :created, location: @user
@@ -54,8 +73,8 @@ class UsersController < ApplicationController
     updated_user.delete('role')
     updated_user.delete('password')
     updated_user.delete('email')
-    if @user.update!(updated_user)
-      render json: @user, status: :ok
+    if @user.update(updated_user)
+      head :ok
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -84,7 +103,11 @@ class UsersController < ApplicationController
       cookies[:token] = AuthToken.issue_token({'user_id': user.id})
       render json:
                  {
-                     'user': user
+                     'id': user.id,
+                     'name': user.name,
+                     'surname': user.surname,
+                     'email': user.email,
+                     "role": user.role
                  },
              status: :ok
     else
@@ -105,9 +128,13 @@ class UsersController < ApplicationController
   error :code => 404, :desc => 'Not Found'
 
   def change_password
-    password = JSON.parse(request.body)['password']
+    old_password = JSON.parse(request.body.string)['old_password']
+    password = JSON.parse(request.body.string)['password']
+    unless @current_user.authenticate(old_password)
+      return head :forbidden
+    end
     @current_user.password = password
-    @current_user.save!
+    @current_user.save
     head :ok
   end
 
@@ -116,21 +143,29 @@ class UsersController < ApplicationController
   error :code => 404, :desc => 'Not Found'
 
   def change_email
-    email = JSON.parse(request.body)['email']
-    if User.find_by_email email
-      head :forbidden
+    password = JSON.parse(request.body.string)['password']
+    email = JSON.parse(request.body.string)['email']
+    if email == @current_user.email
+      return head :ok
+    end
+    unless @current_user.authenticate(password)
+      return head :forbidden
+    end
+    if User.exists? :email => email
+      return head :forbidden
     end
     @current_user.email = email
-    @current_user.save!
+    @current_user.save
     head :ok
   end
 
   private
   def set_user
     begin
+      p 'Set user'
       @user = User.find(params[:id])
     rescue
-      render json: {'error': "User with specific id = #{params[:id]} not found"}, status: :not_found
+      head :not_found
     end
   end
 
