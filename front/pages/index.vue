@@ -31,9 +31,9 @@
         justify-content: center;
         flex-wrap: wrap;
         .book-item {
-            background-color: red;
             flex-basis: 20%;
             margin: 10px;
+            text-decoration: none;
             .book-image {
                 height: 200px;
                 width: 150px;
@@ -47,11 +47,12 @@
         p {
             text-align: center;
             color: white;
-            text-decoration: none;
+            margin: 0;
         }
     }
 </style>
 <script>
+
 export default {
     created() {
         this.$axios.$get('/books').then(res => {
@@ -61,7 +62,8 @@ export default {
     data() {
         return {
             books: [],
-            err: null
+            err: null,
+            searchField: ''
         };
     },
     methods: {
