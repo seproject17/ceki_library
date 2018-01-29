@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   before_action :verify_token, except: [:login, :logout]
   before_action :set_current_user, except: [:login, :logout]
   before_action :set_user, only: [:show, :update, :destroy]
-  before_action :allowed_only_admin, except: [:index, :show, :login, :logout, :show, :change_email, :change_password]
+  before_action :allowed_only_admin, except: [:index, :show, :show_current, :login, :logout, :show, :change_email, :change_password]
 
   # GET /users
   api :GET, '/users', 'Find all users'
@@ -41,7 +41,13 @@ class UsersController < ApplicationController
   error :code => 404, :desc => 'Not Found'
 
   def show_current
-    render json: @current_user, status: :ok
+    render json: {
+        'id': @current_user.id,
+        'name': @current_user.name,
+        'surname': @current_user.surname,
+        'email': @current_user.email,
+        'role': @current_user.role
+    }, status: :ok
   end
 
   # POST /users
