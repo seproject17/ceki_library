@@ -3,7 +3,9 @@ class BooksController < ApplicationController
   before_action :verify_token
   before_action :set_current_user
   before_action :allowed_only_staff, only: [:update, :destroy]
-  before_action :set_book, only: [:show, :update, :destroy, :borrow, :return]
+  before_action :set_book, only: [:show, :update, :destroy, :borrow, :return,
+                                  :upload_base64_cover, :upload_base64_content,
+                                  :delete_cover, :delete_content]
 
   def index
     @books = Book.all
@@ -48,6 +50,40 @@ class BooksController < ApplicationController
     head :ok
   end
 
+  def upload_base64_cover
+    @book.cover = JSON.parse(request.body.string)['cover']
+    unless @book.save
+      return head :forbidden
+    end
+    head :ok
+  end
+
+  def upload_base64_content
+    @book.content = JSON.parse(request.body.string)['content']
+    unless @book.save
+      return head :forbidden
+    end
+    head :ok
+  end
+
+  def delete_cover
+    begin
+      @book.delete_cover
+    rescue
+      head :forbidden
+    end
+    head :ok
+  end
+
+  def delete_content
+    begin
+      @book.delete_content
+    rescue
+      head :forbidden
+    end
+    head :ok
+  end
+
   def borrow
     p 'Borrowing'
     if @book.available_count == 0
@@ -78,7 +114,6 @@ class BooksController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
   def set_book
     @book = Book.find(params[:id])
     if @book.nil?
@@ -93,7 +128,6 @@ class BooksController < ApplicationController
     end
   end
 
-  # Only allow a trusted parameter "white list" through.
   def book_params
     params.require(:book).permit(:title, :author, :publisher, :year, :annotations)
   end

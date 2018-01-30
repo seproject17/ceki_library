@@ -9,51 +9,20 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
   before_action :allowed_only_admin, except: [:index, :show, :show_current, :login, :logout, :show, :change_email, :change_password]
 
-  # GET /users
-  api :GET, '/users', 'Find all users'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
-
   def index
-    @users = User.all.select :id, :name, :surname, :email, :role
+    @users = User.all
     render json: @users
   end
 
-  # GET /users/1
-  api :GET, '/user/:id', 'Find user by id'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
-
   def show
     user = User.find params[:id]
-    render json: {
-        'id': user.id,
-        'name': user.name,
-        'surname': user.surname,
-        'email': user.email,
-        'role': user.role
-    }, status: :ok
+    render json: user, status: :ok
   end
-
-  # GET /users/current
-  api :GET, '/user', 'Get user'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
 
   def show_current
-    render json: {
-        'id': @current_user.id,
-        'name': @current_user.name,
-        'surname': @current_user.surname,
-        'email': @current_user.email,
-        'role': @current_user.role
-    }, status: :ok
+    render json: @current_user, status: :ok
   end
 
-  # POST /users
-  api :POST, '/users', 'Sign up user'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
 
   def create
     @user = User.new(JSON.parse request.body.string)
@@ -69,10 +38,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1
-  api :PUT, '/users/:id', 'Update users'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
 
   def update
     updated_user = JSON.parse request.body.read
@@ -86,19 +51,12 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  api :DELETE, '/users/:id', 'Destroy user account'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
 
   def destroy
     @user.destroy
     head :ok
   end
 
-  api :POST, '/users/login', 'Login user'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
 
   def login
     credentials = JSON.parse request.body.string
@@ -107,15 +65,7 @@ class UsersController < ApplicationController
     user = User.find_by_email email
     if user && user.authenticate(password)
       cookies[:token] = AuthToken.issue_token({'user_id': user.id})
-      render json:
-                 {
-                     'id': user.id,
-                     'name': user.name,
-                     'surname': user.surname,
-                     'email': user.email,
-                     "role": user.role
-                 },
-             status: :ok
+      render json: user, status: :ok
     else
       head :unauthorized
     end
@@ -125,13 +75,6 @@ class UsersController < ApplicationController
     cookies.delete :token
   end
 
-  api :POST, '/users/logout', 'Logout user'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
-
-  api :PUT, '/users/change_password', 'Change password'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
 
   def change_password
     old_password = JSON.parse(request.body.string)['old_password']
@@ -144,9 +87,6 @@ class UsersController < ApplicationController
     head :ok
   end
 
-  api :PUT, '/users/change_email', 'Change email'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
 
   def change_email
     password = JSON.parse(request.body.string)['password']

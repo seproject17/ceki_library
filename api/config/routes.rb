@@ -4,6 +4,11 @@ Rails.application.routes.draw do
 
   post 'books/:id/borrow' => 'books#borrow'
   post 'books/:id/return' => 'books#return'
+  post 'books/:id/cover' => 'books#upload_base64_cover'
+  post 'books/:id/content' => 'books#upload_base64_content'
+  delete 'books/:id/cover' => 'books#delete_cover'
+  delete 'books/:id/content' => 'books#delete_content'
+
   post 'users/login' => 'users#login'
   post 'users/logout' => 'users#logout'
   put 'users/change_password' => 'users#change_password'
