@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129142557) do
+ActiveRecord::Schema.define(version: 20180130030109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,11 +24,10 @@ ActiveRecord::Schema.define(version: 20180129142557) do
     t.string "annotations"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "cover_path"
-    t.string "file_path"
     t.bigint "user_id"
     t.integer "available_count", default: 0
     t.integer "max_count", default: 0
+    t.string "cover_path"
     t.index ["user_id"], name: "index_books_on_user_id"
   end
 
@@ -64,7 +63,6 @@ ActiveRecord::Schema.define(version: 20180129142557) do
     t.integer "role", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "avatar_path"
   end
 
   add_foreign_key "books", "users"

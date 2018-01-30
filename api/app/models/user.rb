@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_many :books
   has_many :borrowings
   has_many :reviews
-  # mount_uploader :avatar, AvatarUploader
+
   has_secure_password
   enum role: [:admin, :librarian, :visitor]
 
@@ -16,5 +16,9 @@ class User < ApplicationRecord
 
   def librarian?
     role == 'librarian'
+  end
+
+  def as_json(options = {})
+    super(options.merge({except: [:password_digest]}))
   end
 end

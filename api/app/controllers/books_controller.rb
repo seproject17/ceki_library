@@ -5,60 +5,43 @@ class BooksController < ApplicationController
   before_action :allowed_only_staff, only: [:update, :destroy]
   before_action :set_book, only: [:show, :update, :destroy, :borrow, :return]
 
-  # GET /books
-  api :GET, '/books', 'Get all books'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
-
   def index
     @books = Book.all
     render json: @books
   end
 
-  # GET /books/1
-  api :GET, '/books/:id', 'Find book by id'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
-
   def show
     render json: @book
   end
 
-  # POST /books
-  api :POST, '/books', 'Create book'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found', :meta => {:anything => 'you can think of'}
-
   def create
-    @book = Book.new(book_params)
-    @current_user.books << @book
-    @current_user.save
-    #
-    # if @book.save
-    #   render json: @book, status: :created, location: @book
-    # else
-    #   render json: @book.errors, status: :unprocessable_entity
-    # end
-    render json: @book, status: :ok, location: @book
-  end
-
-  # PATCH/PUT /books/1
-  api :PUT, '/books/:id', 'Update book'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
-
-  def update
-    if @book.update(book_params)
-      render json: @book
-    else
-      render json: @book.errors, status: :unprocessable_entity
+    begin
+      @book = Book.new(book_params)
+      @current_user.books << @book
+      @current_user.save
+      #
+      # if @book.save
+      #   render json: @book, status: :created, location: @book
+      # else
+      #   render json: @book.errors, status: :unprocessable_entity
+      # end
+      render json: @book, status: :ok, location: @book
+    rescue
+      head :forbidden
     end
   end
 
-  # DELETE /books/1
-  api :DELETE, '/books/:id', 'Delete book'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
+  def update
+    begin
+      if @book.update(book_params)
+        render json: @book
+      else
+        render json: @book.errors, status: :unprocessable_entity
+      end
+    rescue
+      head :forbidden
+    end
+  end
 
   def destroy
     @book.destroy
