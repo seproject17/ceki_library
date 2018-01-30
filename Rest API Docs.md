@@ -294,7 +294,7 @@
 **Request body**
 ```json
 {
-  "old_password": "qwerty"
+  "old_password": "qwerty",
   "password": "1234"
 }
 ```
