@@ -364,7 +364,9 @@
       "python",
       "machine learning",
       "deep learning"
-    ]
+    ],
+    "cover": "data:image/jpeg;base64,<BASE64 IMAGE>",
+    "content": "data:application/pdf;base64,<BASE64 IMAGE>"
  }
 ```
 **Response status**
@@ -391,7 +393,9 @@
       "python",
       "machine learning",
       "deep learning"
-    ]
+    ],
+    "cover": "data:image/jpeg;base64,<BASE64 IMAGE>",
+    "content": "data:application/pdf;base64,<BASE64 IMAGE>"
  }
 ```
 
@@ -408,7 +412,9 @@
       "python",
       "machine learning",
       "deep learning"
-    ]
+    ],
+    "cover": "data:image/jpeg;base64,<BASE64 IMAGE>",
+    "content": "data:application/pdf;base64,<BASE64 IMAGE>"
  }
 ```
 **Response status**
@@ -436,7 +442,9 @@
       "python",
       "machine learning",
       "deep learning"
-    ]
+    ],
+    "cover": "data:image/jpeg;base64,<BASE64 IMAGE>",
+    "content": "data:application/pdf;base64,<BASE64 IMAGE>"
  }
 ```
 
@@ -453,7 +461,9 @@
       "python",
       "machine learning",
       "deep learning"
-    ]
+    ],
+    "cover": "data:image/jpeg;base64,<BASE64 IMAGE>",
+    "content": "data:application/pdf;base64,<BASE64 IMAGE>"
  }
 ```
 **Response status**
