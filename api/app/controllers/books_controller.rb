@@ -3,7 +3,7 @@ class BooksController < ApplicationController
   before_action :verify_token
   before_action :set_current_user
   before_action :allowed_only_staff, only: [:update, :destroy]
-  before_action :set_book, only: [:show, :update, :destroy]
+  before_action :set_book, only: [:show, :update, :destroy, :borrow, :return]
 
   # GET /books
   api :GET, '/books', 'Get all books'
@@ -65,43 +65,34 @@ class BooksController < ApplicationController
     head :ok
   end
 
-  # # POST /books/:id/borrow
-  # api :POST, '/books/:id/borrow', 'Borrow book'
-  # error :code => 401, :desc => 'Unauthorized'
-  # error :code => 404, :desc => 'Not Found'
-  #
-  # def borrow_book
-  #   if @book.borrowings.where(status: :borrowed).exists?
-  #     head :forbidden
-  #   end
-  #   Borrowing.create!(start_date: Date.today, user: @current_user, book: @book)
-  #   if book.available_count > 0 and book.available_count <= book.max_count
-  #     book.available_count -= 1
-  #     book.save!
-  #     render json: book, status: :ok
-  #   else
-  #     head :forbidden
-  #   end
-  # end
-  #
-  # # POST /books/:id/return
-  # api :POST, '/books/:id/return', 'Return book'
-  # error :code => 401, :desc => 'Unauthorized'
-  # error :code => 404, :desc => 'Not Found'
-  #
-  # def return_book
-  #   now_date = Date.today
-  #   last_borrowing = @book.borrowings
-  #                        .where(actual_date: nil, user_id: @user.id)
-  #                        .order(start_date: :desc)[0]
-  #   if last_borrowing.nil?
-  #     head :forbidden
-  #   end
-  #   @book.available_count += 1
-  #   last_borrowing.actual_date = now_date
-  #   last_borrowing.save!
-  #   render json: @book, status: :ok
-  # end
+  def borrow
+    p 'Borrowing'
+    if @book.available_count == 0
+      return head :forbidden
+    end
+    borrowing = Borrowing.new borrow_date: Date.today, status: 'borrowed'
+    borrowing.book = @book
+    borrowing.user = @current_user
+    borrowing.save
+    @book.available_count -= 1
+    @book.save
+    head :ok
+  end
+
+  def return
+    p 'Return'
+    if @book.available_count + 1 > @book.max_count
+      return head :forbidden
+    end
+    unless @book.borrowings.exists?(status: 'borrowed', user_id: @current_user.id)
+      return head :forbidden
+    end
+    borrowing = (@book.borrowings.where(status: 'borrowed', user_id: @current_user.id).last(1))[0]
+    borrowing.status = 'returned'
+    borrowing.actual_date = Date.today
+    borrowing.save
+    head :ok
+  end
 
   private
   # Use callbacks to share common setup or constraints between actions.
