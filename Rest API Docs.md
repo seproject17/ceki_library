@@ -294,7 +294,7 @@
 **Request body**
 ```json
 {
-  "old_password": "qwerty"
+  "old_password": "qwerty",
   "password": "1234"
 }
 ```
@@ -336,7 +336,9 @@
       "python",
       "machine learning",
       "deep learning"
-    ]
+    ],
+    "cover": "data:image/jpeg;base64,<BASE64 IMAGE>",
+    "content": "data:application/pdf;base64,<BASE64 IMAGE>"
   }
 ]
 ```
@@ -364,7 +366,9 @@
       "python",
       "machine learning",
       "deep learning"
-    ]
+    ],
+    "cover": "data:image/jpeg;base64,<BASE64 IMAGE>",
+    "content": "data:application/pdf;base64,<BASE64 IMAGE>"
  }
 ```
 **Response status**
@@ -391,7 +395,9 @@
       "python",
       "machine learning",
       "deep learning"
-    ]
+    ],
+    "cover": "data:image/jpeg;base64,<BASE64 IMAGE>",
+    "content": "data:application/pdf;base64,<BASE64 IMAGE>"
  }
 ```
 
@@ -408,7 +414,9 @@
       "python",
       "machine learning",
       "deep learning"
-    ]
+    ],
+    "cover": "data:image/jpeg;base64,<BASE64 IMAGE>",
+    "content": "data:application/pdf;base64,<BASE64 IMAGE>"
  }
 ```
 **Response status**
@@ -436,7 +444,9 @@
       "python",
       "machine learning",
       "deep learning"
-    ]
+    ],
+    "cover": "data:image/jpeg;base64,<BASE64 IMAGE>",
+    "content": "data:application/pdf;base64,<BASE64 IMAGE>"
  }
 ```
 
@@ -453,7 +463,9 @@
       "python",
       "machine learning",
       "deep learning"
-    ]
+    ],
+    "cover": "data:image/jpeg;base64,<BASE64 IMAGE>",
+    "content": "data:application/pdf;base64,<BASE64 IMAGE>"
  }
 ```
 **Response status**
