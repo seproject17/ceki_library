@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
 
   before_action :verify_token
+  before_action :set_current_user
   before_action :allowed_only_staff, only: [:update, :destroy]
   before_action :set_book, only: [:show, :update, :destroy]
 
@@ -30,12 +31,15 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
-
-    if @book.save
-      render json: @book, status: :created, location: @book
-    else
-      render json: @book.errors, status: :unprocessable_entity
-    end
+    @current_user.books << @book
+    @current_user.save
+    #
+    # if @book.save
+    #   render json: @book, status: :created, location: @book
+    # else
+    #   render json: @book.errors, status: :unprocessable_entity
+    # end
+    render json: @book, status: :ok, location: @book
   end
 
   # PATCH/PUT /books/1
@@ -58,55 +62,61 @@ class BooksController < ApplicationController
 
   def destroy
     @book.destroy
+    head :ok
   end
 
-  # GET /books/:id/items/free
-  api :GET, '/users/:id/books/read', 'Find books read by user'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
-
-  def find_read_books
-    render json: @current_user.books.where(id: BookOperation.select('book_id').where(user_id: user.id))
-  end
-
-  # GET /books/:id/items/borrowed
-  api :GET, '/users/:id/books/borrowed', 'Find books borrowed by user'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
-
-  def find_borrowed_books
-    user = User.find(params[:id])
-    render json: user.books.
-        where(id: BookOperation.select('book_id').where(user_id: user.id, operation: :borrow))
-  end
-
-  # POST /users/:id/books/items/:id/borrow
-  api :POST, '/users/:id/books/items/:id/borrow', 'Borrow book'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
-
-  def borrow_book
-    book = Book.find(params[:id])
-    if book.free_count > 0
-      render json: book, status: :ok
-    else
-      head :forbidden
-    end
-  end
-
-  # POST /users/:id/books/items/:id/return
-  api :POST, '/users/:id/books/items/:id/return', 'Return book'
-  error :code => 401, :desc => 'Unauthorized'
-  error :code => 404, :desc => 'Not Found'
-
-  def return_book
-
-  end
+  # # POST /books/:id/borrow
+  # api :POST, '/books/:id/borrow', 'Borrow book'
+  # error :code => 401, :desc => 'Unauthorized'
+  # error :code => 404, :desc => 'Not Found'
+  #
+  # def borrow_book
+  #   if @book.borrowings.where(status: :borrowed).exists?
+  #     head :forbidden
+  #   end
+  #   Borrowing.create!(start_date: Date.today, user: @current_user, book: @book)
+  #   if book.available_count > 0 and book.available_count <= book.max_count
+  #     book.available_count -= 1
+  #     book.save!
+  #     render json: book, status: :ok
+  #   else
+  #     head :forbidden
+  #   end
+  # end
+  #
+  # # POST /books/:id/return
+  # api :POST, '/books/:id/return', 'Return book'
+  # error :code => 401, :desc => 'Unauthorized'
+  # error :code => 404, :desc => 'Not Found'
+  #
+  # def return_book
+  #   now_date = Date.today
+  #   last_borrowing = @book.borrowings
+  #                        .where(actual_date: nil, user_id: @user.id)
+  #                        .order(start_date: :desc)[0]
+  #   if last_borrowing.nil?
+  #     head :forbidden
+  #   end
+  #   @book.available_count += 1
+  #   last_borrowing.actual_date = now_date
+  #   last_borrowing.save!
+  #   render json: @book, status: :ok
+  # end
 
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_book
     @book = Book.find(params[:id])
+    if @book.nil?
+      head :not_found
+    end
+  end
+
+  def set_user
+    @user = User.find(params[:user_id])
+    if @book.nil?
+      head :not_found
+    end
   end
 
   # Only allow a trusted parameter "white list" through.

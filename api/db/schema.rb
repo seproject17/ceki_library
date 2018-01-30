@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180128224507) do
+ActiveRecord::Schema.define(version: 20180129142557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,23 @@ ActiveRecord::Schema.define(version: 20180128224507) do
     t.datetime "updated_at", null: false
     t.string "cover_path"
     t.string "file_path"
+    t.bigint "user_id"
+    t.integer "available_count", default: 0
+    t.integer "max_count", default: 0
+    t.index ["user_id"], name: "index_books_on_user_id"
+  end
+
+  create_table "borrowings", force: :cascade do |t|
+    t.date "borrow_date"
+    t.date "return_date"
+    t.date "actual_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "book_id"
+    t.integer "status", default: 0
+    t.index ["book_id"], name: "index_borrowings_on_book_id"
+    t.index ["user_id"], name: "index_borrowings_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -34,6 +51,8 @@ ActiveRecord::Schema.define(version: 20180128224507) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.bigint "book_id"
+    t.index ["book_id"], name: "index_reviews_on_book_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
@@ -48,5 +67,9 @@ ActiveRecord::Schema.define(version: 20180128224507) do
     t.string "avatar_path"
   end
 
+  add_foreign_key "books", "users"
+  add_foreign_key "borrowings", "books"
+  add_foreign_key "borrowings", "users"
+  add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
 end

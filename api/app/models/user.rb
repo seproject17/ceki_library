@@ -5,4 +5,16 @@ class User < ApplicationRecord
   # mount_uploader :avatar, AvatarUploader
   has_secure_password
   enum role: [:admin, :librarian, :visitor]
+
+  def admin?
+    role == 'admin'
+  end
+
+  def visitor?
+    role == 'visitor'
+  end
+
+  def librarian?
+    role == 'librarian'
+  end
 end

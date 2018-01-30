@@ -26,6 +26,9 @@ class ApplicationController < ActionController::Base
   end
 
   def allowed_only_staff
-    head :forbidden unless (@current_user.admin? && @current_user.librarian?)
+    p @current_user.admin?
+    if (not @current_user.admin?) and (not @current_user.librarian?)
+      head :forbidden
+    end
   end
 end
