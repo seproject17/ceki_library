@@ -493,11 +493,12 @@
 **Summary:** Create book cover
 
 **Request body**
-`json
+
+```json
 {
   "cover": "data:<MIME_TYPE>;base64,<DATA>"
 }
-`
+```
 
 **Response status**
 
