@@ -21,6 +21,8 @@
 | [POST /users/logout](#get-users) | Logout |
 | [POST /users/{id}/change_username](#get-users) | Change username |
 | [POST /users/{id}/change_password](#get-users) | Change password |
+| [POST /users/recover_account](#get-users) | Recover an account in case if password was forgotten |
+| [POST /users/reset_password](#get-users) | Reset password |
 
 ### Books
 
@@ -306,6 +308,41 @@
 | 200 | Success |
 | 401 | Unauthorized |
 | 403 | Forbidden |
+
+#### POST /users/recover_account
+---
+**Summary:** Request recovering an account in case password was forgotten. After request user will receive email with instructions to reset password
+
+**Request body**
+```json
+{
+  "email": "james_mortimer@baker_street221b.co.uk"
+}
+```
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+
+#### POST /users/reset_password
+---
+**Summary:** Reset password
+**Request body**
+```json
+{
+  "password": "qwerty",
+  "token": "<JWT TOKEN>"
+}
+```
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
 
 ### Books
 
