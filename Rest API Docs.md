@@ -488,12 +488,17 @@
 | 401 | Unauthorized |
 | 403 | Forbidden |
 
-#### GET /books/{id}/file
+#### POST /books/{id}/cover
 ---
-**Summary:** Download book file
+**Summary:** Create book cover
 
-**Response body**
-PDF file
+**Request body**
+
+```json
+{
+  "cover": "data:<MIME_TYPE>;base64,<DATA>"
+}
+```
 
 **Response status**
 
@@ -503,7 +508,19 @@ PDF file
 | 401 | Unauthorized |
 | 403 | Forbidden |
 
-#### POST /books/{id}/file
+#### DELETE /books/{id}/cover
+---
+**Summary:** Delete book cover
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+
+#### POST /books/{id}/content
 ---
 **Summary:** Upload book file in PDF
 
@@ -518,7 +535,7 @@ PDF file
 | 401 | Unauthorized |
 | 403 | Forbidden |
 
-#### DELETE /books/{id}/file
+#### DELETE /books/{id}/content
 ---
 **Summary:** Delete book file
 
