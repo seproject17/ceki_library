@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180130030109) do
+ActiveRecord::Schema.define(version: 20180201011713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,11 +63,12 @@ ActiveRecord::Schema.define(version: 20180130030109) do
     t.integer "role", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "avatar_path"
   end
 
-  add_foreign_key "books", "users"
-  add_foreign_key "borrowings", "books"
-  add_foreign_key "borrowings", "users"
-  add_foreign_key "reviews", "books"
-  add_foreign_key "reviews", "users"
+  add_foreign_key "books", "users", on_delete: :cascade
+  add_foreign_key "borrowings", "books", on_delete: :cascade
+  add_foreign_key "borrowings", "users", on_delete: :cascade
+  add_foreign_key "reviews", "books", on_delete: :cascade
+  add_foreign_key "reviews", "users", on_delete: :cascade
 end

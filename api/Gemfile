@@ -25,6 +25,8 @@ gem 'apipie-rails'
 # File upload
 gem 'carrierwave'
 
+# gem 'ruby-debug-ide'
+
 group :development, :test do
   gem 'capistrano'
   gem 'capistrano-rails'

@@ -21,12 +21,6 @@ class BooksController < ApplicationController
       @book = Book.new(book_params)
       @current_user.books << @book
       @current_user.save
-      #
-      # if @book.save
-      #   render json: @book, status: :created, location: @book
-      # else
-      #   render json: @book.errors, status: :unprocessable_entity
-      # end
       render json: @book, status: :ok, location: @book
     rescue
       head :forbidden

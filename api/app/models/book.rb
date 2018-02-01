@@ -15,7 +15,8 @@ class Book < ApplicationRecord
   IMG2MIME = {
       'gif' => 'image/gif',
       'jpeg' => 'image/jpeg',
-      'png' => 'image/png'
+      'png' => 'image/png',
+      'jpg' => 'image/jpg'
   }
 
 
@@ -42,7 +43,6 @@ class Book < ApplicationRecord
   end
 
   def cover
-    p cover_path
     if cover_path.nil?
       return nil
     end
