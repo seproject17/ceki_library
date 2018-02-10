@@ -24,6 +24,7 @@ gem 'apipie-rails'
 
 # File upload
 gem 'carrierwave'
+gem 'carrierwave-base64'
 
 # gem 'ruby-debug-ide'
 

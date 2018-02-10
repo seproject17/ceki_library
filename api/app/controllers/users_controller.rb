@@ -40,11 +40,9 @@ class UsersController < ApplicationController
 
 
   def update
+    p params
     updated_user = JSON.parse request.body.read
-    updated_user.delete('role')
-    updated_user.delete('password')
-    updated_user.delete('email')
-    if @user.update(updated_user)
+    if @user.update_attributes(updated_user)
       head :ok
     else
       render json: @user.errors, status: :unprocessable_entity

@@ -28,8 +28,9 @@ class BooksController < ApplicationController
   end
 
   def update
+    updated_book = JSON.parse request.body.read
     begin
-      if @book.update(book_params)
+      if @book.update_attributes(updated_book)
         render json: @book
       else
         render json: @book.errors, status: :unprocessable_entity
