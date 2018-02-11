@@ -4,8 +4,6 @@ Rails.application.routes.draw do
 
   post 'books/:id/borrow' => 'books#borrow'
   post 'books/:id/return' => 'books#return'
-  post 'books/:id/cover' => 'books#upload_base64_cover'
-  post 'books/:id/content' => 'books#upload_base64_content'
   delete 'books/:id/cover' => 'books#delete_cover'
   delete 'books/:id/content' => 'books#delete_content'
 
@@ -14,5 +12,6 @@ Rails.application.routes.draw do
   put 'users/change_password' => 'users#change_password'
   put 'users/change_email' => 'users#change_email'
   get 'users/current' => 'users#show_current'
+  delete 'users/avatar' => 'users#delete_avatar'
   resources :users
 end

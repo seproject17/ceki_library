@@ -30,5 +30,11 @@ module Api
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = false
     # config.middleware.use ActionDispatch::Cookies
+    #
+    MIME::Types.add(
+        MIME::Type.new('image/jpg').tap do |type|
+          type.add_extensions 'jpg'
+        end
+    )
   end
 end
