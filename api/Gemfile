@@ -26,16 +26,13 @@ gem 'apipie-rails'
 gem 'carrierwave'
 gem 'carrierwave-base64'
 
-# gem 'ruby-debug-ide'
-
 group :development, :test do
   gem 'capistrano'
   gem 'capistrano-rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'ruby-debug-ide', '~> 0.6.0'
+  gem 'debase', '~> 0.2.2'
 end
-
-# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
