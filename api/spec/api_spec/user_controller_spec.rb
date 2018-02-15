@@ -21,6 +21,9 @@ end
 
 
 RSpec.describe UsersController, type: :controller do
+
+  fixtures :users
+
   # Admin
   describe 'Admin operations on users account' do
 
@@ -28,8 +31,6 @@ RSpec.describe UsersController, type: :controller do
     before :each do
       params = {email: 'admin@mail.ru', password: 'admin'}.to_json
       post :login, body: params, as: :json
-      p 'Credentials'
-      p cookies
     end
 
     after :each do
@@ -47,10 +48,13 @@ RSpec.describe UsersController, type: :controller do
     end
     describe 'GET users#show' do
       it 'find one user with specific id = 1' do
-        get :show, params: {:id => 1}
+        get :show, params: {:id => users(:admin).id}
         expect(response).to be_success
         user = JSON.parse @response.body
-        expect(user).not_to be_nil
+        expect(user['name']).to eq users(:admin).name
+        expect(user['surname']).to eq users(:admin).surname
+        expect(user['email']).to eq users(:admin).email
+        expect(user['role']).to eq users(:admin).role
       end
       it 'find no one user with specific invalid id = 8' do
         get :show, params: {:id => 8}
@@ -79,7 +83,6 @@ RSpec.describe UsersController, type: :controller do
         expect(user['role']).to eq 'admin'
         expect(user['avatar']).should_not be_nil
         expect(user['avatar']['url']).to eq "/uploads/user/avatar/#{user['id']}/avatar.jpg"
-        # expect(File.identical?(AVATAR_PATH, File.join(PUBLIC_ROOT, "/uploads/user/avatar/#{user['id']}/avatar.jpg"))).to be_truthy
 
         user = User.find user['id']
         expect(user.name).to eq 'Robert'
@@ -157,8 +160,8 @@ RSpec.describe UsersController, type: :controller do
             password: 'friday',
             role: 'visitor'
         }.to_json
-        put :update, params: {:id => 1}, body: user, format: :json
-        user = User.find 1
+        put :update, params: {:id => users(:admin).id}, body: user, format: :json
+        user = User.find users(:admin).id
         expect(user.name).to eq 'Robert'
         expect(user.surname).to eq 'Smith'
         expect(user.email).to eq 'cured@mail.ru'
@@ -173,8 +176,8 @@ RSpec.describe UsersController, type: :controller do
             password: 'friday',
             role: 'librarian'
         }.to_json
-        put :update, params: {:id => 2}, body: user, format: :json
-        user = User.find 2
+        put :update, params: {:id => users(:librarian).id}, body: user, format: :json
+        user = User.find users(:librarian).id
         expect(user.name).to eq 'Robert'
         expect(user.surname).to eq 'Smith'
         expect(user.email).to eq 'cured@mail.ru'
@@ -185,8 +188,8 @@ RSpec.describe UsersController, type: :controller do
     # Delete user
     describe 'DELETE users#destroy' do
       it 'delete user account' do
-        delete :destroy, params: {:id => 1}
-        expect {User.find (1)}.to raise_error(ActiveRecord::RecordNotFound)
+        delete :destroy, params: {:id => users(:admin).id}
+        expect {User.find (users(:admin).id)}.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 
@@ -194,7 +197,7 @@ RSpec.describe UsersController, type: :controller do
       it 'delete users avatar' do
         delete :delete_avatar
         expect(response).to be_success
-        user = User.find 1
+        user = User.find users(:admin).id
         expect(user.avatar.url).to be_nil
       end
     end
@@ -206,10 +209,9 @@ RSpec.describe UsersController, type: :controller do
         put :change_email, body: params, as: :json
         expect(response).to be_success
         user = User.find_by_email 'new_admin@mail.ru'
-        expect(user.name).to eq 'admin name'
-        expect(user.surname).to eq 'admin surname'
-        expect(user.role).to eq 'admin'
-        expect(user.id).to eq 1
+        expect(user.name).to eq users(:admin).name
+        expect(user.surname).to eq users(:admin).surname
+        expect(user.role).to eq users(:admin).role
         expect(User.exists? :email => 'admin@mail.ru').to be_falsey
       end
     end
@@ -220,10 +222,9 @@ RSpec.describe UsersController, type: :controller do
         put :change_password, body: params, as: :json
         expect(response).to be_success
         user = User.find_by_email 'admin@mail.ru'
-        expect(user.name).to eq 'admin name'
-        expect(user.surname).to eq 'admin surname'
-        expect(user.role).to eq 'admin'
-        expect(user.id).to eq 1
+        expect(user.name).to eq users(:admin).name
+        expect(user.surname).to eq users(:admin).surname
+        expect(user.role).to eq users(:admin).role
         expect(user.authenticate('new_admin')).to be_truthy
       end
     end
@@ -238,26 +239,6 @@ RSpec.describe UsersController, type: :controller do
     after :each do
       post :logout
     end
-    describe 'GET users#index' do
-      it 'find all users' do
-        get :index
-        expect(response).to be_success
-        users = JSON.parse @response.body
-        expect(users.length).to eq 3
-      end
-    end
-    describe 'GET users#show' do
-      it 'find one user with specific id = 1' do
-        get :show, params: {:id => 1}
-        expect(response).to be_success
-        user = JSON.parse @response.body
-        expect(user).not_to be_nil
-      end
-      it 'find no one user with specific invalid id = 8' do
-        get :show, params: {:id => 8}
-        expect(response).to have_http_status :not_found
-      end
-    end
     describe 'POST users#create' do
       it 'disallow creating new admin account' do
         user = {
@@ -279,9 +260,9 @@ RSpec.describe UsersController, type: :controller do
             password: 'friday',
             role: 'visitor'
         }.to_json
-        put :update, params: {:id => 2}, body: user, as: :json
+        put :update, params: {:id => users(:visitor).id}, body: user, as: :json
         expect(response).to be_success
-        user = User.find 2
+        user = User.find users(:visitor).id
         expect(user.name).to eq 'Robert'
         expect(user.surname).to eq 'Smith'
         expect(user.email).to eq 'cured@mail.ru'
@@ -295,13 +276,13 @@ RSpec.describe UsersController, type: :controller do
             password: 'friday',
             role: 'visitor'
         }.to_json
-        put :update, params: {:id => 1}, body: user, as: :json
+        put :update, params: {:id => users(:admin).id}, body: user, as: :json
         expect(response).to have_http_status :forbidden
       end
     end
     describe 'DELETE users#destroy' do
       it 'disallow to delete user account' do
-        delete :destroy, params: {:id => 1}
+        delete :destroy, params: {:id => users(:visitor).id}
         expect(response).to have_http_status :forbidden
       end
     end
@@ -312,10 +293,9 @@ RSpec.describe UsersController, type: :controller do
         put :change_email, body: params, as: :json
         expect(response).to be_success
         user = User.find_by_email 'new_visitor@mail.ru'
-        expect(user.name).to eq 'visitor name'
-        expect(user.surname).to eq 'visitor surname'
-        expect(user.role).to eq 'visitor'
-        expect(user.id).to eq 2
+        expect(user.name).to eq users(:visitor).name
+        expect(user.surname).to eq users(:visitor).surname
+        expect(user.role).to eq users(:visitor).role
         expect(User.exists? :email => 'visitor@mail.ru').to be_falsey
       end
     end
@@ -326,10 +306,9 @@ RSpec.describe UsersController, type: :controller do
         put :change_password, body: params, as: :json
         expect(response).to be_success
         user = User.find_by_email 'visitor@mail.ru'
-        expect(user.name).to eq 'visitor name'
-        expect(user.surname).to eq 'visitor surname'
-        expect(user.role).to eq 'visitor'
-        expect(user.id).to eq 2
+        expect(user.name).to eq users(:visitor).name
+        expect(user.surname).to eq users(:visitor).surname
+        expect(user.role).to eq users(:visitor).role
         expect(user.authenticate('new_visitor')).to be_truthy
       end
     end
@@ -344,26 +323,6 @@ RSpec.describe UsersController, type: :controller do
     after :each do
       post :logout
     end
-    describe 'GET users#index' do
-      it 'find all users' do
-        get :index
-        expect(response).to be_success
-        users = JSON.parse @response.body
-        expect(users.length).to eq 3
-      end
-    end
-    describe 'GET users#show' do
-      it 'find one user with specific id = 1' do
-        get :show, params: {:id => 1}
-        expect(response).to be_success
-        user = JSON.parse @response.body
-        expect(user).not_to be_nil
-      end
-      it 'find no one user with specific invalid id = 8' do
-        get :show, params: {:id => 8}
-        expect(response).to have_http_status :not_found
-      end
-    end
     describe 'POST users#create' do
       it 'disallow creating new admin account' do
         user = {
@@ -385,9 +344,9 @@ RSpec.describe UsersController, type: :controller do
             password: 'friday',
             role: 'visitor'
         }.to_json
-        put :update, params: {:id => 3}, body: user, as: :json
+        put :update, params: {:id => users(:librarian).id}, body: user, as: :json
         expect(response).to be_success
-        user = User.find 3
+        user = User.find users(:librarian).id
         expect(user.name).to eq 'Robert'
         expect(user.surname).to eq 'Smith'
         expect(user.email).to eq 'cured@mail.ru'
@@ -401,13 +360,13 @@ RSpec.describe UsersController, type: :controller do
             password: 'friday',
             role: 'visitor'
         }.to_json
-        put :update, params: {:id => 1}, body: user, as: :json
+        put :update, params: {:id => users(:admin).id}, body: user, as: :json
         expect(response).to have_http_status :forbidden
       end
     end
     describe 'DELETE users#destroy' do
       it 'disallow deleting user account' do
-        delete :destroy, params: {:id => 1}
+        delete :destroy, params: {:id => users(:librarian).id}
         expect(response).to have_http_status :forbidden
       end
     end
@@ -418,10 +377,9 @@ RSpec.describe UsersController, type: :controller do
         put :change_email, body: params, as: :json
         expect(response).to be_success
         user = User.find_by_email 'new_librarian@mail.ru'
-        expect(user.name).to eq 'librarian name'
-        expect(user.surname).to eq 'librarian surname'
-        expect(user.role).to eq 'librarian'
-        expect(user.id).to eq 3
+        expect(user.name).to eq users(:librarian).name
+        expect(user.surname).to eq users(:librarian).surname
+        expect(user.role).to eq users(:librarian).role
         expect(User.exists? :email => 'librarian@mail.ru').to be_falsey
       end
     end
@@ -432,10 +390,9 @@ RSpec.describe UsersController, type: :controller do
         put :change_password, body: params, as: :json
         expect(response).to be_success
         user = User.find_by_email 'librarian@mail.ru'
-        expect(user.name).to eq 'librarian name'
-        expect(user.surname).to eq 'librarian surname'
-        expect(user.role).to eq 'librarian'
-        expect(user.id).to eq 3
+        expect(user.name).to eq users(:librarian).name
+        expect(user.surname).to eq users(:librarian).surname
+        expect(user.role).to eq users(:librarian).role
         expect(user.authenticate('new_librarian')).to be_truthy
       end
     end

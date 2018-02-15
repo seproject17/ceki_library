@@ -8,6 +8,7 @@ require 'rspec/rails'
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  config.full_backtrace = true
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   config.use_transactional_fixtures = true
@@ -15,13 +16,5 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.filter_rails_from_backtrace!
-
-  config.before(:each) do
-    Rails.logger.info 'Clean database'
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with :truncation
-    Rails.logger.info 'Load seeds'
-    Rails.application.load_seed
-  end
 
 end

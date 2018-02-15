@@ -1,0 +1,20 @@
+admin:
+  name: Admin Name
+  surname: Admin Surname
+  email: admin@mail.ru
+  password_digest: <%= BCrypt::Password.create('admin') %>
+  role: admin
+
+librarian:
+  name: Librarian Name
+  surname: Librarian Surname
+  email: librarian@mail.ru
+  password_digest: <%= BCrypt::Password.create('librarian') %>
+  role: librarian
+
+visitor:
+  name: Visitor Name
+  surname: Visitor Surname
+  email: visitor@mail.ru
+  password_digest: <%= BCrypt::Password.create('visitor') %>
+  role: visitor

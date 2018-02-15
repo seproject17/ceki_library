@@ -5,7 +5,9 @@ require 'rspec/rails'
 
 RSpec.configure do |config|
 
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.infer_spec_type_from_file_location!
+  config.full_backtrace = true
 
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
@@ -16,12 +18,4 @@ RSpec.configure do |config|
   end
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
-
-  config.before(:each) do
-    Rails.logger.info 'Clean database'
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with :truncation
-    Rails.logger.info 'Load seeds'
-    Rails.application.load_seed
-  end
 end
