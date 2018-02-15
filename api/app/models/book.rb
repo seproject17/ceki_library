@@ -2,6 +2,7 @@ require 'base64'
 
 class Book < ApplicationRecord
 
+  belongs_to :user
   has_many :borrowings
   has_many :reviews
   mount_base64_uploader :cover, BookCoverUploader
@@ -94,7 +95,7 @@ class Book < ApplicationRecord
 
   private
   def set_default_available_count
-    self.available_count = self.max_count
+    self.available_count = self.available_count || self.max_count
   end
 
   # private

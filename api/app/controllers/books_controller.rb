@@ -4,7 +4,6 @@ class BooksController < ApplicationController
   before_action :set_current_user
   before_action :allowed_only_staff, only: [:update, :destroy]
   before_action :set_book, only: [:show, :update, :destroy, :borrow, :return,
-                                  :upload_base64_cover, :upload_base64_content,
                                   :delete_cover, :delete_content]
 
   def index
@@ -28,9 +27,8 @@ class BooksController < ApplicationController
   end
 
   def update
-    updated_book = JSON.parse request.body.read
     begin
-      if @book.update_attributes(updated_book)
+      if @book.update_attributes(book_params)
         render json: @book
       else
         render json: @book.errors, status: :unprocessable_entity
@@ -45,42 +43,26 @@ class BooksController < ApplicationController
     head :ok
   end
 
-  def upload_base64_cover
-    @book.cover = JSON.parse(request.body.string)['cover']
-    unless @book.save
-      return head :forbidden
-    end
-    head :ok
-  end
-
-  def upload_base64_content
-    @book.content = JSON.parse(request.body.string)['content']
-    unless @book.save
-      return head :forbidden
-    end
-    head :ok
-  end
 
   def delete_cover
-    begin
-      @book.delete_cover
-    rescue
+    @book.delete_cover!
+    if @book.save
+      head :ok
+    else
       head :forbidden
     end
-    head :ok
   end
 
   def delete_content
-    begin
-      @book.delete_content
-    rescue
+    @book.delete_content!
+    if @book.save
+      head :ok
+    else
       head :forbidden
     end
-    head :ok
   end
 
   def borrow
-    p 'Borrowing'
     if @book.available_count == 0
       return head :forbidden
     end
@@ -94,7 +76,6 @@ class BooksController < ApplicationController
   end
 
   def return
-    p 'Return'
     if @book.available_count + 1 > @book.max_count
       return head :forbidden
     end
@@ -124,6 +105,10 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:title, :author, :publisher, :year, :annotations)
+    params.require(:book).permit(
+        :isbn, :title, :author, :publisher, :year,
+        :annotations, :available_count, :max_count,
+        :cover, :content
+    )
   end
 end
