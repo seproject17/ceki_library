@@ -3,21 +3,6 @@ require 'rails_helper'
 RESOURCES_ROOT = File.join(File.expand_path('..', File.dirname(__FILE__)), 'resources')
 PUBLIC_ROOT = File.join(File.expand_path('..', File.expand_path('..', File.dirname(__FILE__))), 'public')
 AVATAR_PATH = File.join(RESOURCES_ROOT, 'avatar.jpg')
-BASE64_IMG_REGEX = /data:(image\/gif|image\/jpeg|image\/png);base64,([a-zA-Z0-9+\/]+)=/i
-
-IMG2MIME = {
-    :gif => 'image/gif',
-    :jpeg => 'image/jpeg',
-    :png => 'image/png',
-    :jpg => 'image/jpg'
-}
-
-def file2base64(file_path)
-  img_type = file_path.split('.').last.to_sym
-  f = File.open(file_path, 'r')
-  base64_content = Base64.strict_encode64(f.read)
-  "data:#{IMG2MIME[img_type]};base64,#{base64_content}="
-end
 
 
 RSpec.describe UsersController, type: :controller do
@@ -74,7 +59,7 @@ RSpec.describe UsersController, type: :controller do
             avatar: file2base64(AVATAR_PATH)
         }.to_json
         post :create, body: user, format: :json
-        expect(response).to have_http_status :created
+        expect(response).to be_success
         user = JSON.parse @response.body
         expect(user).not_to be_nil
         expect(user['name']).to eq 'Robert'
@@ -102,7 +87,7 @@ RSpec.describe UsersController, type: :controller do
             avatar: file2base64(AVATAR_PATH)
         }.to_json
         post :create, body: user, format: :json
-        expect(response).to have_http_status :created
+        expect(response).to be_success
         user = JSON.parse @response.body
         expect(user).not_to be_nil
         expect(user['name']).to eq 'Robert'
@@ -130,7 +115,7 @@ RSpec.describe UsersController, type: :controller do
             avatar: file2base64(AVATAR_PATH)
         }.to_json
         post :create, body: user, format: :json
-        expect(response).to have_http_status :created
+        expect(response).to be_success
         user = JSON.parse @response.body
         expect(user).not_to be_nil
         expect(user['name']).to eq 'Robert'

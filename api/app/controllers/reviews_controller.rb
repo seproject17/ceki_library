@@ -15,7 +15,7 @@ class ReviewsController < ApplicationController
     @review.book = @book
     @review.user = @current_user
     if @review.save
-      render json: @review, status: :created
+      render json: @review, status: :ok
     else
       render json: @review.errors, status: :unprocessable_entity
     end
@@ -23,7 +23,7 @@ class ReviewsController < ApplicationController
 
   def update
     if @review.update(review_params)
-      render json: @review
+      render json: @review, status: :ok
     else
       render json: @review.errors, status: :unprocessable_entity
     end
@@ -31,6 +31,7 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review.destroy
+    head :ok
   end
 
   def find_by_user

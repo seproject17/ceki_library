@@ -29,7 +29,7 @@ class BooksController < ApplicationController
   def update
     begin
       if @book.update_attributes(book_params)
-        render json: @book
+        render json: @book, status: :ok
       else
         render json: @book.errors, status: :unprocessable_entity
       end
@@ -72,7 +72,7 @@ class BooksController < ApplicationController
     borrowing.save
     @book.available_count -= 1
     @book.save
-    head :ok
+    render json: borrowing, status: :ok
   end
 
   def return
@@ -91,8 +91,9 @@ class BooksController < ApplicationController
 
   private
   def set_book
-    @book = Book.find(params[:id])
-    if @book.nil?
+    begin
+      @book = Book.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
       head :not_found
     end
   end
