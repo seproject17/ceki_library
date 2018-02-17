@@ -1,4 +1,4 @@
-book_one:
+one:
   isbn: 1234567890
   title: Title 1
   author: Author 1
@@ -9,7 +9,7 @@ book_one:
   available_count: 19
   user: admin
 
-book_two:
+two:
   isbn: 1234567891
   title: Title 2
   author: Author 2
@@ -20,13 +20,13 @@ book_two:
   available_count: 19
   user: visitor
 
-book_three:
+three:
   isbn: 1234567892
   title: Title 3
   author: Author 3
   publisher: Publisher 3
   annotations: Annotations 3
   year: 1979-01-01
-  max_count: 79
+  max_count: 20
   available_count: 19
   user: visitor
