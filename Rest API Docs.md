@@ -21,8 +21,8 @@
 | [POST /users/logout](#get-users) | Logout |
 | [POST /users/{id}/change_username](#get-users) | Change username |
 | [POST /users/{id}/change_password](#get-users) | Change password |
-| [POST /users/recover_account](#get-users) | Recover an account in case if password was forgotten |
-| [POST /users/reset_password](#get-users) | Reset password |
+| :warning: [POST /users/recover_account](#get-users) | Recover an account in case if password was forgotten |
+| :warning: [POST /users/reset_password](#get-users) | Reset password |
 
 ### Books
 
