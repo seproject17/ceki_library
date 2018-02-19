@@ -50,19 +50,19 @@
 
 | URL  | Description |
 | ---  | ----------- |
-| :warning: GET /books/{id}/reviews  | Find all reviews for specific book |
-| :warning: POST /book/{bookId}/review | Create new review |
-| :warning: PUT /reviews/{id} | Update review |
-| :warning: DELETE /reviews/{id} | Delete review |
+| GET /books/{id}/reviews  | Find all reviews for specific book |
+| POST /book/{bookId}/review | Create new review |
+| PUT /reviews/{id} | Update review |
+| DELETE /reviews/{id} | Delete review |
 
 ### Borrowings
 
 | URL  | Description |
 | ---  | ----------- |
-| GET /borrowings  | Find all borrowings |
-| GET /borrowings/{id}  | Get borrowing by id |
-| POST /borrowings/{id}/accept | Accept borrowing |
-| POST /borrowings/{id}/reject | Reject borrowing |
+| :warning: GET /borrowings  | Find all borrowings |
+| :warning: GET /borrowings/{id}  | Get borrowing by id |
+| :warning: POST /borrowings/{id}/accept | Accept borrowing |
+| :warning: POST /borrowings/{id}/reject | Reject borrowing |
 
 ## Detailed 
 ### Users
