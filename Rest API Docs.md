@@ -770,7 +770,7 @@ PDF file
       "surname": "Иванов",
       "email": "ivan@mail.ru"
     },
-    "comment": "Excellent!",
+    "comments": "Excellent!",
     "mark": 10
   }
 ]
@@ -791,8 +791,7 @@ PDF file
 **Request body**
 ```json
 {
-    "user_id": 1,
-    "comment": "Excellent!",
+    "comments": "Excellent!",
     "mark": 10
 }
 ```
@@ -808,7 +807,7 @@ PDF file
       "surname": "Иванов",
       "email": "ivan@mail.ru"
     },
-    "comment": "Excellent!",
+    "comments": "Excellent!",
     "mark": 10
   }
 ]
@@ -830,7 +829,7 @@ PDF file
 ```json
 {
     "user_id": 1,
-    "comment": "Excellent!",
+    "comments": "Excellent!",
     "mark": 10
 }
 ```
