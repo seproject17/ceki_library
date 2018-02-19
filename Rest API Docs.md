@@ -6,7 +6,7 @@
 
 **Auth Type:** JWT Token Auth in Cookie 
 
-**Hint** :warning: means that this methods is not implemented yet
+**Hint**: :warning: means that this method is not implemented yet
 
 ## Summary
 ### Users
@@ -776,7 +776,7 @@ PDF file
       "title": "A Clockwork Orange",
       "isbn": "1234567890",
       "author": "Anthony Burgess",
-      "publisher: "AST",
+      "publisher": "AST",
       "year": "1962"
     },
     "borrow_date": null,
@@ -796,7 +796,7 @@ PDF file
       "title": "A Clockwork Orange",
       "isbn": "1234567890",
       "author": "Anthony Burgess",
-      "publisher: "AST",
+      "publisher": "AST",
       "year": "1962"
     },
     "borrow_date": "2017-01-01",
@@ -816,7 +816,7 @@ PDF file
       "title": "A Clockwork Orange",
       "isbn": "1234567890",
       "author": "Anthony Burgess",
-      "publisher: "AST",
+      "publisher": "AST",
       "year": "1962"
     },
     "borrow_date": null,
@@ -836,7 +836,7 @@ PDF file
       "title": "A Clockwork Orange",
       "isbn": "1234567890",
       "author": "Anthony Burgess",
-      "publisher: "AST",
+      "publisher": "AST",
       "year": "1962"
     },
     "borrow_date": "2017-01-01",
@@ -874,7 +874,7 @@ PDF file
       "title": "A Clockwork Orange",
       "isbn": "1234567890",
       "author": "Anthony Burgess",
-      "publisher: "AST",
+      "publisher": "AST",
       "year": "1962"
     },
     "borrow_date": "2017-01-01",
@@ -911,7 +911,7 @@ PDF file
       "title": "A Clockwork Orange",
       "isbn": "1234567890",
       "author": "Anthony Burgess",
-      "publisher: "AST",
+      "publisher": "AST",
       "year": "1962"
     },
     "borrow_date": "2017-01-01",
@@ -947,7 +947,7 @@ PDF file
       "title": "A Clockwork Orange",
       "isbn": "1234567890",
       "author": "Anthony Burgess",
-      "publisher: "AST",
+      "publisher": "AST",
       "year": "1962"
     },
     "borrow_date": "2017-01-01",
@@ -983,7 +983,7 @@ PDF file
       "title": "A Clockwork Orange",
       "isbn": "1234567890",
       "author": "Anthony Burgess",
-      "publisher: "AST",
+      "publisher": "AST",
       "year": "1962"
     },
     "borrow_date": "2017-01-01",
