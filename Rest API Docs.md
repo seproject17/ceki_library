@@ -778,7 +778,7 @@ PDF file
       "author": "Anthony Burgess",
       "publisher: "AST",
       "year": "1962"
-    }
+    },
     "borrow_date": null,
     "return_date": null,
     "status": "ORDERED"
@@ -798,7 +798,7 @@ PDF file
       "author": "Anthony Burgess",
       "publisher: "AST",
       "year": "1962"
-    }
+    },
     "borrow_date": "2017-01-01",
     "return_date": null,
     "status": "ACCEPTED"
@@ -818,7 +818,7 @@ PDF file
       "author": "Anthony Burgess",
       "publisher: "AST",
       "year": "1962"
-    }
+    },
     "borrow_date": null,
     "return_date": null,
     "status": "REJECTED"
@@ -838,7 +838,7 @@ PDF file
       "author": "Anthony Burgess",
       "publisher: "AST",
       "year": "1962"
-    }
+    },
     "borrow_date": "2017-01-01",
     "return_date": "2017-01-02",
     "status": "RETURNED"
@@ -876,7 +876,7 @@ PDF file
       "author": "Anthony Burgess",
       "publisher: "AST",
       "year": "1962"
-    }
+    },
     "borrow_date": "2017-01-01",
     "return_date": "2017-01-02",
     "status": "RETURNED"
@@ -913,7 +913,7 @@ PDF file
       "author": "Anthony Burgess",
       "publisher: "AST",
       "year": "1962"
-    }
+    },
     "borrow_date": "2017-01-01",
     "return_date": null,
     "status": "ACCEPTED"
@@ -949,7 +949,7 @@ PDF file
       "author": "Anthony Burgess",
       "publisher: "AST",
       "year": "1962"
-    }
+    },
     "borrow_date": "2017-01-01",
     "return_date": null,
     "status": "ACCEPTED"
@@ -985,7 +985,7 @@ PDF file
       "author": "Anthony Burgess",
       "publisher: "AST",
       "year": "1962"
-    }
+    },
     "borrow_date": "2017-01-01",
     "return_date": "2017-01-01",
     "status": "RETURNED"
