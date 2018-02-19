@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180210153335) do
+ActiveRecord::Schema.define(version: 20180219144902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,12 +35,11 @@ ActiveRecord::Schema.define(version: 20180210153335) do
   create_table "borrowings", force: :cascade do |t|
     t.date "borrow_date"
     t.date "return_date"
-    t.date "actual_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.bigint "book_id"
-    t.integer "status", default: 0
+    t.integer "status", default: 0, null: false
     t.index ["book_id"], name: "index_borrowings_on_book_id"
     t.index ["user_id"], name: "index_borrowings_on_user_id"
   end
@@ -57,14 +56,15 @@ ActiveRecord::Schema.define(version: 20180210153335) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "surname"
-    t.string "email"
-    t.string "password_digest"
+    t.string "name", null: false
+    t.string "surname", null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
     t.integer "role", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar"
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "books", "users", on_delete: :cascade
