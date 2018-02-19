@@ -6,6 +6,8 @@
 
 **Auth Type:** JWT Token Auth in Cookie 
 
+**Hint**: :warning: means that this method is not implemented yet
+
 ## Summary
 ### Users
 
@@ -21,8 +23,8 @@
 | [POST /users/logout](#get-users) | Logout |
 | [POST /users/{id}/change_username](#get-users) | Change username |
 | [POST /users/{id}/change_password](#get-users) | Change password |
-| [POST /users/recover_account](#get-users) | Recover an account in case if password was forgotten |
-| [POST /users/reset_password](#get-users) | Reset password |
+| :warning: [POST /users/recover_account](#get-users) | Recover an account in case if password was forgotten |
+| :warning: [POST /users/reset_password](#get-users) | Reset password |
 
 ### Books
 
@@ -33,33 +35,35 @@
 | [POST /books](#get-books) | Create new user book |
 | [PUT /books/{id}](#get-books)  | Update book |
 | [DELETE /books/{id}](#get-books)  | Delete book |
-| [POST /books/{id}/file](#get-books) | Upload book file |
-| [GET /books/{id}/file](#get-books) | Download book file |
-| [DELETE /books/{id}/file](#get-books) | Delete book file |
-| [POST /books/borrow](#get-books)  | Borrow book |
-| [POST /books/return](#get-books)  | Return book |
-| [GET /books/{id}/readers](#get-books) | Find all book readers |
-| [GET /users/{id}/books/read](#get-books)  | Find all books read by specific user |
-| [GET /users/{id}/books/borrowed](#get-books)  | Find all books borrowed by specific user |
-| [GET /users/{id}/books/added](#get-books) | Find all books which added by specific user |
-
-### Book Items
-
-| URL  | Description |
-| ---  | ----------- |
-| [GET /books/{id}/books_item](#book-items) | Find book items for specific book
-| [GET /book_items/{id}](#book-items) | Find a book item with specific id |
-| [PUT /book_items/{id}](#book-items) | Update book item |
-| [DELETE /book_items/{id}](#book-items) | Delete book item |
+| :warning: [POST /books/{id}/file](#get-books) | Upload book file |
+| :warning: [GET /books/{id}/file](#get-books) | Download book file |
+| [DELETE /books/{id}/content](#get-books) | Delete book file |
+| [DELETE /books/{id}/cover](#get-books) | Delete book cover |
+| :warning: [POST /books/borrow](#get-books)  | Borrow book |
+| :warning: [GET /books/{id}/readers](#get-books) | Find all book readers |
+| :warning: [GET /users/{id}/books/read](#get-books)  | Find all books read by specific user |
+| :warning: [GET /users/{id}/books/borrowed](#get-books)  | Find all books borrowed by specific user |
+| :warning: [GET /users/{id}/books/added](#get-books) | Find all books which added by specific user |
 
 ### Reviews
 
 | URL  | Description |
 | ---  | ----------- |
-| [GET /books/{id}/reviews](#get-books-id-reviews)  | Find all reviews for specific book |
+| GET /books/{id}/reviews  | Find all reviews for specific book |
 | POST /book/{bookId}/review | Create new review |
 | PUT /reviews/{id} | Update review |
 | DELETE /reviews/{id} | Delete review |
+
+### Borrowings
+
+| URL  | Description |
+| ---  | ----------- |
+| :warning: GET /borrowings  | Find all borrowings |
+| :warning: GET /user/current/borrowings | Get borrowings by user |
+| :warning: GET /borrowings/{id}  | Get borrowing by id |
+| :warning: POST /borrowings/{id}/accept | Accept borrowing |
+| :warning: POST /borrowings/{id}/reject | Reject borrowing |
+| :warning: POST /borrowings/{id}/return | Return book |
 
 ## Detailed 
 ### Users
@@ -750,6 +754,252 @@ PDF file
 | 401 | Unauthorized |
 | 403 | Forbidden |
 
+### Borrowings
+
+#### GET /borrowings
+---
+**Summary:** Find all borrowings
+
+**Response body**
+```json
+[
+  {
+    "id": 1,
+    "user": {
+      "id": 1,
+      "name": "Иван",
+      "surname": "Иванов",
+      "email": "ivan@mail.ru"
+    },
+    "book": {
+      "id": 1,
+      "title": "A Clockwork Orange",
+      "isbn": "1234567890",
+      "author": "Anthony Burgess",
+      "publisher": "AST",
+      "year": "1962"
+    },
+    "borrow_date": null,
+    "return_date": null,
+    "status": "ORDERED"
+  },
+  {
+    "id": 1,
+    "user": {
+      "id": 1,
+      "name": "Иван",
+      "surname": "Иванов",
+      "email": "ivan@mail.ru"
+    },
+    "book": {
+      "id": 1,
+      "title": "A Clockwork Orange",
+      "isbn": "1234567890",
+      "author": "Anthony Burgess",
+      "publisher": "AST",
+      "year": "1962"
+    },
+    "borrow_date": "2017-01-01",
+    "return_date": null,
+    "status": "ACCEPTED"
+  },
+  {
+    "id": 1,
+    "user": {
+      "id": 1,
+      "name": "Иван",
+      "surname": "Иванов",
+      "email": "ivan@mail.ru"
+    },
+    "book": {
+      "id": 1,
+      "title": "A Clockwork Orange",
+      "isbn": "1234567890",
+      "author": "Anthony Burgess",
+      "publisher": "AST",
+      "year": "1962"
+    },
+    "borrow_date": null,
+    "return_date": null,
+    "status": "REJECTED"
+  },
+  {
+    "id": 1,
+    "user": {
+      "id": 1,
+      "name": "Иван",
+      "surname": "Иванов",
+      "email": "ivan@mail.ru"
+    },
+    "book": {
+      "id": 1,
+      "title": "A Clockwork Orange",
+      "isbn": "1234567890",
+      "author": "Anthony Burgess",
+      "publisher": "AST",
+      "year": "1962"
+    },
+    "borrow_date": "2017-01-01",
+    "return_date": "2017-01-02",
+    "status": "RETURNED"
+  }
+]
+```
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+
+#### GET /user/current/borrowings
+---
+**Summary:** Find borrowings by current user
+
+**Response body**
+```json
+[
+  {
+    "id": 1,
+    "user": {
+      "id": 1,
+      "name": "Иван",
+      "surname": "Иванов",
+      "email": "ivan@mail.ru"
+    },
+    "book": {
+      "id": 1,
+      "title": "A Clockwork Orange",
+      "isbn": "1234567890",
+      "author": "Anthony Burgess",
+      "publisher": "AST",
+      "year": "1962"
+    },
+    "borrow_date": "2017-01-01",
+    "return_date": "2017-01-02",
+    "status": "RETURNED"
+  }
+]
+```
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+
+#### POST /borrowings/{id}/accept
+---
+**Summary:** Accept borrowing
+
+**Response body**
+```json
+{
+    "id": 1,
+    "user": {
+      "id": 1,
+      "name": "Иван",
+      "surname": "Иванов",
+      "email": "ivan@mail.ru"
+    },
+    "book": {
+      "id": 1,
+      "title": "A Clockwork Orange",
+      "isbn": "1234567890",
+      "author": "Anthony Burgess",
+      "publisher": "AST",
+      "year": "1962"
+    },
+    "borrow_date": "2017-01-01",
+    "return_date": null,
+    "status": "ACCEPTED"
+ }
+```
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden if user is not staff (admin or librarian) |
+
+#### POST /borrowings/{id}/reject
+---
+**Summary:** Reject borrowing
+
+**Response body**
+```json
+{
+    "id": 1,
+    "user": {
+      "id": 1,
+      "name": "Иван",
+      "surname": "Иванов",
+      "email": "ivan@mail.ru"
+    },
+    "book": {
+      "id": 1,
+      "title": "A Clockwork Orange",
+      "isbn": "1234567890",
+      "author": "Anthony Burgess",
+      "publisher": "AST",
+      "year": "1962"
+    },
+    "borrow_date": "2017-01-01",
+    "return_date": null,
+    "status": "ACCEPTED"
+ }
+```
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden if user is not staff (admin or librarian) |
+
+#### POST /borrowings/{id}/return
+---
+**Summary:** Return book
+
+**Response body**
+```json
+{
+    "id": 1,
+    "user": {
+      "id": 1,
+      "name": "Иван",
+      "surname": "Иванов",
+      "email": "ivan@mail.ru"
+    },
+    "book": {
+      "id": 1,
+      "title": "A Clockwork Orange",
+      "isbn": "1234567890",
+      "author": "Anthony Burgess",
+      "publisher": "AST",
+      "year": "1962"
+    },
+    "borrow_date": "2017-01-01",
+    "return_date": "2017-01-01",
+    "status": "RETURNED"
+ }
+```
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden if user is not staff (admin or librarian) |
+
 ### Reviews
 
 #### GET /books/{id}/reviews
@@ -767,7 +1017,7 @@ PDF file
       "surname": "Иванов",
       "email": "ivan@mail.ru"
     },
-    "comment": "Excellent!",
+    "comments": "Excellent!",
     "mark": 10
   }
 ]
@@ -788,8 +1038,7 @@ PDF file
 **Request body**
 ```json
 {
-    "user_id": 1,
-    "comment": "Excellent!",
+    "comments": "Excellent!",
     "mark": 10
 }
 ```
@@ -805,7 +1054,7 @@ PDF file
       "surname": "Иванов",
       "email": "ivan@mail.ru"
     },
-    "comment": "Excellent!",
+    "comments": "Excellent!",
     "mark": 10
   }
 ]
@@ -827,7 +1076,7 @@ PDF file
 ```json
 {
     "user_id": 1,
-    "comment": "Excellent!",
+    "comments": "Excellent!",
     "mark": 10
 }
 ```
