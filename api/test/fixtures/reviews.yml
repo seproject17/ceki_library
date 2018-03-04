@@ -1,9 +1,17 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  comments: MyString
-  mark: 1
+  comments: Comment 1
+  mark: 10
+  user: admin
+  book: one
 
 two:
-  comments: MyString
-  mark: 1
+  comments: Comment 2
+  mark: 9
+  user: admin
+  book: two
+
+three:
+  comments: Comment 3
+  mark: 8
+  user: visitor
+  book: one

@@ -66,27 +66,14 @@ class BooksController < ApplicationController
     if @book.available_count == 0
       return head :forbidden
     end
-    borrowing = Borrowing.new borrow_date: Date.today, status: 'borrowed'
+    borrowing = Borrowing.new status: 'ordered'
     borrowing.book = @book
     borrowing.user = @current_user
-    borrowing.save
-    @book.available_count -= 1
-    @book.save
-    render json: borrowing, status: :ok
-  end
-
-  def return
-    if @book.available_count + 1 > @book.max_count
-      return head :forbidden
+    if borrowing.save
+      render json: borrowing, status: :ok
+    else
+      render json: borrowing.errors, status: :ok
     end
-    unless @book.borrowings.exists?(status: 'borrowed', user_id: @current_user.id)
-      return head :forbidden
-    end
-    borrowing = (@book.borrowings.where(status: 'borrowed', user_id: @current_user.id).last(1))[0]
-    borrowing.status = 'returned'
-    borrowing.actual_date = Date.today
-    borrowing.save
-    head :ok
   end
 
   private

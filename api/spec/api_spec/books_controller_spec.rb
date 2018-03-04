@@ -112,14 +112,14 @@ RSpec.describe BooksController, type: :controller do
     it 'should find book with specific id' do
       get :show, params: {'id': books(:one)}
       book = JSON.parse response.body
-      expect(book['isbn']).to eq '1234567890'
-      expect(book['title']).to eq 'Title 1'
-      expect(book['author']).to eq 'Author 1'
-      expect(book['publisher']).to eq 'Publisher 1'
-      expect(book['year']).to eq '1977-01-01'
-      expect(book['annotations']).to eq 'Annotations 1'
-      expect(book['available_count']).to eq 19
-      expect(book['max_count']).to eq 19
+      expect(book['isbn']).to eq books(:one).isbn
+      expect(book['title']).to eq books(:one).title
+      expect(book['author']).to eq books(:one).author
+      expect(book['publisher']).to eq books(:one).publisher
+      expect(book['year']).to eq books(:one).year.to_s
+      expect(book['annotations']).to eq books(:one).annotations
+      expect(book['available_count']).to eq books(:one).available_count
+      expect(book['max_count']).to eq books(:one).max_count
     end
 
     it 'expect 404 if book not found' do
@@ -132,10 +132,15 @@ RSpec.describe BooksController, type: :controller do
   end
 
   describe 'Borrow book' do
-    it 'should borrow a book successfully' do
+    it 'should order borrow a book successfully' do
       post :borrow, params: {'id': books(:one).id}
       expect(response).to have_http_status :ok
-      p JSON.parse response.body
+      borrowing = JSON.parse response.body
+      expect(borrowing['status']).to eq 'ordered'
+      borrowing = Borrowing.find borrowing['id']
+      expect(borrowing.status).to eq 'ordered'
+      expect(borrowing.book.id).to eq books(:one).id
+      expect(borrowing.user.id).to eq users(:admin).id
     end
     it 'borrowing should be forbidden if not free instances of book' do
       book = Book.find(books(:one).id)
