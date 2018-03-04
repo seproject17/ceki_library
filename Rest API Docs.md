@@ -58,12 +58,13 @@
 
 | URL  | Description |
 | ---  | ----------- |
-| :warning: GET /borrowings  | Find all borrowings |
-| :warning: GET /user/current/borrowings | Get borrowings by user |
-| :warning: GET /borrowings/{id}  | Get borrowing by id |
-| :warning: POST /borrowings/{id}/accept | Accept borrowing |
-| :warning: POST /borrowings/{id}/reject | Reject borrowing |
-| :warning: POST /borrowings/{id}/return | Return book |
+| GET /borrowings  | Find all borrowings |
+| GET /user/{id}/borrowings | Get borrowings by user id |
+| GET /user/current/borrowings | Get borrowings by current user |
+| GET /borrowings/{id}  | Get borrowing by id |
+| POST /borrowings/{id}/accept | Accept borrowing |
+| POST /borrowings/{id}/reject | Reject borrowing |
+| POST /borrowings/{id}/return | Return book |
 
 ## Detailed 
 ### Users
