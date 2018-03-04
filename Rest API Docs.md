@@ -1108,7 +1108,7 @@ PDF file
 | 401 | Unauthorized |
 | 403 | Forbidden |
 
-#### POST /books/{id}/reviews
+#### POST /books/{id}/review
 ---
 **Summary:** Create new review
 
