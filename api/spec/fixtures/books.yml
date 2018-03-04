@@ -5,8 +5,8 @@ one:
   publisher: Publisher 1
   annotations: Annotations 1
   year: 1977-01-01
-  max_count: 19
-  available_count: 19
+  max_count: 2
+  available_count: 2
   user: admin
 
 two:
@@ -16,8 +16,8 @@ two:
   publisher: Publihser 2
   annotations: Annotations 2
   year: 1978-01-01
-  max_count: 76
-  available_count: 19
+  max_count: 2
+  available_count: 1
   user: visitor
 
 three:
@@ -27,6 +27,6 @@ three:
   publisher: Publisher 3
   annotations: Annotations 3
   year: 1979-01-01
-  max_count: 20
-  available_count: 19
+  max_count: 2
+  available_count: 0
   user: visitor

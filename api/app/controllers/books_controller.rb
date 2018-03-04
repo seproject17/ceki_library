@@ -3,8 +3,9 @@ class BooksController < ApplicationController
   before_action :verify_token
   before_action :set_current_user
   before_action :allowed_only_staff, only: [:update, :destroy]
-  before_action :set_book, only: [:show, :update, :destroy, :borrow, :return,
-                                  :delete_cover, :delete_content]
+  before_action :set_user, only: [:find_readed_books_by_user, :find_added_books_by_user, :find_borrowed_books_by_user]
+  before_action :set_book, only: [:show, :update, :destroy, :borrow,
+                                  :delete_cover, :delete_content, :find_readers]
 
   def index
     @books = Book.all
@@ -66,27 +67,38 @@ class BooksController < ApplicationController
     if @book.available_count == 0
       return head :forbidden
     end
-    borrowing = Borrowing.new borrow_date: Date.today, status: 'borrowed'
+    borrowing = Borrowing.new status: 'ordered'
     borrowing.book = @book
     borrowing.user = @current_user
-    borrowing.save
-    @book.available_count -= 1
-    @book.save
-    render json: borrowing, status: :ok
+    if borrowing.save
+      render json: borrowing, status: :ok
+    else
+      render json: borrowing.errors, status: :ok
+    end
   end
 
-  def return
-    if @book.available_count + 1 > @book.max_count
-      return head :forbidden
-    end
-    unless @book.borrowings.exists?(status: 'borrowed', user_id: @current_user.id)
-      return head :forbidden
-    end
-    borrowing = (@book.borrowings.where(status: 'borrowed', user_id: @current_user.id).last(1))[0]
-    borrowing.status = 'returned'
-    borrowing.actual_date = Date.today
-    borrowing.save
-    head :ok
+  def find_readed_books_by_user
+    borrowings = @user.borrowings
+    render json: borrowings.where(status: 'returned').or(borrowings.where(status: 'borrowed')).map {
+        |borrowing| borrowing.book
+    }.uniq
+  end
+
+  def find_borrowed_books_by_user
+    borrowings = @user.borrowings
+    render json: borrowings.where(status: 'returned').map {
+        |borrowing| borrowing.book
+    }.uniq
+  end
+
+  def find_added_books_by_user
+    render json: @user.books
+  end
+
+  def find_readers
+    render json: @book.borrowings.map {
+      |borrowing| borrowing.user
+    }.uniq
   end
 
   private
@@ -99,8 +111,8 @@ class BooksController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:user_id])
-    if @book.nil?
+    @user = User.find(params[:id])
+    if @user.nil?
       head :not_found
     end
   end
