@@ -1,7 +1,7 @@
 class BorrowingsController < ApplicationController
   before_action :verify_token
   before_action :set_current_user
-  before_action :allowed_only_staff, except: [:index, :show]
+  before_action :allowed_only_staff, except: [:index, :show, :find_by_user, :find_by_current_user]
   before_action :set_borrowing, only: [:show, :accept, :borrow, :reject, :return]
   before_action :set_user, only: [:find_by_user]
 
@@ -15,6 +15,10 @@ class BorrowingsController < ApplicationController
 
   def find_by_user
     render json: @user.borrowings
+  end
+
+  def find_by_current_user
+    render json: @current_user.borrowings
   end
 
   def accept

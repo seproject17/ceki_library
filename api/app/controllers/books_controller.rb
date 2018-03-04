@@ -3,8 +3,9 @@ class BooksController < ApplicationController
   before_action :verify_token
   before_action :set_current_user
   before_action :allowed_only_staff, only: [:update, :destroy]
-  before_action :set_book, only: [:show, :update, :destroy, :borrow, :return,
-                                  :delete_cover, :delete_content]
+  before_action :set_user, only: [:find_readed_books_by_user, :find_added_books_by_user, :find_borrowed_books_by_user]
+  before_action :set_book, only: [:show, :update, :destroy, :borrow,
+                                  :delete_cover, :delete_content, :find_readers]
 
   def index
     @books = Book.all
@@ -76,6 +77,30 @@ class BooksController < ApplicationController
     end
   end
 
+  def find_readed_books_by_user
+    borrowings = @user.borrowings
+    render json: borrowings.where(status: 'returned').or(borrowings.where(status: 'borrowed')).map {
+        |borrowing| borrowing.book
+    }.uniq
+  end
+
+  def find_borrowed_books_by_user
+    borrowings = @user.borrowings
+    render json: borrowings.where(status: 'returned').map {
+        |borrowing| borrowing.book
+    }.uniq
+  end
+
+  def find_added_books_by_user
+    render json: @user.books
+  end
+
+  def find_readers
+    render json: @book.borrowings.map {
+      |borrowing| borrowing.user
+    }.uniq
+  end
+
   private
   def set_book
     begin
@@ -86,8 +111,8 @@ class BooksController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:user_id])
-    if @book.nil?
+    @user = User.find(params[:id])
+    if @user.nil?
       head :not_found
     end
   end

@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   resources :books
 
   post 'books/:id/borrow' => 'books#borrow'
+  get 'books/:id/readers' => 'books#find_readers'
+  get 'users/:id/books/readed' => 'books#find_readed_books_by_user'
+  get 'users/:id/books/added' => 'books#find_added_books_by_user'
+  get 'users/:id/books/borrowed' => 'books#find_borrowed_books_by_user'
   delete 'books/:id/cover' => 'books#delete_cover'
   delete 'books/:id/content' => 'books#delete_content'
 
@@ -11,7 +15,8 @@ Rails.application.routes.draw do
   post 'borrowings/:id/return' => 'borrowings#return'
   get 'borrowings/:id' => 'borrowings#show'
   get 'borrowings' => 'borrowings#index'
-  get 'user/borrowings' => 'borrowings#find_by_user'
+  get 'users/current/borrowings' => 'borrowings#find_by_current_user'
+  get 'users/:id/borrowings' => 'borrowings#find_by_user'
 
   get 'reviews/:id' => 'reviews#show'
   post 'books/:id/review' => 'reviews#create'
