@@ -58,12 +58,13 @@
 
 | URL  | Description |
 | ---  | ----------- |
-| :warning: GET /borrowings  | Find all borrowings |
-| :warning: GET /user/current/borrowings | Get borrowings by user |
-| :warning: GET /borrowings/{id}  | Get borrowing by id |
-| :warning: POST /borrowings/{id}/accept | Accept borrowing |
-| :warning: POST /borrowings/{id}/reject | Reject borrowing |
-| :warning: POST /borrowings/{id}/return | Return book |
+| GET /borrowings  | Find all borrowings |
+| GET /user/{id}/borrowings | Get borrowings by user id |
+| GET /user/current/borrowings | Get borrowings by current user |
+| GET /borrowings/{id}  | Get borrowing by id |
+| POST /borrowings/{id}/accept | Accept borrowing |
+| POST /borrowings/{id}/reject | Reject borrowing |
+| POST /borrowings/{id}/return | Return book |
 
 ## Detailed 
 ### Users
@@ -781,7 +782,7 @@ PDF file
     },
     "borrow_date": null,
     "return_date": null,
-    "status": "ORDERED"
+    "status": "ordered"
   },
   {
     "id": 1,
@@ -801,7 +802,7 @@ PDF file
     },
     "borrow_date": "2017-01-01",
     "return_date": null,
-    "status": "ACCEPTED"
+    "status": "accepted"
   },
   {
     "id": 1,
@@ -821,7 +822,7 @@ PDF file
     },
     "borrow_date": null,
     "return_date": null,
-    "status": "REJECTED"
+    "status": "rejected"
   },
   {
     "id": 1,
@@ -841,7 +842,7 @@ PDF file
     },
     "borrow_date": "2017-01-01",
     "return_date": "2017-01-02",
-    "status": "RETURNED"
+    "status": "returned"
   }
 ]
 ```
@@ -879,7 +880,7 @@ PDF file
     },
     "borrow_date": "2017-01-01",
     "return_date": "2017-01-02",
-    "status": "RETURNED"
+    "status": "returned"
   }
 ]
 ```
@@ -891,6 +892,46 @@ PDF file
 | 200 | Success |
 | 401 | Unauthorized |
 | 403 | Forbidden |
+
+
+#### GET /user/{id}/borrowings
+---
+**Summary:** Find borrowings by user with specified id
+
+**Response body**
+```json
+[
+  {
+    "id": 1,
+    "user": {
+      "id": 1,
+      "name": "Иван",
+      "surname": "Иванов",
+      "email": "ivan@mail.ru"
+    },
+    "book": {
+      "id": 1,
+      "title": "A Clockwork Orange",
+      "isbn": "1234567890",
+      "author": "Anthony Burgess",
+      "publisher": "AST",
+      "year": "1962"
+    },
+    "borrow_date": "2017-01-01",
+    "return_date": "2017-01-02",
+    "status": "returned"
+  }
+]
+```
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+
 
 #### POST /borrowings/{id}/accept
 ---
@@ -916,7 +957,7 @@ PDF file
     },
     "borrow_date": "2017-01-01",
     "return_date": null,
-    "status": "ACCEPTED"
+    "status": "accepted"
  }
 ```
 
@@ -952,7 +993,43 @@ PDF file
     },
     "borrow_date": "2017-01-01",
     "return_date": null,
-    "status": "ACCEPTED"
+    "status": "rejected"
+ }
+```
+
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+| 403 | Forbidden if user is not staff (admin or librarian) |
+
+#### POST /borrowings/{id}/borrow
+---
+**Summary:** Borrow book
+
+**Response body**
+```json
+{
+    "id": 1,
+    "user": {
+      "id": 1,
+      "name": "Иван",
+      "surname": "Иванов",
+      "email": "ivan@mail.ru"
+    },
+    "book": {
+      "id": 1,
+      "title": "A Clockwork Orange",
+      "isbn": "1234567890",
+      "author": "Anthony Burgess",
+      "publisher": "AST",
+      "year": "1962"
+    },
+    "borrow_date": "2017-01-01",
+    "return_date": "2017-01-01",
+    "status": "borrowed"
  }
 ```
 
@@ -988,7 +1065,7 @@ PDF file
     },
     "borrow_date": "2017-01-01",
     "return_date": "2017-01-01",
-    "status": "RETURNED"
+    "status": "returned"
  }
 ```
 
