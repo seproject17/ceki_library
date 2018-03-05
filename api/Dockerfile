@@ -15,4 +15,5 @@ WORKDIR /app
 COPY Gemfile Gemfile.lock ./
 
 RUN bundle install
+RUN bundle exec rails db:migrate
 
