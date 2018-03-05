@@ -49,7 +49,7 @@
 
 | URL  | Description |
 | ---  | ----------- |
-| GET /books/{id}/reviews  | Find all reviews for specific book |
+| GET /books/{id} | Find all reviews for specific book |
 | POST /book/{bookId}/review | Create new review |
 | PUT /reviews/{id} | Update review |
 | DELETE /reviews/{id} | Delete review |
@@ -1108,7 +1108,7 @@ PDF file
 | 401 | Unauthorized |
 | 403 | Forbidden |
 
-#### POST /books/{id}/reviews
+#### POST /books/{id}/review
 ---
 **Summary:** Create new review
 
