@@ -16,7 +16,7 @@
               :placeholders="placeholders"
               :customData="modal_data.additional"
               :unique_id="unique_id">
-            <div class="field" v-for="field in Object.keys(values)">
+            <div class="field" v-for="field in Object.keys(values)" :key="field">
                 <span v-if="labels[field]" class="label">{{labels[field]}}</span>
                 <el-input v-model="values[field]"
                           :placeholder="placeholders[field]"></el-input>
