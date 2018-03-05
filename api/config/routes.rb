@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'users/:id/books/borrowed' => 'books#find_borrowed_books_by_user'
   delete 'books/:id/cover' => 'books#delete_cover'
   delete 'books/:id/content' => 'books#delete_content'
+  # post 'books/:id/content' => 'books#add_content'
 
   post 'borrowings/:id/accept' => 'borrowings#accept'
   post 'borrowings/:id/reject' => 'borrowings#reject'
