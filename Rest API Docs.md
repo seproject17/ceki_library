@@ -39,17 +39,17 @@
 | :warning: [GET /books/{id}/file](#get-books) | Download book file |
 | [DELETE /books/{id}/content](#get-books) | Delete book file |
 | [DELETE /books/{id}/cover](#get-books) | Delete book cover |
-| :warning: [POST /books/borrow](#get-books)  | Borrow book |
-| :warning: [GET /books/{id}/readers](#get-books) | Find all book readers |
-| :warning: [GET /users/{id}/books/read](#get-books)  | Find all books read by specific user |
-| :warning: [GET /users/{id}/books/borrowed](#get-books)  | Find all books borrowed by specific user |
-| :warning: [GET /users/{id}/books/added](#get-books) | Find all books which added by specific user |
+| [POST /books/{id}/borrow](#get-books)  | Borrow book |
+| [GET /books/{id}/readers](#get-books) | Find all book readers |
+| [GET /users/{id}/books/read](#get-books)  | Find all books read by specific user |
+| [GET /users/{id}/books/borrowed](#get-books)  | Find all books borrowed by specific user |
+| [GET /users/{id}/books/added](#get-books) | Find all books which added by specific user |
 
 ### Reviews
 
 | URL  | Description |
 | ---  | ----------- |
-| GET /books/{id}/reviews  | Find all reviews for specific book |
+| GET /books/{id} | Find all reviews for specific book |
 | POST /book/{bookId}/review | Create new review |
 | PUT /reviews/{id} | Update review |
 | DELETE /reviews/{id} | Delete review |
@@ -1108,7 +1108,7 @@ PDF file
 | 401 | Unauthorized |
 | 403 | Forbidden |
 
-#### POST /books/{id}/reviews
+#### POST /books/{id}/review
 ---
 **Summary:** Create new review
 
