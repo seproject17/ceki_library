@@ -589,38 +589,19 @@ PDF file
 | 401 | Unauthorized |
 | 403 | Forbidden |
 
-#### POST /books/borrow
+#### POST /books/{id}/borrow
 ---
-**Summary:** Load book for specific period
+**Summary:** Order a borrowings of book with specific id
 
 **Request body**
 ```json
 {
-  "user_id": 1,
-  "book_id": 1,
-  "start_date": "2017-10-10",
-  "end_date": "2017-10-11"
-}
-```
-
-**Response status**
-
-| Code | Description |
-| ---- | ----------- |
-| 200 | Success |
-| 401 | Unauthorized |
-| 403 | Forbidden |
-
-#### POST /books/return
----
-**Summary:** Return book
-
-**Request body**
-```json
-{
-  "user_id": 1,
-  "book_id": 1,
-  "return_date": "2017-10-12"
+	 "id": 1,
+    "user_id": 1,
+	"book_id": 1,
+    "borrow_date": "2017-01-01",
+    "return_date": null,
+    "status": "ordered"
 }
 ```
 
@@ -766,80 +747,32 @@ PDF file
 [
   {
     "id": 1,
-    "user": {
-      "id": 1,
-      "name": "Иван",
-      "surname": "Иванов",
-      "email": "ivan@mail.ru"
-    },
-    "book": {
-      "id": 1,
-      "title": "A Clockwork Orange",
-      "isbn": "1234567890",
-      "author": "Anthony Burgess",
-      "publisher": "AST",
-      "year": "1962"
-    },
+    "user_id": 1,
+    "book_id": 1,
     "borrow_date": null,
     "return_date": null,
     "status": "ordered"
   },
   {
-    "id": 1,
-    "user": {
-      "id": 1,
-      "name": "Иван",
-      "surname": "Иванов",
-      "email": "ivan@mail.ru"
-    },
-    "book": {
-      "id": 1,
-      "title": "A Clockwork Orange",
-      "isbn": "1234567890",
-      "author": "Anthony Burgess",
-      "publisher": "AST",
-      "year": "1962"
-    },
+   "id": 1,
+    "user_id": 1,
+    "book_id": 1,
     "borrow_date": "2017-01-01",
     "return_date": null,
     "status": "accepted"
   },
   {
-    "id": 1,
-    "user": {
-      "id": 1,
-      "name": "Иван",
-      "surname": "Иванов",
-      "email": "ivan@mail.ru"
-    },
-    "book": {
-      "id": 1,
-      "title": "A Clockwork Orange",
-      "isbn": "1234567890",
-      "author": "Anthony Burgess",
-      "publisher": "AST",
-      "year": "1962"
-    },
+   "id": 1,
+    "user_id": 1,
+    "book_id": 1,
     "borrow_date": null,
     "return_date": null,
     "status": "rejected"
   },
   {
     "id": 1,
-    "user": {
-      "id": 1,
-      "name": "Иван",
-      "surname": "Иванов",
-      "email": "ivan@mail.ru"
-    },
-    "book": {
-      "id": 1,
-      "title": "A Clockwork Orange",
-      "isbn": "1234567890",
-      "author": "Anthony Burgess",
-      "publisher": "AST",
-      "year": "1962"
-    },
+    "user_id": 1,
+    "book_id": 1,
     "borrow_date": "2017-01-01",
     "return_date": "2017-01-02",
     "status": "returned"
@@ -864,20 +797,8 @@ PDF file
 [
   {
     "id": 1,
-    "user": {
-      "id": 1,
-      "name": "Иван",
-      "surname": "Иванов",
-      "email": "ivan@mail.ru"
-    },
-    "book": {
-      "id": 1,
-      "title": "A Clockwork Orange",
-      "isbn": "1234567890",
-      "author": "Anthony Burgess",
-      "publisher": "AST",
-      "year": "1962"
-    },
+    "user_id": 1,
+    "book_id": 1,
     "borrow_date": "2017-01-01",
     "return_date": "2017-01-02",
     "status": "returned"
@@ -902,21 +823,9 @@ PDF file
 ```json
 [
   {
-    "id": 1,
-    "user": {
-      "id": 1,
-      "name": "Иван",
-      "surname": "Иванов",
-      "email": "ivan@mail.ru"
-    },
-    "book": {
-      "id": 1,
-      "title": "A Clockwork Orange",
-      "isbn": "1234567890",
-      "author": "Anthony Burgess",
-      "publisher": "AST",
-      "year": "1962"
-    },
+   "id": 1,
+    "user_id": 1,
+    "book_id": 1,
     "borrow_date": "2017-01-01",
     "return_date": "2017-01-02",
     "status": "returned"
@@ -941,20 +850,8 @@ PDF file
 ```json
 {
     "id": 1,
-    "user": {
-      "id": 1,
-      "name": "Иван",
-      "surname": "Иванов",
-      "email": "ivan@mail.ru"
-    },
-    "book": {
-      "id": 1,
-      "title": "A Clockwork Orange",
-      "isbn": "1234567890",
-      "author": "Anthony Burgess",
-      "publisher": "AST",
-      "year": "1962"
-    },
+    "user_id": 1,
+    "book_id": 1,
     "borrow_date": "2017-01-01",
     "return_date": null,
     "status": "accepted"
@@ -976,21 +873,9 @@ PDF file
 **Response body**
 ```json
 {
-    "id": 1,
-    "user": {
-      "id": 1,
-      "name": "Иван",
-      "surname": "Иванов",
-      "email": "ivan@mail.ru"
-    },
-    "book": {
-      "id": 1,
-      "title": "A Clockwork Orange",
-      "isbn": "1234567890",
-      "author": "Anthony Burgess",
-      "publisher": "AST",
-      "year": "1962"
-    },
+   "id": 1,
+    "user_id": 1,
+    "book_id": 1,
     "borrow_date": "2017-01-01",
     "return_date": null,
     "status": "rejected"
@@ -1012,21 +897,9 @@ PDF file
 **Response body**
 ```json
 {
-    "id": 1,
-    "user": {
-      "id": 1,
-      "name": "Иван",
-      "surname": "Иванов",
-      "email": "ivan@mail.ru"
-    },
-    "book": {
-      "id": 1,
-      "title": "A Clockwork Orange",
-      "isbn": "1234567890",
-      "author": "Anthony Burgess",
-      "publisher": "AST",
-      "year": "1962"
-    },
+   "id": 1,
+    "user_id": 1,
+    "book_id": 1,
     "borrow_date": "2017-01-01",
     "return_date": "2017-01-01",
     "status": "borrowed"
@@ -1048,21 +921,9 @@ PDF file
 **Response body**
 ```json
 {
-    "id": 1,
-    "user": {
-      "id": 1,
-      "name": "Иван",
-      "surname": "Иванов",
-      "email": "ivan@mail.ru"
-    },
-    "book": {
-      "id": 1,
-      "title": "A Clockwork Orange",
-      "isbn": "1234567890",
-      "author": "Anthony Burgess",
-      "publisher": "AST",
-      "year": "1962"
-    },
+   "id": 1,
+    "user_id": 1,
+    "book_id": 1,
     "borrow_date": "2017-01-01",
     "return_date": "2017-01-01",
     "status": "returned"
