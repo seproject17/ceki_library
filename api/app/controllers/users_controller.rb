@@ -35,7 +35,7 @@ class UsersController < ApplicationController
 
 
   def update
-    if @user.update_attributes(user_params)
+    if @user.update_attributes(update_user_params)
       render json: @user, status: :ok
     else
       render json: @user.errors, status: :unprocessable_entity
@@ -128,6 +128,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.permit(:name, :surname, :email, :password, :role, :avatar)
+  end
+
+  def update_user_params
+    params.permit(:name, :surname, :avatar)
   end
 
   def credentials_params
