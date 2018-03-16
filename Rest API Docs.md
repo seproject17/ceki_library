@@ -21,8 +21,8 @@
 | [DELETE /users/{id}](#get-users) | Delete user account |
 | [POST /users/login](#get-users) | Login in system |
 | [POST /users/logout](#get-users) | Logout |
-| [POST /users/{id}/change_username](#get-users) | Change username |
-| [POST /users/{id}/change_password](#get-users) | Change password |
+| [PUT /users/change_username](#get-users) | Change username |
+| [PUT /users/change_password](#get-users) | Change password |
 | :warning: [POST /users/recover_account](#get-users) | Recover an account in case if password was forgotten |
 | :warning: [POST /users/reset_password](#get-users) | Reset password |
 
