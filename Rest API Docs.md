@@ -1006,7 +1006,7 @@ PDF file
 | 401 | Unauthorized |
 | 403 | Forbidden |
 
-#### PUT /books/{id}/reviews
+#### PUT /reviews/{id}
 ---
 **Summary:** Update review
 
