@@ -274,7 +274,7 @@
 | ---- | ----------- |
 | 204 | OK, logged out |
 
-#### PUT /users/{id}/change_email
+#### PUT /users/change_email
 ---
 **Summary:** Change users email
 
@@ -294,7 +294,7 @@
 | 401 | Unauthorized |
 | 403 | Forbidden |
 
-#### PUT /users/{id}/change_password
+#### PUT /users/change_password
 ---
 **Summary:** Change users password
 
