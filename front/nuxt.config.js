@@ -22,7 +22,11 @@ module.exports = {
     ]
   },
   plugins: [
-    '~plugins/element-ui'
+    '~plugins/element-ui',
+      {
+          src: '~plugins/NuxtClientInit.js',
+          ssr: false,
+      }
   ],
   css: [
     'element-ui/lib/theme-chalk/index.css'

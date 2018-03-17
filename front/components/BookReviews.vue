@@ -1,5 +1,6 @@
 <template>
     <div>
+        {{reviews}}
         <div v-for="review in reviews">
             <div class="review-item">
                 <el-rate disabled v-model="review.mark"
@@ -27,6 +28,11 @@
 export default {
     props: {
         reviews: { required: true, type: Array }
+    },
+    mounted(){
+        this.$axios.$get('/users').then(res=>{
+           console.log("RESULT", res);
+        });
     }
 };
 </script>

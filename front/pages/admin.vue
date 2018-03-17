@@ -29,6 +29,7 @@
 import SmartModal from '~/components/SmartModal.vue';
 
 export default {
+    middleware: ['logged', 'admin'],
     data() {
         return {
             createBookModalData: {
