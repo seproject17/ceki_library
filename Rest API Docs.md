@@ -21,8 +21,8 @@
 | [DELETE /users/{id}](#get-users) | Delete user account |
 | [POST /users/login](#get-users) | Login in system |
 | [POST /users/logout](#get-users) | Logout |
-| [POST /users/{id}/change_username](#get-users) | Change username |
-| [POST /users/{id}/change_password](#get-users) | Change password |
+| [PUT /users/change_username](#get-users) | Change username |
+| [PUT /users/change_password](#get-users) | Change password |
 | :warning: [POST /users/recover_account](#get-users) | Recover an account in case if password was forgotten |
 | :warning: [POST /users/reset_password](#get-users) | Reset password |
 
@@ -274,7 +274,7 @@
 | ---- | ----------- |
 | 204 | OK, logged out |
 
-#### PUT /users/{id}/change_email
+#### PUT /users/change_email
 ---
 **Summary:** Change users email
 
@@ -294,7 +294,7 @@
 | 401 | Unauthorized |
 | 403 | Forbidden |
 
-#### PUT /users/{id}/change_password
+#### PUT /users/change_password
 ---
 **Summary:** Change users password
 
@@ -1006,7 +1006,7 @@ PDF file
 | 401 | Unauthorized |
 | 403 | Forbidden |
 
-#### PUT /books/{id}/reviews
+#### PUT /reviews/{id}
 ---
 **Summary:** Update review
 
