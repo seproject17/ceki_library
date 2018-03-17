@@ -11,10 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "@nuxtjs/axios": "^5.0.1",
+    "cookieparser": "^0.1.0",
     "element-ui": "^2.0.11",
     "node-sass": "^4.7.2",
-    "nuxt": "^1.2.1",
+    "nuxt": "^1.4.0",
     "sass-loader": "^6.0.6",
+    "vue-base64-file-upload": "^1.0.4",
     "vue-loader": "^13.7.0"
   },
   "devDependencies": {
