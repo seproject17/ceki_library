@@ -2,7 +2,6 @@
     <div class="editable-field">
         <div class="editable-container" v-if="isEditing">
             <el-input
-                    placeholder="Введи, педрила"
                     v-model="editingText"
                     style="flex-grow: 1;"></el-input>
             <span style="padding-left:10px;">
