@@ -788,7 +788,7 @@ PDF file
 | 401 | Unauthorized |
 | 403 | Forbidden |
 
-#### GET /user/current/borrowings
+#### GET /users/current/borrowings
 ---
 **Summary:** Find borrowings by current user
 
@@ -815,7 +815,7 @@ PDF file
 | 403 | Forbidden |
 
 
-#### GET /user/{id}/borrowings
+#### GET /users/{id}/borrowings
 ---
 **Summary:** Find borrowings by user with specified id
 
