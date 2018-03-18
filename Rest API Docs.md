@@ -59,8 +59,8 @@
 | URL  | Description |
 | ---  | ----------- |
 | GET /borrowings  | Find all borrowings |
-| GET /user/{id}/borrowings | Get borrowings by user id |
-| GET /user/current/borrowings | Get borrowings by current user |
+| GET /users/{id}/borrowings | Get borrowings by user id |
+| GET /users/current/borrowings | Get borrowings by current user |
 | GET /borrowings/{id}  | Get borrowing by id |
 | POST /borrowings/{id}/accept | Accept borrowing |
 | POST /borrowings/{id}/reject | Reject borrowing |
