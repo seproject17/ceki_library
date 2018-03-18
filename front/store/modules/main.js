@@ -9,7 +9,8 @@ const state = () => ({
     wishlist: null,
     userData: null,
     book: null,
-    reviews: []
+    reviews: [],
+    userBorrowings: []
 });
 const getters = {
     currentUser: ({ user }) => user,
@@ -19,7 +20,8 @@ const getters = {
     fetchCart: state => state.cart,
     getAllProducts: state => state.cart,
     currentBook: state => state.book,
-    currentReviews: state=>state.reviews
+    currentReviews: state=>state.reviews,
+    currentUserBorrowings: state => state.userBorrowings
 };
 const actions = {
     loadUser({ commit }) {
@@ -41,6 +43,11 @@ const actions = {
         return this.$axios.$get(`/books/${bookId}/reviews`).then((res) => {
             commit('reviewsLoaded', res);
         });
+    },
+    loadCurrentUserBorrowings({commit,state}){
+        return this.$axios.$get(`/users/${state.user.id}/borrowings`).then(res=>{
+            commit('currentUserBorrowingsLoaded', res);
+        })
     }
 };
 const mutations = {
@@ -53,6 +60,10 @@ const mutations = {
     },
     bookLoaded(state, book) {
         state.book = book;
+    },
+    currentUserBorrowingsLoaded(state, borrowings){
+        console.log("currentUser borrowings cokmmit", borrowings);
+        state.userBorrowings = borrowings;
     }
 };
 export default {

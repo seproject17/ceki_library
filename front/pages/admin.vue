@@ -3,6 +3,7 @@
         <div class="admin-page-content">
             <div class="admin-buttons">
                 <el-button @click="showCreateBookModal">Добавить книгу</el-button>
+                <el-button @click="showCreateUserModal">Создать пользователя</el-button>
             </div>
             <div class="admin-buttons-result">
             </div>
@@ -20,6 +21,18 @@
                 <el-input v-model="props.values.publisher" :placeholder="props.placeholders.publisher"></el-input>
                 ISBN
                 <el-input v-model="props.values.isbn" :placeholder="props.placeholders.isbn"></el-input>
+            </template>
+        </smart-modal>
+        <smart-modal ref="create_user_modal" v-model="createUserModalData">
+            <template slot="fields" slot-scope="props">
+                Имя
+                <el-input v-model="props.values.name" placeholder="Введите имя"></el-input>
+                Фамилия
+                <el-input v-model="props.values.surname" placeholder="Введите фамилию"></el-input>
+                Почта
+                <el-input v-model="props.values.email" placeholder="Введите почту"></el-input>
+                Пароль для пользователя (может поменять в личном кабинете)
+                <el-input v-model="props.values.password" placeholder="Введите пароль"></el-input>
             </template>
         </smart-modal>
     </div>
@@ -59,6 +72,31 @@ export default {
                         }
                     }
                 ]
+            },
+            createUserModalData: {
+                fields: {
+                    name: { value: '' },
+                    surname: { value: '' },
+                    email: { value: ''},
+                    password: { value: ''},
+                },
+                buttons: [
+                    {
+                        label: 'Создать',
+                        success({ name, surname, email, password }, store, modal) {
+
+                            modal.$axios.$post(`/users`, {
+                                name,
+                                surname,
+                                email,
+                                password
+                            }).then((l) => {
+                                console.log("USER CREATED", l);
+                                modal.close();
+                            });
+                        }
+                    }
+                ]
             }
         };
     },
@@ -71,6 +109,17 @@ export default {
                 author: ''
             });
             this.$refs.create_book_modal.show();
+        },
+        showCreateUserModal(){
+            console.log('SHOW CREATE user MODAL');
+            console.log('JJ', this.$refs);
+            this.$refs.create_user_modal.updateInitialValues({
+                name: '',
+                surname: '',
+                email:'',
+                password: ''
+            });
+            this.$refs.create_user_modal.show();
         }
     },
     components: {

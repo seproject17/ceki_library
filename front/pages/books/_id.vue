@@ -21,7 +21,7 @@
                         <el-button @click="writeReview">Написать рецензию</el-button>
                     </div>
                     <div>
-                        <el-button>Заявка на выдачу</el-button>
+                        <el-button @click="bookRequest">Заявка на выдачу</el-button>
                     </div>
                     <!-- <el-button>У кого?</el-button> -->
                 </div>
@@ -95,6 +95,12 @@ export default {
                 book: this.book
             });
             this.$refs.bookReviewModal.show();
+        },
+        bookRequest(){
+            console.log("BOOK REQUEST", this.book);
+            this.$axios.$post(`/books/${this.book.id}/borrow`).then(res=>{
+                console.log("REQUSST SENT ", res);
+            })
         }
     },
     computed: {
