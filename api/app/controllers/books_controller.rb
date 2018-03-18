@@ -49,6 +49,13 @@ class BooksController < ApplicationController
     head :ok
   end
 
+  def save_content
+
+  end
+
+  def save_cover
+
+  end
 
   def delete_cover
     @book.delete_cover!
@@ -81,7 +88,7 @@ class BooksController < ApplicationController
 
   def borrow
     if @book.available_count == 0
-      return head :forbidden
+      return head :unprocessable_entity
     end
     borrowing = Borrowing.new status: 'ordered'
     borrowing.book = @book
