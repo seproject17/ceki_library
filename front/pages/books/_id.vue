@@ -55,15 +55,12 @@ export default {
     validate({ params }) {
         return /^\d+$/.test(params.id);
     },
-    async asyncData({ params, app, error }) {
-        let book = await app.$axios.$get(`/books/${params.id}`);
-        let reviews = await app.$axios.$get(`/books/${book.id}/reviews`);
-        return { book, reviews };
+    async fetch ({ store, params }) {
+        await store.dispatch('loadBook', params.id);
+        await store.dispatch('loadReviews', params.id);
     },
     data() {
         return {
-            book: {},
-            reviews: [],
             bookReviewModalData: {
                 fields: {
                     mark: { value: 0 },
@@ -78,8 +75,10 @@ export default {
                             modal.$axios.$post(`/books/${book.id}/review`, {
                                 mark, comments
                             }).then((l) => {
-                                modal.close();
-                                console.log('Создано', mark, comments, l);
+                                store.dispatch('loadReviews', book.id).then(res=>{
+                                    modal.close();
+                                    console.log('Создано', mark, comments, l);
+                                });
                             });
                         }
                     }
@@ -96,6 +95,15 @@ export default {
                 book: this.book
             });
             this.$refs.bookReviewModal.show();
+        }
+    },
+    computed: {
+        book(){
+            console.log(this.$store.state);
+            return this.$store.getters.currentBook;
+        },
+        reviews(){
+            return this.$store.getters.currentReviews;
         }
     },
     components:{

@@ -11,16 +11,23 @@
 
 
             <div class="user-profile">
-                <img :src="$store.getters.currentUser.avatar.url" alt="">
+                <div class="user-profile-image"
+                     :style="{'background-image': `url(${$store.getters.currentUser.avatar.url})`}">
+                </div>
+
                 <div style="display: flex; align-items: center; flex-direction: column;justify-content: center;">
                     <p style="margin:0;">{{$store.getters.currentUser.name}}</p>
                     <p style="margin:0;">{{$store.getters.currentUser.surname}}</p>
-                    <el-button type="text"
+                    <el-button type="text" style="margin:0;padding:0;"
+                               @click="$router.push('/profile')">Профиль
+                    </el-button>
+                    <el-button type="text" style="margin:0;padding:0;"
                                v-if="$store.getters.currentUser.role === 'admin'"
-                               @click="$router.push('/admin')">Администрирование</el-button>
+                               @click="$router.push('/admin')">Администрирование
+                    </el-button>
+
                     <el-button type="text" style="margin:0;padding:0;" @click="logout">Выйти</el-button>
                 </div>
-
 
             </div>
         </div>
@@ -53,7 +60,14 @@
                 font-size: 15em;
                 margin-left: 20px;
                 display: flex;
-
+                .user-profile-image {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center;
+                }
             }
         }
     }
