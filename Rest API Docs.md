@@ -59,8 +59,8 @@
 | URL  | Description |
 | ---  | ----------- |
 | GET /borrowings  | Find all borrowings |
-| GET /user/{id}/borrowings | Get borrowings by user id |
-| GET /user/current/borrowings | Get borrowings by current user |
+| GET /users/{id}/borrowings | Get borrowings by user id |
+| GET /users/current/borrowings | Get borrowings by current user |
 | GET /borrowings/{id}  | Get borrowing by id |
 | POST /borrowings/{id}/accept | Accept borrowing |
 | POST /borrowings/{id}/reject | Reject borrowing |
@@ -788,7 +788,7 @@ PDF file
 | 401 | Unauthorized |
 | 403 | Forbidden |
 
-#### GET /user/current/borrowings
+#### GET /users/current/borrowings
 ---
 **Summary:** Find borrowings by current user
 
@@ -815,7 +815,7 @@ PDF file
 | 403 | Forbidden |
 
 
-#### GET /user/{id}/borrowings
+#### GET /users/{id}/borrowings
 ---
 **Summary:** Find borrowings by user with specified id
 
