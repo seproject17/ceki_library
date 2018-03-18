@@ -5,6 +5,7 @@ class Book < ApplicationRecord
   belongs_to :user
   has_many :borrowings
   has_many :reviews
+  has_and_belongs_to_many :tags
   mount_base64_uploader :cover, BookCoverUploader
   mount_uploader :content, BookFileUploader
 
@@ -16,6 +17,8 @@ class Book < ApplicationRecord
   scope :isbn_starts_with, -> (isbn) {(where 'isbn LIKE ?', "#{isbn}%")}
   scope :isbn_ends_with, -> (isbn) {(where 'isbn LIKE ?', "%#{isbn}")}
   scope :isbn_matches, -> (isbn) {(where 'isbn LIKE ?', "%#{isbn}%")}
+
+
   # BOOKS_ROOT = File.join('public', 'uploads', 'books')
   #
   # MIME2IMG = {
@@ -90,7 +93,13 @@ class Book < ApplicationRecord
   # end
 
   def as_json(options = {})
-    super((options || {}).merge({except: [:cover_path]})).merge({cover: cover}).merge({content: content})
+    super((options || {}).merge({except: [:cover_path]}))
+        .merge(
+            {
+                cover: cover, content: content,
+                tags: self.tags
+            }
+        )
   end
 
   # private

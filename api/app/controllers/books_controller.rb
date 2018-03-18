@@ -30,6 +30,16 @@ class BooksController < ApplicationController
   def create
     begin
       @book = Book.new(book_params)
+      tags = params[:tags]
+      if tags.present?
+        tags.each {|tag_name|
+          tag = Tag.find_by_name tag_name
+          unless tag
+            tag = Tag.new name: tag_name
+          end
+          @book.tags << tag
+        }
+      end
       if params[:content]
         @book.content = params[:content]
       end
@@ -54,6 +64,17 @@ class BooksController < ApplicationController
           return head :unprocessable_entity
         end
       end
+    end
+    tags = params[:tags]
+    if tags.present? && tags.length > 0
+      @book.tags.clear
+      tags.each {|tag_name|
+        tag = Tag.find_by_name tag_name
+        unless tag
+          tag = Tag.new name: tag_name
+        end
+        @book.tags << tag
+      }
     end
     if @book.update_attributes(update_book_params)
       render json: @book, status: :ok
