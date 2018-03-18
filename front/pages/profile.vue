@@ -1,12 +1,12 @@
 <template>
     <div>
         <h1 style="text-align: center">ЛИЧНЫЙ КАБИНЕТ</h1>
-        <div style="display: flex; justify-content: center;align-items: center; height:100vh; margin-top:-37px;">
+        <div style="display: flex; justify-content: center;align-items: center; margin-top:-37px;">
             <div>
                 <div class="user-photo"
                      :style="{'background-image': `url(${user.avatar.url})`}">
                 </div>
-                <input type="file" style="position: absolute;" @change="onFileChange">
+                <input type="file" @change="onFileChange">
             </div>
 
             <div style="padding-left:20px;">
@@ -14,6 +14,21 @@
                 <string-editor :text="user.surname" @save="updateSurname"></string-editor>
             </div>
         </div>
+
+        <template v-if="userBorrowings.length > 0">
+            <p>
+                Заявки на книги
+            </p>
+            <div>
+                <div v-for="borrowing in userBorrowings">
+                    {{borrowing}}
+                </div>
+            </div>
+        </template>
+        <div v-else>
+            Вы пока не взяли ни одной книги
+        </div>
+
     </div>
 
 </template>
@@ -43,7 +58,13 @@ export default {
     computed: {
         user() {
             return this.$store.getters.currentUser;
+        },
+        userBorrowings(){
+            return this.$store.getters.currentUserBorrowings;
         }
+    },
+    async fetch ({ store, params }) {
+        await store.dispatch('loadCurrentUserBorrowings');
     },
     methods: {
         updateName(name) {
