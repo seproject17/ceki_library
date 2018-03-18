@@ -12,11 +12,32 @@ class Book < ApplicationRecord
   scope :title, -> (title) {where title: title}
   scope :title_starts_with, -> (title) {(where 'title LIKE ?', "#{title}%")}
   scope :title_ends_with, -> (title) {where('title LIKE ?', "%#{title}")}
-  scope :title_matches, -> (title) {where('title LIKE ?', "%#{title}%")}
+  scope :title_matches, -> (title) {
+    # select {|book|
+    #   book.title.present? && (title.include? book.title)
+    # }
+    where("title is not NULL AND title <> ''").where("title LIKE ?", "%#{title}%")
+        .or(where("? LIKE '%' || title || '%'", title))
+  }
   scope :isbn, -> (isbn) {where isbn: isbn}
   scope :isbn_starts_with, -> (isbn) {(where 'isbn LIKE ?', "#{isbn}%")}
   scope :isbn_ends_with, -> (isbn) {(where 'isbn LIKE ?', "%#{isbn}")}
-  scope :isbn_matches, -> (isbn) {(where 'isbn LIKE ?', "%#{isbn}%")}
+  scope :isbn_matches, -> (isbn) {
+    where("isbn is not NULL AND isbn <> ''").where("isbn LIKE ?", "%#{isbn}%")
+        .or(where("? LIKE '%' || isbn || '%'", isbn))
+  }
+  scope :author_matches, -> (author) {
+    where("author is not NULL AND author <> ''").where("author LIKE ?", "%#{author}%")
+        .or(where("? LIKE '%' || author || '%'", author))
+  }
+  scope :publisher_matches, -> (publisher) {
+    where("publisher is not NULL AND publisher <> ''").where("publisher LIKE ?", "%#{publisher}%")
+        .or(where("? LIKE '%' || publisher || '%'", publisher))
+  }
+  scope :annotations_matches, -> (annotations) {
+    where("annotations is not NULL AND annotations <> ''").where("annotations LIKE ?", "%#{annotations}%")
+        .or(where("? LIKE '%' || annotations || '%'", annotations))
+  }
 
 
   # BOOKS_ROOT = File.join('public', 'uploads', 'books')
