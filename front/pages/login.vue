@@ -12,6 +12,7 @@
 </template>
 <script>
 export default {
+    layout: 'login',
     middleware: ['not-logged'],
     data() {
         return {

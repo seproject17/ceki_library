@@ -17,7 +17,8 @@
     "nuxt": "^1.4.0",
     "sass-loader": "^6.0.6",
     "vue-base64-file-upload": "^1.0.4",
-    "vue-loader": "^13.7.0"
+    "vue-loader": "^13.7.0",
+    "vue-touch": "^2.0.0-beta.4"
   },
   "devDependencies": {
     "eslint": "^4.18.2",
