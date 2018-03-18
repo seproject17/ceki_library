@@ -8,6 +8,14 @@ class Book < ApplicationRecord
   mount_base64_uploader :cover, BookCoverUploader
   mount_uploader :content, BookFileUploader
 
+  scope :title, -> (title) {where title: title}
+  scope :title_starts_with, -> (title) {(where 'title LIKE ?', "#{title}%")}
+  scope :title_ends_with, -> (title) {where('title LIKE ?', "%#{title}")}
+  scope :title_matches, -> (title) {where('title LIKE ?', "%#{title}%")}
+  scope :isbn, -> (isbn) {where isbn: isbn}
+  scope :isbn_starts_with, -> (isbn) {(where 'isbn LIKE ?', "#{isbn}%")}
+  scope :isbn_ends_with, -> (isbn) {(where 'isbn LIKE ?', "%#{isbn}")}
+  scope :isbn_matches, -> (isbn) {(where 'isbn LIKE ?', "%#{isbn}%")}
   # BOOKS_ROOT = File.join('public', 'uploads', 'books')
   #
   # MIME2IMG = {
