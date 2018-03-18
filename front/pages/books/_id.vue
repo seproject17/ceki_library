@@ -11,9 +11,14 @@
                     {{ book.annotations }}
                 </div>
                 <div class="control">
-                    <div>В наличии
-                        <el-tag>0</el-tag>
+                    <div>
+                        <div>В наличии
+                            <el-tag>{{book.available_count}}</el-tag>
+                        </div>
+                        <el-button type="text" v-if="user.role === 'admin'" @click="changeBookCount">изменить количество</el-button>
+
                     </div>
+
                     <div>
                         <el-button>Скачать</el-button>
                     </div>
@@ -29,7 +34,8 @@
             <smart-modal ref="bookReviewModal" v-model="bookReviewModalData">
                 <template slot="fields" slot-scope="props">
                     Текст рецензии
-                    <el-input type="textarea" placeholder="Введите текст рецензии" v-model="props.values.comments"></el-input>
+                    <el-input type="textarea" placeholder="Введите текст рецензии"
+                              v-model="props.values.comments"></el-input>
                     Ваша оценка
                     <el-rate
                             v-model="props.values.mark"
@@ -51,11 +57,12 @@
 <script>
 import BookReviews from '~/components/BookReviews.vue';
 import SmartModal from '~/components/SmartModal.vue';
+
 export default {
     validate({ params }) {
         return /^\d+$/.test(params.id);
     },
-    async fetch ({ store, params }) {
+    async fetch({ store, params }) {
         await store.dispatch('loadBook', params.id);
         await store.dispatch('loadReviews', params.id);
     },
@@ -65,7 +72,7 @@ export default {
                 fields: {
                     mark: { value: 0 },
                     comments: { value: '' },
-                    book: {value: null}
+                    book: { value: null }
                 },
                 buttons: [
                     {
@@ -75,7 +82,7 @@ export default {
                             modal.$axios.$post(`/books/${book.id}/review`, {
                                 mark, comments
                             }).then((l) => {
-                                store.dispatch('loadReviews', book.id).then(res=>{
+                                store.dispatch('loadReviews', book.id).then(res => {
                                     modal.close();
                                     console.log('Создано', mark, comments, l);
                                 });
@@ -86,9 +93,9 @@ export default {
             }
         };
     },
-    methods:{
-        writeReview(){
-            console.log("WRITING REVIEW FOR VBOOk", this.book);
+    methods: {
+        writeReview() {
+            console.log('WRITING REVIEW FOR VBOOk', this.book);
             this.$refs.bookReviewModal.updateInitialValues({
                 comments: '',
                 mark: 0,
@@ -96,23 +103,46 @@ export default {
             });
             this.$refs.bookReviewModal.show();
         },
-        bookRequest(){
-            console.log("BOOK REQUEST", this.book);
-            this.$axios.$post(`/books/${this.book.id}/borrow`).then(res=>{
-                console.log("REQUSST SENT ", res);
-            })
+        bookRequest() {
+            console.log('BOOK REQUEST', this.book);
+            this.$axios.$post(`/books/${this.book.id}/borrow`).then(res => {
+                console.log('REQUSST SENT ', res);
+            });
+        },
+        changeBookCount(){
+            this.$prompt('Введите новое количество книг', 'Tip', {
+                confirmButtonText: 'OK',
+                cancelButtonText: 'Cancel',
+                inputPattern: /[0-9]+/,
+                inputErrorMessage: 'должно быть числом!'
+            }).then(({value}) => {
+                this.$axios.$put(`/books/${this.book.id}`, {
+                    max_count: value
+                }).then(res=>{
+                   console.log("CHANGE QUANTITY", res);
+                    store.dispatch('loadBook', params.id);
+                    this.$message({
+                        type: 'success',
+                        message: 'Успешно изменено на:' + value
+                    });
+                });
+
+            });
         }
     },
     computed: {
-        book(){
+        book() {
             console.log(this.$store.state);
             return this.$store.getters.currentBook;
         },
-        reviews(){
+        reviews() {
             return this.$store.getters.currentReviews;
+        },
+        user() {
+            return this.$store.getters.currentUser;
         }
     },
-    components:{
+    components: {
         BookReviews, SmartModal
     }
 };
