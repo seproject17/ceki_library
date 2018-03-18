@@ -34,10 +34,10 @@ class BooksController < ApplicationController
   end
 
   def update
-    if params[:content]
-      @book.content = params[:content]
+    if update_book_params[:content]
+      @book.content = update_book_params[:content]
     end
-    if @book.update_attributes(book_params)
+    if @book.update_attributes(update_book_params)
       render json: @book, status: :ok
     else
       render json: @book.errors, status: :unprocessable_entity
@@ -144,6 +144,14 @@ class BooksController < ApplicationController
     params.permit(
         :isbn, :title, :author, :publisher, :year,
         :annotations, :available_count, :max_count,
+        :cover
+    )
+  end
+
+  def update_book_params
+    params.permit(
+        :isbn, :title, :author, :publisher, :year,
+        :annotations, :max_count,
         :cover
     )
   end
