@@ -34,8 +34,18 @@ class BooksController < ApplicationController
   end
 
   def update
+    _params = update_book_params
     if update_book_params[:content]
       @book.content = update_book_params[:content]
+    end
+    if _params[:max_count]
+      if @book.max_count < _params[:max_count]
+        @book.available_count += _params[:max_count] - @book.max_count
+      else
+        if @book.available_count > _params[:max_count]
+          return head :unprocessable_entity
+        end
+      end
     end
     if @book.update_attributes(update_book_params)
       render json: @book, status: :ok
