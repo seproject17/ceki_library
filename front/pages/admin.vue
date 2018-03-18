@@ -4,6 +4,8 @@
             <div class="admin-buttons">
                 <el-button @click="showCreateBookModal">Добавить книгу</el-button>
                 <el-button @click="showCreateUserModal">Создать пользователя</el-button>
+                <reservations swipeable/>
+
             </div>
             <div class="admin-buttons-result">
             </div>
@@ -40,6 +42,7 @@
 
 <script>
 import SmartModal from '~/components/SmartModal.vue';
+import Reservations from '~/components/Reservations'
 
 export default {
     middleware: ['logged', 'admin'],
@@ -123,7 +126,7 @@ export default {
         }
     },
     components: {
-        SmartModal
+        SmartModal, Reservations
     }
 };
 </script>
