@@ -7,13 +7,11 @@
                      :style="{'background-image': `url(${user.avatar.url})`}">
                 </div>
                 <input type="file" style="position: absolute;" @change="onFileChange">
-                {{user}}
-
             </div>
 
             <div style="padding-left:20px;">
-                <h4>{{user.name}}</h4>
-                <h5>{{user.surname}}</h5>
+                <string-editor :text="user.name" @save="updateName"></string-editor>
+                <string-editor :text="user.surname" @save="updateSurname"></string-editor>
             </div>
         </div>
     </div>
@@ -21,17 +19,19 @@
 </template>
 <style lang="scss">
     .user-photo {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
     }
 </style>
 <script>
+import StringEditor from '~/components/StringEditor.vue';
+
 let VueBase64FileUpload = null;
-let components = {};
+let components = { StringEditor };
 if (process.browser) {
     components['photo-upload'] = require('vue-base64-file-upload');
 }
@@ -46,6 +46,17 @@ export default {
         }
     },
     methods: {
+        updateName(name) {
+            console.log('UPDATE NamE', name);
+            this.$axios.$put(`/users/${this.user.id}`, { name }).then(res => {
+                this.$store.commit('userLoaded', res);
+            });
+        },
+        updateSurname(surname) {
+            this.$axios.$put(`/users/${this.user.id}`, { surname }).then(res => {
+                this.$store.commit('userLoaded', res);
+            });
+        },
         onFileChange(e) {
             //file object
 
@@ -70,10 +81,10 @@ export default {
                     this.$emit('load', dataURI);
                     console.log('NEW DATA URI', dataURI);
                     this.preview = dataURI;
-                    this.$axios.$put(`/users/${this.user.id}`, {avatar: dataURI}).then(res=>{
-                        console.log("EEEEE", res);
+                    this.$axios.$put(`/users/${this.user.id}`, { avatar: dataURI }).then(res => {
+                        console.log('EEEEE', res);
                         this.$store.commit('userLoaded', res);
-                    })
+                    });
                 }
             };
 
