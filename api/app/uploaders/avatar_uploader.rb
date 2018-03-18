@@ -43,7 +43,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def filename
     # "something.jpg" if original_filename
     if file
-      SecureRandom.uuid.gsub('-', '') + '.' + file.extension
+      # SecureRandom.uuid.gsub('-', '') + '.' + file.extension
+      'avatar_' + model.id.to_s + '.' + file.extension
     else
       super
     end
