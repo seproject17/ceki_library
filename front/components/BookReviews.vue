@@ -1,6 +1,5 @@
 <template>
     <div>
-        {{reviews}}
         <div v-for="review in reviews">
             <div class="review-item">
                 <el-rate disabled v-model="review.mark"

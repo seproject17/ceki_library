@@ -3,19 +3,17 @@
         <h1 style="text-align: center">ЛИЧНЫЙ КАБИНЕТ</h1>
         <div style="display: flex; justify-content: center;align-items: center; height:100vh; margin-top:-37px;">
             <div>
-                <div class="user-photo">
-
+                <div class="user-photo"
+                     :style="{'background-image': `url(${user.avatar.url})`}">
                 </div>
+                <input type="file" style="position: absolute;" @change="onFileChange">
                 {{user}}
-
-                <input type="file" @change="onFileChange">
-
 
             </div>
 
             <div style="padding-left:20px;">
-                <p>{{user.name}}</p>
-                <p>{{user.surname}}</p>
+                <h4>{{user.name}}</h4>
+                <h5>{{user.surname}}</h5>
             </div>
         </div>
     </div>
@@ -23,10 +21,12 @@
 </template>
 <style lang="scss">
     .user-photo {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        background-color: red;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
     }
 </style>
 <script>
@@ -72,6 +72,7 @@ export default {
                     this.preview = dataURI;
                     this.$axios.$put(`/users/${this.user.id}`, {avatar: dataURI}).then(res=>{
                         console.log("EEEEE", res);
+                        this.$store.commit('userLoaded', res);
                     })
                 }
             };

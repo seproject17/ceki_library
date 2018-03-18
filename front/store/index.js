@@ -19,7 +19,8 @@ const actions = {
            if (cookieJSON.token) {
                commit('testAdd',  cookieJSON.token);
                this.$axios.setHeader('Authorization', cookieJSON.token);
-               return this.$axios.get('http://api:3000/users/current').then(({ data }) => {
+               this.$axios.defaults.basepath = 'http://api:3000';
+               return this.$axios.get('/users/current').then(({ data }) => {
                    commit('userLoaded', data);
                });
            }
