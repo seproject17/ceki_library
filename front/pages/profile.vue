@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1 style="text-align: center">ЛИЧНЫЙ КАБИНЕТ</h1>
+        <h1 style="text-align: center;padding-bottom:20px;">ЛИЧНЫЙ КАБИНЕТ</h1>
         <div style="display: flex; justify-content: center;align-items: center; margin-top:-37px;">
             <div>
                 <div class="user-photo"
