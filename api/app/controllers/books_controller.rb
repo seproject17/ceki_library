@@ -12,6 +12,14 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
+    @books = @books.title(filter_params[:title]) if filter_params[:title].present?
+    @books = @books.title_starts_with(filter_params[:title_starts_with]) if filter_params[:title_starts_with].present?
+    @books = @books.title_ends_witg(filter_params[:title_ends_with]) if filter_params[:title_ends_with].present?
+    @books = @books.title_matches(filter_params[:title_matches]) if filter_params[:title_matches].present?
+    @books = @books.isbn(filter_params[:isbn]) if filter_params[:isbn].present?
+    @books = @books.isbn_starts_witg(filter_params[:isbn_starts_with]) if filter_params[:isbn_starts_with].present?
+    @books = @books.isbn_ends_with(filter_params[:isbn_ends_with]) if filter_params[:isbn_ends_with].present?
+    @books = @books.isbn_matches(filter_params[:isbn_matches]) if filter_params[:isbn_matches].present?
     render json: @books
   end
 
@@ -148,6 +156,12 @@ class BooksController < ApplicationController
     if @user.nil?
       head :not_found
     end
+  end
+
+  def filter_params
+    params.permit(
+        :isbn, :isbn_starts_with, :isbn_ends_with, :isbn_matches, :title, :title_starts_with, :title_ends_with, :title_matches
+    )
   end
 
   def book_params
