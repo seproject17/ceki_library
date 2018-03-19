@@ -45,6 +45,6 @@ class BookFileUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
   def default_url
-    "not_found.png"
+    "/not_found.png"
   end
 end
