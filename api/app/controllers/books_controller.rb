@@ -8,7 +8,7 @@ class BooksController < ApplicationController
   before_action :allowed_only_staff, only: [:update, :destroy]
   before_action :set_user, only: [:find_readed_books_by_user, :find_added_books_by_user, :find_borrowed_books_by_user]
   before_action :set_book, only: [:show, :update, :destroy, :borrow,
-                                  :delete_cover, :delete_content, :find_readers, :add_content]
+                                  :delete_cover, :delete_content, :find_readers, :save_cover, :save_content]
 
   def index
     if filter_params[:query].present? && !filter_params[:query].match(/\A\s*\z/)
@@ -90,11 +90,20 @@ class BooksController < ApplicationController
   end
 
   def save_content
-
+    if request.raw_post
+      t = Tempfile.new("content.pdf")
+      t << request.raw_post.gsub("\u0000", '')
+      @book.content = t
+    end
+    if @book.save
+      render json: @book
+    else
+      render @book.errors, status: :unprocessable_entity
+    end
   end
 
   def save_cover
-
+    @book.cover = request.raw_post
   end
 
   def delete_cover
@@ -198,7 +207,7 @@ class BooksController < ApplicationController
     params.permit(
         :isbn, :title, :author, :publisher, :year,
         :annotations, :max_count,
-        :cover
+        :cover, :content
     )
   end
 
