@@ -37,6 +37,7 @@ services:
       - ./cekilib.dev.conf:/etc/nginx/conf.d/default.conf
       - ./front:/mnt/front
       - ./api/public/uploads:/uploads
+      - ./api/public/not_found.png:/not_found.png
 volumes:
   pg-data:
   node-modules:
