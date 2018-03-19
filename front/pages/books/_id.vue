@@ -2,7 +2,7 @@
     <div>
         <div class="book-detail">
             <div class="flex-1">
-                <img class="cover" src="/book.png"/>
+                <div class="cover" :style="`background-image: url(${book.cover.url})`"/>
                 <div class="title">{{ book.title }}</div>
                 <div class="author">{{ book.author }}</div>
             </div>
@@ -15,12 +15,23 @@
                         <div>В наличии
                             <el-tag>{{book.available_count}}</el-tag>
                         </div>
-                        <el-button type="text" v-if="user.role === 'admin'" @click="changeBookCount">изменить количество</el-button>
+                        <template v-if="user.role === 'admin'">
+                            <el-button style="padding:0;" type="text" @click="changeBookCount">изменить количество</el-button>
+                            <br>
+                            загрузить обложку
+                            <input  type="file" accept="image/png" @change="coverFileChanged">
+                            <br>
+                            Загрузить электронную версию
+                            <input type="file" accept=".pdf" @change="bookFileChanged">
+                        </template>
 
                     </div>
 
-                    <div>
-                        <el-button>Скачать</el-button>
+                    <div style="padding:10px;">
+                        <a style="color: rgb(70, 151, 237);" v-if="book.content.url" :href="book.content.url">Скачать PDF</a>
+                        <div v-else>
+                            Нет электронной версии
+                        </div>
                     </div>
                     <div>
                         <el-button @click="writeReview">Написать рецензию</el-button>
@@ -94,6 +105,56 @@ export default {
         };
     },
     methods: {
+        coverFileChanged(e){
+            //file object
+
+            let files = e.target.files || e.dataTransfer.files;
+
+            if (!files.length)
+                return;
+
+            let file = files[0];
+            let size = file.size && file.size / Math.pow(1000, 2);
+
+            let formData = new FormData()
+            formData.append('cover', files[0], files[0].name)
+
+            this.$axios.$put(`/books/${this.book.id}`, formData, {
+                // headers : {
+                //     "Content-Type": "application/pdf"
+                // }
+            }).then(response => {
+                console.log("AFTER LOADING", response);
+                this.$store.commit('bookLoaded', response);
+
+            })
+
+        },
+        bookFileChanged(e) {
+            //file object
+
+            let files = e.target.files || e.dataTransfer.files;
+
+            if (!files.length)
+                return;
+
+            let file = files[0];
+            let size = file.size && file.size / Math.pow(1000, 2);
+
+            let formData = new FormData()
+            formData.append('content', files[0], files[0].name)
+
+            this.$axios.$put(`/books/${this.book.id}`, formData, {
+                // headers : {
+                //     "Content-Type": "application/pdf"
+                // }
+            }).then(response => {
+                console.log("AFTER LOADING", response);
+                this.$store.commit('bookLoaded', response);
+            })
+
+            // read blob url from file data
+        },
         writeReview() {
             console.log('WRITING REVIEW FOR VBOOk', this.book);
             this.$refs.bookReviewModal.updateInitialValues({
@@ -163,8 +224,14 @@ export default {
             flex: 1 0 auto;
         }
 
+        .cover {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
         .cover, .annotations {
             height: 420px;
+
         }
         .annotation {
             padding: 15px;
@@ -181,6 +248,7 @@ export default {
         .control {
             display: flex;
             justify-content: space-evenly;
+            align-items: center;
         }
     }
 </style>
