@@ -49,4 +49,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
       super
     end
   end
+
+  def default_url
+    "not_found.png"
+  end
 end
