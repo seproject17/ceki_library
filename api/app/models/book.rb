@@ -6,7 +6,7 @@ class Book < ApplicationRecord
   has_many :borrowings
   has_many :reviews
   has_and_belongs_to_many :tags
-  mount_base64_uploader :cover, BookCoverUploader
+  mount_uploader :cover, BookCoverUploader
   mount_uploader :content, BookFileUploader
 
   scope :title, -> (title) {where title: title}
