@@ -24,6 +24,11 @@ class BooksController < ApplicationController
     render json: @books
   end
 
+  def tags
+    @tags = Tag.all
+    render json: @tags
+  end
+
   def show
     render json: @book
   end
@@ -92,6 +97,7 @@ class BooksController < ApplicationController
   def save_content
     if request.raw_post
       t = Tempfile.new("content.pdf")
+      t.binmode
       t << request.raw_post.gsub("\u0000", '')
       @book.content = t
     end
