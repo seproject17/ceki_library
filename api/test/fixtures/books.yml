@@ -1,32 +1,340 @@
-one:
-  isbn: 1234567890
-  title: Title 1
-  author: Author 1
-  publisher: Publisher 1
-  annotations: Annotations 1
-  year: 1977-01-01
-  max_count: 2
-  available_count: 2
-  user: admin
+book_0:
+  annotations: Executive cover actually win. Sign example may exist society Democrat.
+    Collection behind every two fire evening know. Check social rich me view buy inside.
+  author: Crystal Sexton
+  available_count: 11
+  isbn: '123456789'
+  max_count: 11
+  publisher: Gibbs-Flores
+  user: user_5
+  year: '1988-07-07'
+book_1:
+  annotations: 'Majority thing market service worker. Pay opportunity that stand media.
 
-two:
-  isbn: 1234567891
-  title: Title 2
-  author: Author 2
-  publisher: Publihser 2
-  annotations: Annotations 2
-  year: 1978-01-01
-  max_count: 2
-  available_count: 1
-  user: visitor
+    Simply person why time.'
+  author: Randall Garcia
+  available_count: 6
+  isbn: '123456790'
+  max_count: 6
+  publisher: Scott, Hernandez and Coleman
+  user: user_10
+  year: '1990-05-26'
+book_10:
+  annotations: 'Become cover thank matter find. Only husband have former eye.
 
-three:
-  isbn: 1234567892
-  title: Title 3
-  author: Author 3
-  publisher: Publisher 3
-  annotations: Annotations 3
-  year: 1979-01-01
-  max_count: 2
+    None guy necessary appear. Apply structure way life.'
+  author: Robert Cox
   available_count: 0
-  user: visitor
+  isbn: '123456799'
+  max_count: 6
+  publisher: Gibbs-Curtis
+  user: user_2
+  year: '2003-09-25'
+book_11:
+  annotations: 'Network community issue anything election experience. Young billion
+    expect citizen throughout board.
+
+    Next finally focus thus this information discuss never. Risk environment price
+    carry.'
+  author: Timothy Christensen
+  available_count: 10
+  isbn: '123456800'
+  max_count: 13
+  publisher: Miller and Sons
+  user: user_3
+  year: '2003-12-31'
+book_12:
+  annotations: Inside social participant itself under woman. Ability science action.
+    Chance window reduce anyone agent.
+  author: Andrea Valentine
+  available_count: 14
+  isbn: '123456801'
+  max_count: 14
+  publisher: Ramos LLC
+  user: user_16
+  year: '1983-09-21'
+book_13:
+  annotations: 'Accept notice door add personal point. Business protect sit possible.
+    Avoid standard themselves the cell name article.
+
+    Economic small purpose. Yeah such rich organization.'
+  author: Robin Guerra
+  available_count: 0
+  isbn: '123456802'
+  max_count: 20
+  publisher: Pratt, Cunningham and Richard
+  user: user_5
+  year: '2009-11-24'
+book_14:
+  annotations: Case above skin I. Site after machine decision century likely yeah.
+    Amount way western close weight visit artist nature.
+  author: Kelly Coleman
+  available_count: 11
+  isbn: '123456803'
+  max_count: 11
+  publisher: Johnson, Kent and Martin
+  user: user_0
+  year: '1981-01-17'
+book_15:
+  annotations: 'Detail light shoulder. Fast inside black himself.
+
+    Light both most tree they discuss. How detail majority need after police. Brother
+    everybody herself.'
+  author: Patricia Bishop
+  available_count: 6
+  isbn: '123456804'
+  max_count: 10
+  publisher: Cooper LLC
+  user: user_5
+  year: '1972-04-07'
+book_16:
+  annotations: 'Night machine cover maintain hold treat.
+
+    Red film program open conference candidate. Third business owner late present
+    edge hope. Daughter present could thousand up suggest none.'
+  author: Alan Palmer
+  available_count: 0
+  isbn: '123456805'
+  max_count: 9
+  publisher: Bailey Ltd
+  user: user_11
+  year: '2008-06-01'
+book_17:
+  annotations: Stuff loss whom attention area together. Realize senior yourself community
+    although her. Key clear relationship despite job among exist only.
+  author: John Gamble
+  available_count: 5
+  isbn: '123456806'
+  max_count: 7
+  publisher: Schwartz Inc
+  user: user_5
+  year: '2012-12-22'
+book_18:
+  annotations: 'After success decade modern. System image operation western television
+    president. Former like mission pull.
+
+    Either statement myself health. Shoulder think assume direction determine early
+    doctor.'
+  author: Frederick Mills
+  available_count: 0
+  isbn: '123456807'
+  max_count: 11
+  publisher: Smith Ltd
+  user: user_12
+  year: '1983-01-02'
+book_19:
+  annotations: 'Material not while month late account especially. Page affect yourself
+    trip join role hair.
+
+    Whether agent behind. Face remain Congress. Skin medical recently ground surface
+    cold.'
+  author: Jeff Jordan
+  available_count: 17
+  isbn: '123456808'
+  max_count: 17
+  publisher: Espinoza-Ibarra
+  user: user_13
+  year: '1971-10-29'
+book_2:
+  annotations: Political daughter paper energy why into arm. Despite show black cell
+    peace plan onto clear.
+  author: Dawn Aguirre
+  available_count: 0
+  isbn: '123456791'
+  max_count: 11
+  publisher: Wong Inc
+  user: user_16
+  year: '1996-08-27'
+book_20:
+  annotations: 'Catch picture later traditional. Speech movement almost because whatever
+    thus.
+
+    Model nation accept car. Note tend religious appear discuss opportunity perform.'
+  author: Ryan Watts
+  available_count: 1
+  isbn: '123456809'
+  max_count: 1
+  publisher: Reyes PLC
+  user: user_10
+  year: '1977-11-23'
+book_21:
+  annotations: Chair fish but actually entire. Decade tough customer main degree.
+    Each wall area quite education note.
+  author: Brandon Johnson
+  available_count: 0
+  isbn: '123456810'
+  max_count: 20
+  publisher: Cervantes-Porter
+  user: user_7
+  year: '1997-04-07'
+book_22:
+  annotations: 'Religious include throughout than effect. Animal particular begin
+    expert full. First product senior minute idea way Mr.
+
+    Dream quite think office every. Recent pass close probably around charge maybe.'
+  author: Jesus Gordon
+  available_count: 16
+  isbn: '123456811'
+  max_count: 16
+  publisher: Garrett, Moreno and Allison
+  user: user_12
+  year: '1978-08-11'
+book_23:
+  annotations: Child some challenge power know result it itself. College all represent
+    information expert. Explain next color water middle billion ability various.
+  author: Carrie Evans
+  available_count: 17
+  isbn: '123456812'
+  max_count: 17
+  publisher: Brooks, Nelson and Richards
+  user: user_6
+  year: '1986-08-24'
+book_24:
+  annotations: Know administration during husband door world. Sometimes away stuff
+    couple science join.
+  author: Dr. Jordan Cross
+  available_count: 0
+  isbn: '123456813'
+  max_count: 4
+  publisher: Carpenter-Allen
+  user: user_4
+  year: '1992-06-10'
+book_25:
+  annotations: 'Probably page around once produce care him.
+
+    Per get cold draw family up issue. Treat realize main meet. Change edge writer
+    talk film black best bill.'
+  author: Melissa Maldonado
+  available_count: 18
+  isbn: '123456814'
+  max_count: 18
+  publisher: Oconnell-Jackson
+  user: user_3
+  year: '1998-11-02'
+book_26:
+  annotations: 'Ten consider official whom seem.
+
+    Agency although rather. Imagine lawyer table hair protect food.
+
+    Seek recently firm interview idea project. Option son chair movement agreement
+    the woman.'
+  author: Sarah Richards
+  available_count: 2
+  isbn: '123456815'
+  max_count: 2
+  publisher: Nichols-Russo
+  user: user_2
+  year: '2017-12-27'
+book_27:
+  annotations: Director house some. Source opportunity artist most lose prevent free
+    wide. Minute early end risk nice series speak during.
+  author: Ashley Martinez
+  available_count: 4
+  isbn: '123456816'
+  max_count: 14
+  publisher: Lamb-Elliott
+  user: user_5
+  year: '1983-12-03'
+book_28:
+  annotations: Much task nature especially though. Specific condition where factor
+    care same day plan. Police throughout social memory add nor road.
+  author: Mary Thompson
+  available_count: 0
+  isbn: '123456817'
+  max_count: 5
+  publisher: Smith-Carpenter
+  user: user_15
+  year: '1975-12-23'
+book_29:
+  annotations: 'Job arrive rule statement would. Need statement chance think heart
+    half food.
+
+    Six east every resource. As mind skin court grow commercial. Simple fear student
+    until threat return fear evening.'
+  author: Kimberly Wood
+  available_count: 1
+  isbn: '123456818'
+  max_count: 1
+  publisher: Lopez PLC
+  user: user_14
+  year: '1999-01-21'
+book_3:
+  annotations: 'Ground forget candidate my understand car this. Successful TV share
+    reduce do thank between meeting.
+
+    Because our office become happen become population. Arrive likely kid.'
+  author: Robert Bautista
+  available_count: 15
+  isbn: '123456792'
+  max_count: 15
+  publisher: Jones-Johnson
+  user: user_9
+  year: '2013-12-24'
+book_4:
+  annotations: Condition sign determine state under. Bed sit material behavior grow
+    along. Friend special teacher fund. Conference exactly apply form.
+  author: Martin Kelly
+  available_count: 3
+  isbn: '123456793'
+  max_count: 4
+  publisher: Barnes-Robinson
+  user: user_8
+  year: '2006-12-16'
+book_5:
+  annotations: 'North pass away. International social city west figure improve.
+
+    Television television agency.
+
+    Term find woman where choose at arrive. Thing prove agent glass population player.
+    Gun young onto.'
+  author: Leslie Madden
+  available_count: 21
+  isbn: '123456794'
+  max_count: 21
+  publisher: Grant-Perez
+  user: user_4
+  year: '1990-03-25'
+book_6:
+  annotations: Mouth draw avoid high nice around. Radio seem cup thought law. Hospital
+    plant partner six real foot deep. Finish land throw space respond standard.
+  author: Valerie James
+  available_count: 2
+  isbn: '123456795'
+  max_count: 11
+  publisher: Huang, Hutchinson and Stewart
+  user: user_12
+  year: '1990-02-22'
+book_7:
+  annotations: 'Leg less billion rule. Half under fear. For century mission recognize
+    change quickly. Trade investment race from.
+
+    Peace tough risk idea item worry.'
+  author: Scott Hanson
+  available_count: 1
+  isbn: '123456796'
+  max_count: 1
+  publisher: Ray-Gonzalez
+  user: user_10
+  year: '1980-12-01'
+book_8:
+  annotations: 'Standard type reduce federal piece citizen. So give rock wrong source
+    season wrong front. Right edge line six season mean stage light.
+
+    Leave finish interesting. Modern young environmental team.'
+  author: Jeffrey Ortiz
+  available_count: 0
+  isbn: '123456797'
+  max_count: 9
+  publisher: Andrade Group
+  user: user_2
+  year: '2009-08-24'
+book_9:
+  annotations: Candidate should share behavior. Price question thing field create
+    good receive. Behavior product blood house Mr.
+  author: Julie Diaz
+  available_count: 0
+  isbn: '123456798'
+  max_count: 19
+  publisher: Vargas-Gilmore
+  user: user_4
+  year: '2008-03-20'
