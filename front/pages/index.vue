@@ -4,7 +4,7 @@
             <nuxt-link :to="{ name: 'books-id', params: { id: book.id} }"
                        class="book-item" v-for="book in books"
                        :key="book.id">
-                <div class="book-image"></div>
+                <div class="book-image" :style="`background-image: url(${book.cover.url})`"></div>
                 <p>
                     {{book.title}}
                 </p>
@@ -35,9 +35,9 @@
                 height: 200px;
                 width: 150px;
                 margin: auto;
-                background: url(/book.png) center center;
                 background-size: contain;
                 background-repeat: no-repeat;
+                background-position: center;
             }
 
         }
