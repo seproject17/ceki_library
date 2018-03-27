@@ -1,4 +1,6 @@
 require 'securerandom'
+require 'digest/md5'
+
 class AvatarUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -44,7 +46,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
     # "something.jpg" if original_filename
     if file
       # SecureRandom.uuid.gsub('-', '') + '.' + file.extension
-      'avatar_' + model.id.to_s + '.' + file.extension
+      # 'avatar_' + model.id.to_s + '.' + file.extension
+      'avatar_' + Digest::MD5.hexdigest(file.read) + '.' + file.extension;
     else
       super
     end
