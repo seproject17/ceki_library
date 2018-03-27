@@ -18,7 +18,7 @@ const state = () => ({
 const getters = {
     currentUser: ({ user }) => user,
     isLogged: ({ user }) => user !== null,
-    isAdmin: (state, { currentUser }) => currentUser && currentUser.role === 'admin',
+    isAdmin: (state, { currentUser }) => currentUser && currentUser.role === 'admin' || currentUser.role === 'librarian',
     currentUserData: state => state.userData,
     fetchCart: state => state.cart,
     getAllProducts: state => state.cart,
