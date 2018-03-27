@@ -179,7 +179,8 @@ export default {
                     message: 'Заявка была отправлена успешно!',
                     type: 'success'
                 });
-                this.$store.dispatch('loadBook', params.id);
+                this.$store.dispatch('loadBook', this.book.id);
+                this.$store.dispatch('loadCurrentUserBorrowings');
             });
         },
         changeBookCount(){
