@@ -102,6 +102,10 @@
                 <el-input v-model="props.values.publisher" :placeholder="props.placeholders.publisher"></el-input>
                 ISBN
                 <el-input v-model="props.values.isbn" :placeholder="props.placeholders.isbn"></el-input>
+                Макс. количество
+                <div>
+                    <el-input-number size="mini" v-model="props.values.max_count"></el-input-number>
+                </div>
                 Теги
                 <div>
                     <el-select
@@ -128,6 +132,10 @@
                 <el-input v-model="props.values.publisher" :placeholder="props.placeholders.publisher"></el-input>
                 <div>ISBN</div>
                 <el-input v-model="props.values.isbn" :placeholder="props.placeholders.isbn"></el-input>
+                Макс. количество
+                <div>
+                    <el-input-number size="mini" v-model="props.values.max_count"></el-input-number>
+                </div>
                 Теги
                 <div>
                     <el-select
@@ -167,12 +175,13 @@ export default {
                     description: { value: '', placeholder: 'Напишите описание' },
                     isbn: { value: '', placeholder: 'ISBN' },
                     publisher: { value: '', placeholder: 'Издательство' },
-                    tags: { value: [] }
+                    tags: { value: [] },
+                    max_count: {value: 0}
                 },
                 buttons: [
                     {
                         label: 'Создать',
-                        success({ title, author, description, isbn, publisher, tags }, store, modal) {
+                        success({ title, author, description, isbn, publisher, tags, max_count }, store, modal) {
 
                             modal.$axios.$post('/books', {
                                 title,
@@ -180,7 +189,8 @@ export default {
                                 annotations: description,
                                 isbn,
                                 publisher,
-                                tags
+                                tags,
+                                max_count
                             }).then((l) => {
                                 console.log(l);
                                 modal.close();
@@ -197,12 +207,13 @@ export default {
                     isbn: { value: '', placeholder: 'ISBN' },
                     publisher: { value: '', placeholder: 'Издательство' },
                     id: { value: 0 },
-                    tags: { value: [] }
+                    tags: { value: [] },
+                    max_count: {value: []}
                 },
                 buttons: [
                     {
                         label: 'Сохранить',
-                        success({ title, author, annotations, isbn, publisher, id, tags }, store, modal) {
+                        success({ title, author, annotations, isbn, publisher, id, tags, max_count }, store, modal) {
 
                             modal.$axios.$put(`/books/${id}`, {
                                 title,
@@ -210,7 +221,8 @@ export default {
                                 annotations,
                                 isbn,
                                 publisher,
-                                tags
+                                tags,
+                                max_count
                             }).then((l) => {
                                 console.log(l);
                                 modal.$message({
@@ -234,15 +246,16 @@ export default {
             this.$refs.create_book_modal.updateInitialValues({
                 title: '',
                 author: '',
-                tags: []
+                tags: [],
+                max_count: 0
             });
             this.$refs.create_book_modal.show();
         },
-        showUpdateBookModal({ title, author, annotations, isbn, publisher, id, tags }) {
-            console.log('SHOW update book MODAL', { title, author, annotations, isbn, publisher, id, tags });
+        showUpdateBookModal({ title, author, annotations, isbn, publisher, id, tags,max_count }) {
+            console.log('SHOW update book MODAL', { title, author, annotations, isbn, publisher, id, tags,max_count });
             let tagss = [];
             tags.forEach(tag=>tagss.push(tag.name));
-            this.$refs.update_book_modal.updateInitialValues({ title, author, annotations, isbn, publisher, id, tags:tagss });
+            this.$refs.update_book_modal.updateInitialValues({ title, author, annotations, isbn, publisher, id, tags:tagss,max_count});
             this.$refs.update_book_modal.show();
         }
 
