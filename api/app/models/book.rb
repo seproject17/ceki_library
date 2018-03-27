@@ -16,27 +16,27 @@ class Book < ApplicationRecord
     # select {|book|
     #   book.title.present? && (title.include? book.title)
     # }
-    where("title is not NULL AND title <> ''").where("title LIKE ?", "%#{title}%")
-        .or(where("? LIKE '%' || title || '%'", title))
+    where("title is not NULL AND title <> ''").where("lower(title) LIKE lower(?)", "%#{title}%")
+        .or(where("lower(?) LIKE '%' || lower(title) || '%'", title))
   }
   scope :isbn, -> (isbn) {where isbn: isbn}
   scope :isbn_starts_with, -> (isbn) {(where 'isbn LIKE ?', "#{isbn}%")}
   scope :isbn_ends_with, -> (isbn) {(where 'isbn LIKE ?', "%#{isbn}")}
   scope :isbn_matches, -> (isbn) {
     where("isbn is not NULL AND isbn <> ''").where("isbn LIKE ?", "%#{isbn}%")
-        .or(where("? LIKE '%' || isbn || '%'", isbn))
+        .or(where("lower(?) LIKE '%' || lower(isbn) || '%'", isbn))
   }
   scope :author_matches, -> (author) {
-    where("author is not NULL AND author <> ''").where("author LIKE ?", "%#{author}%")
-        .or(where("? LIKE '%' || author || '%'", author))
+    where("author is not NULL AND author <> ''").where("lower(author) LIKE lower(?)", "%#{author}%")
+        .or(where("lower(?) LIKE '%' || lower(author) || '%'", author))
   }
   scope :publisher_matches, -> (publisher) {
-    where("publisher is not NULL AND publisher <> ''").where("publisher LIKE ?", "%#{publisher}%")
-        .or(where("? LIKE '%' || publisher || '%'", publisher))
+    where("publisher is not NULL AND publisher <> ''").where("lower(publisher) LIKE lower(?)", "%#{publisher}%")
+        .or(where("lower(?) LIKE '%' || lower(publisher) || '%'", publisher))
   }
   scope :annotations_matches, -> (annotations) {
-    where("annotations is not NULL AND annotations <> ''").where("annotations LIKE ?", "%#{annotations}%")
-        .or(where("? LIKE '%' || annotations || '%'", annotations))
+    where("annotations is not NULL AND annotations <> ''").where("lower(annotations) LIKE lower(?)", "%#{annotations}%")
+        .or(where("lower(?) LIKE '%' || lower(annotations) || '%'", annotations))
   }
 
 
