@@ -31,7 +31,7 @@
                                 prop="book"
                                 label="Книга"
                                 sortable
-                                width="400"
+                                width="300"
                                 align="center">
                             <template slot-scope="scope">
                                 {{`${scope.row.book.title} (id: ${scope.row.book.id})`}}
@@ -41,10 +41,28 @@
                                 prop="status"
                                 label="Заявка"
                                 sortable
-                                width="400"
+                                width="200"
                                 align="center">
                             <template slot-scope="scope">
                                 {{describedStatus(scope.row.status)}}
+                            </template>
+                        </el-table-column>
+                        <el-table-column
+                                prop="status"
+                                label="Действия"
+                                sortable
+                                width="200"
+                                align="center">
+                            <template slot-scope="scope">
+                                <template v-if="scope.row.status === 'accepted'">
+                                    <el-button size="mini"
+                                               @click="borrowBook(scope.row)">Выдать книгу</el-button>
+
+                                </template>
+                                <template v-if="scope.row.status ==='borrowed'">
+                                    <el-button size="mini"
+                                               @click="returnBook(scope.row)">Принять обратно</el-button>
+                                </template>
                             </template>
                         </el-table-column>
 
@@ -81,7 +99,27 @@ import Reservations from '~/components/Reservations.vue'
                     return 'Принята';
                 if (status === 'rejected')
                     return 'Отклонена';
+                if (status === 'borrowed')
+                    return 'На руках';
+                if (status === 'returned')
+                    return 'Возвращена';
                 return status;
+            },
+            borrowBook({book_id, id}){
+                console.log("BOOK BORROW",book_id);
+                this.$axios.$post(`/borrowings/${id}/borrow`).then(res=>{
+                    console.log("Borrowing выдана", res);
+                    this.$message({type: 'success', message: 'Книга помечена как выданная'});
+                    this.$store.dispatch('loadBorrowings');
+                })
+            },
+            returnBook({book_id, id}){
+                this.$axios.$post(`/borrowings/${id}/return`).then(res=>{
+                    console.log("Borrowing вернулась", res);
+                    this.$message({type: 'success', message: 'Книга помечена как вернувшаяся в библиотеку'});
+                    this.$store.dispatch('loadBorrowings');
+
+                });
             }
         },
         components: {Reservations}
