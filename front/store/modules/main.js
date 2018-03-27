@@ -10,6 +10,8 @@ const state = () => ({
     userData: null,
     book: null,
     reviews: [],
+    books: [],
+    users: [],
     userBorrowings: []
 });
 const getters = {
@@ -20,18 +22,30 @@ const getters = {
     fetchCart: state => state.cart,
     getAllProducts: state => state.cart,
     currentBook: state => state.book,
-    currentReviews: state=>state.reviews,
-    currentUserBorrowings: state => state.userBorrowings
+    currentReviews: state => state.reviews,
+    currentUserBorrowings: state => state.userBorrowings,
+    allBooks: state => state.books,
+    allUsers: state => state.users
 };
 const actions = {
     loadUser({ commit }) {
-        return axios.get('/api/users/current').then(({ data }) => {
+        return this.$axios.get('/users/current').then(({ data }) => {
             commit('userLoaded', data);
+        });
+    },
+    loadUsers({ commit }) {
+        return this.$axios.$get('/users').then(( data) => {
+            commit('usersLoaded', data);
         });
     },
     logout({ commit }) {
         return this.$axios.post('/users/logout').then(res => {
             commit('userLoaded', null);
+        });
+    },
+    loadBooks({ commit }) {
+        return this.$axios.$get('/books').then(res => {
+            commit('booksLoaded', res);
         });
     },
     loadBook({ commit }, bookId) {
@@ -44,16 +58,21 @@ const actions = {
             commit('reviewsLoaded', res);
         });
     },
-    loadCurrentUserBorrowings({commit,state}){
-        return this.$axios.$get(`/users/${state.user.id}/borrowings`).then(res=>{
+    loadCurrentUserBorrowings({ commit, state }) {
+        return this.$axios.$get(`/users/${state.user.id}/borrowings`).then(res => {
             commit('currentUserBorrowingsLoaded', res);
-        })
+        });
     }
 };
 const mutations = {
+    booksLoaded(state, books) {
+        state.books = books;
+    },
     userLoaded(state, user) {
         state.user = user;
-        console.log('USER CHANGED');
+    },
+    usersLoaded(state, users){
+      state.users = users;
     },
     reviewsLoaded(state, reviews) {
         state.reviews = reviews;
@@ -61,8 +80,8 @@ const mutations = {
     bookLoaded(state, book) {
         state.book = book;
     },
-    currentUserBorrowingsLoaded(state, borrowings){
-        console.log("currentUser borrowings cokmmit", borrowings);
+    currentUserBorrowingsLoaded(state, borrowings) {
+        console.log('currentUser borrowings cokmmit', borrowings);
         state.userBorrowings = borrowings;
     }
 };
