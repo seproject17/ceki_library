@@ -3,10 +3,10 @@
         <div class="admin-buttons-result" style="padding-bottom:20px;">
             <div class="admin-buttons">
                 <el-button @click="showCreateBookModal" icon="el-icon-plus">Книга</el-button>
-                <el-button @click="showCreateUserModal" icon="el-icon-plus">Пользователь</el-button>
             </div>
         </div>
         <el-table
+                @row-click="showUpdateBookModal"
                 :data="books"
                 style="width: 100%">
             <el-table-column
@@ -80,7 +80,7 @@
                     width="100">
                 <template slot-scope="scope">
                     <template v-if="scope.row.tags.length>0">
-                        <el-tag  v-for="tag in scope.row.tags">
+                        <el-tag v-for="tag in scope.row.tags">
                             {{tag}}
                         </el-tag>
                     </template>
@@ -105,23 +105,27 @@
                 <el-input v-model="props.values.isbn" :placeholder="props.placeholders.isbn"></el-input>
             </template>
         </smart-modal>
-        <smart-modal ref="create_user_modal" v-model="createUserModalData">
+        <smart-modal ref="update_book_modal" v-model="updateBookModalData">
             <template slot="fields" slot-scope="props">
-                Имя
-                <el-input v-model="props.values.name" placeholder="Введите имя"></el-input>
-                Фамилия
-                <el-input v-model="props.values.surname" placeholder="Введите фамилию"></el-input>
-                Почта
-                <el-input v-model="props.values.email" placeholder="Введите почту"></el-input>
-                Пароль для пользователя (может поменять в личном кабинете)
-                <el-input v-model="props.values.password" placeholder="Введите пароль"></el-input>
+                Название
+                <el-input v-model="props.values.title" :placeholder="props.placeholders.title"></el-input>
+                Автор
+                <el-input v-model="props.values.author" :placeholder="props.placeholders.author"></el-input>
+                Описание
+                <el-input type="textarea" v-model="props.values.annotations"
+                          :placeholder="props.placeholders.description"></el-input>
+                Издательство
+                <el-input v-model="props.values.publisher" :placeholder="props.placeholders.publisher"></el-input>
+                ISBN
+                <el-input v-model="props.values.isbn" :placeholder="props.placeholders.isbn"></el-input>
             </template>
         </smart-modal>
     </div>
 </template>
 <script>
 import SmartModal from '~/components/SmartModal.vue';
-import Reservations from '~/components/Reservations'
+import Reservations from '~/components/Reservations';
+
 export default {
     layout: 'admin',
     middleware: ['logged', 'admin'],
@@ -162,28 +166,36 @@ export default {
                         }
                     }
                 ]
-            },
-            createUserModalData: {
+            }, updateBookModalData: {
                 fields: {
-                    name: { value: '' },
-                    surname: { value: '' },
-                    email: { value: ''},
-                    password: { value: ''},
+                    title: { value: '', placeholder: 'Введите название книги' },
+                    author: { value: '', placeholder: 'Укажите автора' },
+                    annotations: { value: '', placeholder: 'Напишите описание' },
+                    isbn: { value: '', placeholder: 'ISBN' },
+                    publisher: { value: '', placeholder: 'Издательство' },
+                    id: { value: 0 }
                 },
                 buttons: [
                     {
-                        label: 'Создать',
-                        success({ name, surname, email, password }, store, modal) {
+                        label: 'Сохранить',
+                        success({ title, author, annotations, isbn, publisher, id }, store, modal) {
 
-                            modal.$axios.$post(`/users`, {
-                                name,
-                                surname,
-                                email,
-                                password
+                            modal.$axios.$put(`/books/${id}`, {
+                                title,
+                                author,
+                                annotations,
+                                isbn,
+                                publisher
                             }).then((l) => {
-                                console.log("USER CREATED", l);
+                                console.log(l);
+                                modal.$message({
+                                    message: 'Книга обновлена успешно',
+                                    type: 'success'
+                                });
+                                store.dispatch('loadBooks');
                                 modal.close();
                             });
+                            console.log('Создано', title, author, annotations, modal, store);
                         }
                     }
                 ]
@@ -200,17 +212,12 @@ export default {
             });
             this.$refs.create_book_modal.show();
         },
-        showCreateUserModal(){
-            console.log('SHOW CREATE user MODAL');
-            console.log('JJ', this.$refs);
-            this.$refs.create_user_modal.updateInitialValues({
-                name: '',
-                surname: '',
-                email:'',
-                password: ''
-            });
-            this.$refs.create_user_modal.show();
+        showUpdateBookModal({ title, author, annotations, isbn, publisher, id }) {
+            console.log('SHOW update book MODAL', { title, author, annotations, isbn, publisher,id });
+            this.$refs.update_book_modal.updateInitialValues({ title, author, annotations, isbn, publisher, id});
+            this.$refs.update_book_modal.show();
         }
+
     },
     components: {
         SmartModal, Reservations
