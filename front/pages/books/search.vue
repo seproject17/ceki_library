@@ -43,7 +43,7 @@
         }
         p {
             text-align: center;
-            color: white;
+            color: black;
             margin: 0;
         }
     }
