@@ -4,8 +4,9 @@
             <v-touch @pan="move" @panstart="startMove" @panend="stopMove" @pancancel="stopMove" @tap="select">
                 <div v-bind:style="{'transform':this.transform}" class="reservation-list-item"
                      :class="{ selected:this.selected, accepted:accepted!=null&&accepted===true, declined:accepted!=null&&accepted===false }">
-                    Запрос №{{reserveInfo.number}}<br>
-                    {{reserveInfo.name}}, {{formattedDateTime}}
+                    Запрос №{{reserveInfo.id}}<br>
+                    от пользователя: <strong>{{reserveInfo.user_id}}</strong>
+                    {{reserveInfo.user}} {{formattedDateTime}}
                     <div class="reservation-buttons-container" v-if="(!this.swipeable)&&accepted==null">
                         <div class="reservation-button accept" @click.stop="acceptReservation">принять</div>
                         &nbsp;
@@ -84,9 +85,9 @@ export default {
             return this.reserveInfo.accepted;
         },
         formattedDateTime() {
-            let date = new Date(this.reserveInfo.dateTime);
+            let date = new Date(this.reserveInfo.created_at);
             let months = ['янв.', 'фев.', 'мар.', 'апр.', 'май', 'июнь', 'июль', 'авг.', 'сен.', 'окт.', 'нояб.', 'дек.'];
-            return date.getDate() + ' ' + months[date.getMonth()] + ', ' + date.getFullYear() + ' г., ' + (date.getHours() > 10 ? '' : '0') + date.getHours() + ':' + (date.getMinutes() > 10 ? '' : '0') + date.getMinutes();
+            return date.getDate() + ' ' + months[date.getMonth()] + ', ' + date.getFullYear() + ' г., ' + (date.getHours() >= 10 ? '' : '0') + date.getHours() + ':' + (date.getMinutes() >= 10 ? '' : '0') + date.getMinutes();
         }
     }
 };

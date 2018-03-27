@@ -7,6 +7,7 @@
                     <el-menu-item index="/admin">Общее</el-menu-item>
                     <el-menu-item index="/admin/users" disabled>Пользователи</el-menu-item>
                     <el-menu-item index="/admin/books" disabled>Книги</el-menu-item>
+                    <el-menu-item index="/admin/requests" disabled>Заявки на книги</el-menu-item>
                 </el-menu>
             </div>
 
@@ -32,6 +33,8 @@
 </template>
 <script>
 export default {
+    layout:'admin',
+    middleware:['logged', 'admin'],
     methods: {
         async logout() {
             await this.$store.dispatch('logout');

@@ -76,8 +76,7 @@
                     label="Теги"
                     align="center"
 
-                    sortable
-                    width="100">
+                    sortable>
                 <template slot-scope="scope">
                     <template v-if="scope.row.tags.length>0">
                         <el-tag v-for="tag in scope.row.tags">

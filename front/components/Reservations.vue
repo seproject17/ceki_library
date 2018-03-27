@@ -1,7 +1,7 @@
 <template>
     <div class="reservations">
         <button @click="updateData">Add</button><br><br>
-        <reservation-list-item :key="i" v-for="(reservation, i ) in reservations" :reserve-info="reservation"  :swipeable="swipeable" @accept="handleAccept" />
+        <reservation-list-item  style="width:100%;" :key="i" v-for="(reservation, i ) in reservations" :reserve-info="reservation"  :swipeable="swipeable" @accept="handleAccept" />
     </div>
 </template>
 
@@ -14,15 +14,11 @@ export default {
         swipeable:{
             type:Boolean,
             default:false
+        },
+        reservations: {
+            type: Array,
+            required: true
         }
-    },
-    data(){
-        return { reservations:[
-                {'number':1,'name':'пользователь 1','dateTime':new Date(),'accepted':null},
-                {'number':2,'name':'п2','dateTime':new Date().setMonth(4),'accepted':null},
-                {'number':3,'name':'п3','dateTime':0,'accepted':null},
-                {'number':4,'name':'mo7a','dateTime':0,'accepted':null}
-            ] }
     },
     methods:{
         updateData(){

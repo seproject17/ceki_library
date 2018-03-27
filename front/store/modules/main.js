@@ -12,7 +12,8 @@ const state = () => ({
     reviews: [],
     books: [],
     users: [],
-    userBorrowings: []
+    userBorrowings: [],
+    borrowings: []
 });
 const getters = {
     currentUser: ({ user }) => user,
@@ -25,7 +26,8 @@ const getters = {
     currentReviews: state => state.reviews,
     currentUserBorrowings: state => state.userBorrowings,
     allBooks: state => state.books,
-    allUsers: state => state.users
+    allUsers: state => state.users,
+    allBorrowings: state => state.borrowings
 };
 const actions = {
     loadUser({ commit }) {
@@ -34,7 +36,7 @@ const actions = {
         });
     },
     loadUsers({ commit }) {
-        return this.$axios.$get('/users').then(( data) => {
+        return this.$axios.$get('/users').then((data) => {
             commit('usersLoaded', data);
         });
     },
@@ -62,6 +64,11 @@ const actions = {
         return this.$axios.$get(`/users/${state.user.id}/borrowings`).then(res => {
             commit('currentUserBorrowingsLoaded', res);
         });
+    },
+    loadBorrowings({ commit }) {
+        return this.$axios.$get('/borrowings').then(res => {
+            commit('allBorrowingsLoaded', res);
+        });
     }
 };
 const mutations = {
@@ -71,8 +78,8 @@ const mutations = {
     userLoaded(state, user) {
         state.user = user;
     },
-    usersLoaded(state, users){
-      state.users = users;
+    usersLoaded(state, users) {
+        state.users = users;
     },
     reviewsLoaded(state, reviews) {
         state.reviews = reviews;
@@ -83,6 +90,9 @@ const mutations = {
     currentUserBorrowingsLoaded(state, borrowings) {
         console.log('currentUser borrowings cokmmit', borrowings);
         state.userBorrowings = borrowings;
+    },
+    allBorrowingsLoaded(state, borrowings) {
+        state.borrowings = borrowings;
     }
 };
 export default {
