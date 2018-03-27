@@ -26,6 +26,12 @@
 | :warning: [POST /users/recover_account](#get-users) | Recover an account in case if password was forgotten |
 | :warning: [POST /users/reset_password](#get-users) | Reset password |
 
+### Tags
+
+| URL  | Description |
+| ---  | ----------- |
+| [GET /tags](#get-tags)   | Find tags |
+
 ### Books
 
 | URL  | Description |
@@ -349,6 +355,28 @@
 | 200 | Success |
 | 401 | Unauthorized |
 
+### Tags
+
+#### GET /tags
+---
+**Summary:** Find gets
+
+**Response body**
+```json
+[
+  {
+    "id": 1,
+    "name": "Ho ho"
+  }
+]
+```
+**Response status**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success |
+| 401 | Unauthorized |
+
 ### Books
 
 #### GET /books
@@ -359,10 +387,7 @@
 
 | Param name | Description |
 | ---------- | ----------- |
-| name | Name matcher |
-| count | Count of books which are presented |
-| offset | Offset |
-| sort | Sort mode |
+| query | Fuzzy query with title, author, publisher and isbn |
 
 **Response body**
 ```json
