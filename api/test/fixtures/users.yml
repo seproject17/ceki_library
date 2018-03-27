@@ -11,95 +11,95 @@ librarian:
   role: librarian
   surname: Librarian
 user_0:
-  email: michellewarner@gmail.com
-  name: Michael
-  password_digest: <%= BCrypt::Password.create('visitor') %>
-  role: visitor
-  surname: Williams
+  email: sharonwalker@george-gaines.info
+  name: Jonathan
+  password_digest: <%= BCrypt::Password.create('librarian') %>
+  role: librarian
+  surname: Cook
 user_1:
-  email: thomaslane@gmail.com
-  name: Paul
-  password_digest: <%= BCrypt::Password.create('librarian') %>
-  role: librarian
-  surname: Davis
+  email: vrodriguez@gmail.com
+  name: Alicia
+  password_digest: <%= BCrypt::Password.create('visitor') %>
+  role: visitor
+  surname: Mckee
 user_10:
-  email: gailwilliams@yahoo.com
-  name: Jane
+  email: mjohnson@vasquez.biz
+  name: Daniel
   password_digest: <%= BCrypt::Password.create('visitor') %>
   role: visitor
-  surname: Valdez
+  surname: Howard
 user_11:
-  email: timothy75@reyes.com
-  name: Rebekah
-  password_digest: <%= BCrypt::Password.create('admin') %>
-  role: admin
-  surname: Todd
+  email: jamesjones@hotmail.com
+  name: David
+  password_digest: <%= BCrypt::Password.create('librarian') %>
+  role: librarian
+  surname: Flores
 user_12:
-  email: kennedycrystal@yahoo.com
-  name: Lucas
-  password_digest: <%= BCrypt::Password.create('admin') %>
-  role: admin
-  surname: Salas
+  email: janetlloyd@marshall-jackson.com
+  name: Steven
+  password_digest: <%= BCrypt::Password.create('visitor') %>
+  role: visitor
+  surname: Hicks
 user_13:
-  email: waynecortez@jackson.com
-  name: Aaron
-  password_digest: <%= BCrypt::Password.create('librarian') %>
-  role: librarian
-  surname: Carter
+  email: charlesbeasley@sanchez.org
+  name: Darren
+  password_digest: <%= BCrypt::Password.create('admin') %>
+  role: admin
+  surname: Stewart
 user_14:
-  email: qnewman@olson.com
-  name: Kevin
+  email: mercadojacob@yahoo.com
+  name: Karina
   password_digest: <%= BCrypt::Password.create('visitor') %>
   role: visitor
-  surname: Ramos
+  surname: Johnson
 user_2:
-  email: burkebrian@robles-prince.com
-  name: Sean
+  email: suehernandez@gmail.com
+  name: Austin
   password_digest: <%= BCrypt::Password.create('admin') %>
   role: admin
-  surname: Myers
+  surname: Walker
 user_3:
-  email: meyermark@hotmail.com
-  name: Bernard
-  password_digest: <%= BCrypt::Password.create('admin') %>
-  role: admin
-  surname: Roberson
-user_4:
-  email: owilliams@tucker-holland.com
-  name: Elizabeth
-  password_digest: <%= BCrypt::Password.create('librarian') %>
-  role: librarian
-  surname: Meadows
-user_5:
-  email: robertstimothy@yahoo.com
-  name: Andrew
-  password_digest: <%= BCrypt::Password.create('admin') %>
-  role: admin
-  surname: Rose
-user_6:
-  email: heatherfrancis@gmail.com
-  name: Michele
+  email: keithwilson@gmail.com
+  name: Thomas
   password_digest: <%= BCrypt::Password.create('visitor') %>
   role: visitor
-  surname: Jones
-user_7:
-  email: cannonchristopher@mccarthy-morgan.biz
-  name: Natalie
-  password_digest: <%= BCrypt::Password.create('admin') %>
-  role: admin
-  surname: Beard
-user_8:
-  email: beverly61@gmail.com
-  name: Mike
-  password_digest: <%= BCrypt::Password.create('admin') %>
-  role: admin
-  surname: Terry
-user_9:
-  email: christophercasey@hotmail.com
-  name: Carl
+  surname: Anderson
+user_4:
+  email: lisaburns@yahoo.com
+  name: Ryan
   password_digest: <%= BCrypt::Password.create('librarian') %>
   role: librarian
-  surname: Gonzales
+  surname: Nicholson
+user_5:
+  email: cordovajennifer@hotmail.com
+  name: Jennifer
+  password_digest: <%= BCrypt::Password.create('visitor') %>
+  role: visitor
+  surname: Allen
+user_6:
+  email: alyssajenkins@clark.com
+  name: Elizabeth
+  password_digest: <%= BCrypt::Password.create('admin') %>
+  role: admin
+  surname: Lyons
+user_7:
+  email: nathanhood@yahoo.com
+  name: Lisa
+  password_digest: <%= BCrypt::Password.create('visitor') %>
+  role: visitor
+  surname: Johnson
+user_8:
+  email: garciajennifer@hotmail.com
+  name: Gregory
+  password_digest: <%= BCrypt::Password.create('admin') %>
+  role: admin
+  surname: Pena
+user_9:
+  email: goliver@gmail.com
+  name: Nathan
+  password_digest: <%= BCrypt::Password.create('librarian') %>
+  role: librarian
+  surname: Robinson
 visitor:
   email: visitor@mail.ru
   name: Visitor
