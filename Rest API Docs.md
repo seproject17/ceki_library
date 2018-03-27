@@ -6,8 +6,6 @@
 
 **Auth Type:** JWT Token Auth in Cookie 
 
-**Hint**: :warning: means that this method is not implemented yet
-
 ## Summary
 ### Users
 
@@ -23,8 +21,6 @@
 | [POST /users/logout](#get-users) | Logout |
 | [PUT /users/change_username](#get-users) | Change username |
 | [PUT /users/change_password](#get-users) | Change password |
-| :warning: [POST /users/recover_account](#get-users) | Recover an account in case if password was forgotten |
-| :warning: [POST /users/reset_password](#get-users) | Reset password |
 
 ### Tags
 
@@ -41,8 +37,6 @@
 | [POST /books](#get-books) | Create new user book |
 | [PUT /books/{id}](#get-books)  | Update book |
 | [DELETE /books/{id}](#get-books)  | Delete book |
-| :warning: [POST /books/{id}/file](#get-books) | Upload book file |
-| :warning: [GET /books/{id}/file](#get-books) | Download book file |
 | [DELETE /books/{id}/content](#get-books) | Delete book file |
 | [DELETE /books/{id}/cover](#get-books) | Delete book cover |
 | [POST /books/{id}/borrow](#get-books)  | Borrow book |
@@ -78,15 +72,6 @@
 #### GET /users
 ---
 **Summary:** Find all users
-
-**Params**
-
-| Param name | Description | Type | Example |
-| ---------- | ----------- | ---- | ------- |
-| name | Name matcher | string | name[0]=ohn+Smith&name[1]=Anna+Wats&name[2]=An |
-| count | Count of users | integer | count=12 | 
-| offset | Offset | integer | offset=3 |
-| role | Role matcher (expected as array, set of avaiable values: admin, visitor, librarian)| string | role[0]=admin&role[1]=visitor |
 
 **Response body**
 ```json
@@ -320,46 +305,11 @@
 | 401 | Unauthorized |
 | 403 | Forbidden |
 
-#### POST /users/recover_account
----
-**Summary:** Request recovering an account in case password was forgotten. After request user will receive email with instructions to reset password
-
-**Request body**
-```json
-{
-  "email": "james_mortimer@baker_street221b.co.uk"
-}
-```
-
-**Response status**
-
-| Code | Description |
-| ---- | ----------- |
-| 200 | Success |
-
-#### POST /users/reset_password
----
-**Summary:** Reset password
-**Request body**
-```json
-{
-  "password": "qwerty",
-  "token": "<JWT TOKEN>"
-}
-```
-
-**Response status**
-
-| Code | Description |
-| ---- | ----------- |
-| 200 | Success |
-| 401 | Unauthorized |
-
 ### Tags
 
 #### GET /tags
 ---
-**Summary:** Find gets
+**Summary:** Find tags
 
 **Response body**
 ```json
