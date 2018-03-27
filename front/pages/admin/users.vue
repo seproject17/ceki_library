@@ -120,6 +120,26 @@ export default {
                 },
                 buttons: [
                     {
+                        label: 'Удалить',
+                        success({ name, surname, email, password, id }, store, modal) {
+                            modal.$confirm('Вы уверены?', 'Внимание', {
+                                confirmButtonText: 'Да',
+                                cancelButtonText: 'Нет',
+                                type: 'warning'
+                            }).then(() => {
+                                modal.$axios.$delete(`/users/${id}`).then((l) => {
+                                    modal.$message({
+                                        message: 'Пользователь удален успешно',
+                                        type: 'success'
+                                    });
+                                    store.dispatch("loadUsers");
+                                    modal.close();
+                                });
+                            });
+
+                        }
+                    },
+                    {
                         label: 'Сохранить',
                         success({ name, surname, email, password, id }, store, modal) {
 
