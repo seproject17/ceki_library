@@ -4,7 +4,7 @@
           <div style="flex-grow: 1;">
               <el-input placeholder="Введите название, автора, isbn книги" v-model="searchField">
                   <template slot="append">
-                      <el-button>Поиск</el-button>
+                      <el-button icon="el-icon-search" @click="search(searchField)">Поиск</el-button>
                   </template>
               </el-input>
           </div>
@@ -41,6 +41,10 @@
                 await this.$store.dispatch('logout');
                 this.$router.push('/login');
 
+            },
+            search(query){
+                console.log("SEARCH", query);
+                this.$router.push({path: '/books/search', query: {query}});
             }
         },
         data(){
