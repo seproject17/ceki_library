@@ -49,6 +49,9 @@
         },
         data(){
             return {searchField: ''}
+        },
+        created(){
+            this.searchField = (this.$route.query)? this.$route.query.query : '';
         }
 	}
 </script>
