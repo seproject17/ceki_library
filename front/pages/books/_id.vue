@@ -37,7 +37,10 @@
                         <el-button @click="writeReview">Написать рецензию</el-button>
                     </div>
                     <div>
-                        <el-button @click="bookRequest">Заявка на выдачу</el-button>
+                        <el-button v-if="!alreadyOrdered" @click="bookRequest">Заявка на выдачу</el-button>
+                        <div v-else>
+                            Заявка отправлена
+                        </div>
                     </div>
                     <!-- <el-button>У кого?</el-button> -->
                 </div>
@@ -56,11 +59,14 @@
             </smart-modal>
 
         </div>
-        <h3>
-            Рецензии
-        </h3>
-        <book-reviews :reviews="reviews">
-        </book-reviews>
+        <div style="background-color:white;">
+            <h3>
+                Рецензии
+            </h3>
+            <book-reviews :reviews="reviews">
+            </book-reviews>
+        </div>
+
     </div>
 
 </template>
@@ -76,6 +82,7 @@ export default {
     async fetch({ store, params }) {
         await store.dispatch('loadBook', params.id);
         await store.dispatch('loadReviews', params.id);
+        await store.dispatch('loadCurrentUserBorrowings');
     },
     data() {
         return {
@@ -168,6 +175,10 @@ export default {
             console.log('BOOK REQUEST', this.book);
             this.$axios.$post(`/books/${this.book.id}/borrow`).then(res => {
                 console.log('REQUSST SENT ', res);
+                this.$message({
+                    message: 'Заявка была отправлена успешно!',
+                    type: 'success'
+                });
             });
         },
         changeBookCount(){
@@ -201,6 +212,17 @@ export default {
         },
         user() {
             return this.$store.getters.currentUser;
+        },
+        userBorrowings(){
+            return this.$store.getters.currentUserBorrowings;
+        },
+        bookIsDisabled(){
+           this.alreadyOrdered();
+        },
+        alreadyOrdered(){
+            let found = false;
+            this.userBorrowings.forEach(el=>found = found || (el.status === 'ordered' && el.book_id === this.book.id));
+            return found;
         }
     },
     components: {

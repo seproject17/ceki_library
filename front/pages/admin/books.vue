@@ -1,15 +1,95 @@
 <template>
-    <div class="admin-container">
-        <div class="admin-page-content">
+    <div>
+        <div class="admin-buttons-result" style="padding-bottom:20px;">
             <div class="admin-buttons">
-                <el-button @click="showCreateBookModal">Добавить книгу</el-button>
-                <el-button @click="showCreateUserModal">Создать пользователя</el-button>
-                <reservations swipeable/>
-
-            </div>
-            <div class="admin-buttons-result">
+                <el-button @click="showCreateBookModal" icon="el-icon-plus">Книга</el-button>
+                <el-button @click="showCreateUserModal" icon="el-icon-plus">Пользователь</el-button>
             </div>
         </div>
+        <el-table
+                :data="books"
+                style="width: 100%">
+            <el-table-column
+                    prop="isbn"
+                    label="isbn"
+                    sortable
+                    align="center"
+                    width="100">
+            </el-table-column>
+
+            <el-table-column
+                    prop="title"
+                    sortable
+                    align="center"
+
+                    label="Название"
+                    width="250">
+                <template slot-scope="scope">
+                    <div v-if="scope.row.title">{{scope.row.title}}</div>
+                    <div v-else>
+                        без названия
+                    </div>
+                </template>
+            </el-table-column>
+            <el-table-column
+                    prop="author"
+                    sortable
+                    align="center"
+
+                    label="Автор"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="max_count"
+                    label="Всего (шт)"
+                    sortable
+                    align="center"
+
+                    width="100">
+            </el-table-column>
+            <el-table-column
+                    prop="available_count"
+                    label="Доступно (шт)"
+                    sortable
+                    align="center"
+
+                    width="100">
+            </el-table-column>
+            <el-table-column
+                    prop="publisher"
+                    label="Издатель"
+                    sortable
+                    align="center"
+
+                    width="300">
+            </el-table-column>
+            <el-table-column
+                    prop="year"
+                    sortable
+                    width="100"
+                    align="center"
+
+                    label="Год">
+            </el-table-column>
+            <el-table-column
+                    prop="tags"
+                    label="Теги"
+                    align="center"
+
+                    sortable
+                    width="100">
+                <template slot-scope="scope">
+                    <template v-if="scope.row.tags.length>0">
+                        <el-tag  v-for="tag in scope.row.tags">
+                            {{tag}}
+                        </el-tag>
+                    </template>
+                    <div v-else>
+                        без тегов
+                    </div>
+                </template>
+            </el-table-column>
+        </el-table>
         <smart-modal ref="create_book_modal" v-model="createBookModalData">
             <template slot="fields" slot-scope="props">
                 Название
@@ -39,13 +119,20 @@
         </smart-modal>
     </div>
 </template>
-
 <script>
 import SmartModal from '~/components/SmartModal.vue';
 import Reservations from '~/components/Reservations'
-
 export default {
+    layout: 'admin',
     middleware: ['logged', 'admin'],
+    async fetch({ store, params }) {
+        await store.dispatch('loadBooks');
+    },
+    computed: {
+        books() {
+            return this.$store.getters.allBooks;
+        }
+    },
     data() {
         return {
             createBookModalData: {
@@ -128,5 +215,6 @@ export default {
     components: {
         SmartModal, Reservations
     }
+
 };
 </script>
