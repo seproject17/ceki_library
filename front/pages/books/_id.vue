@@ -258,6 +258,8 @@ export default {
         }
         .cover, .annotations {
             height: 420px;
+            max-width: 800px;
+            padding-left:20px;
 
         }
         .annotation {
