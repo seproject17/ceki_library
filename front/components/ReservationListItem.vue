@@ -5,8 +5,8 @@
                 <div v-bind:style="{'transform':this.transform}" class="reservation-list-item"
                      :class="{ selected:this.selected, accepted:accepted!=null&&accepted===true, declined:accepted!=null&&accepted===false }">
                     Запрос №{{reserveInfo.id}}<br>
-                    от пользователя: <strong>{{reserveInfo.user_id}}</strong>
-                    {{reserveInfo.user}} {{formattedDateTime}}
+                    от пользователя: <strong>{{reserveInfo.user.name}}</strong>
+                    {{formattedDateTime}}
                     <div class="reservation-buttons-container" v-if="(!this.swipeable)&&accepted==null">
                         <div class="reservation-button accept" @click.stop="acceptReservation">принять</div>
                         &nbsp;
@@ -71,10 +71,10 @@ export default {
                 this.selected = !this.selected;
         },
         acceptReservation() {
-            this.$emit('accept', { 'reservation': this.reserveInfo, 'accepted': true });
+            this.$emit('decision-made', { borrowing: this.reserveInfo, 'decision': 'accept' });
         },
         declineReservation() {
-            this.$emit('accept', { 'reservation': this.reserveInfo, 'accepted': false });
+            this.$emit('decision-made', { borrowing: this.reserveInfo, 'decision': 'reject' });
         }
     },
     beforeCreate(a) {

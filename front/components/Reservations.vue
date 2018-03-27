@@ -1,7 +1,6 @@
 <template>
     <div class="reservations">
-        <button @click="updateData">Add</button><br><br>
-        <reservation-list-item  style="width:100%;" :key="i" v-for="(reservation, i ) in reservations" :reserve-info="reservation"  :swipeable="swipeable" @accept="handleAccept" />
+        <reservation-list-item  style="width:100%;" :key="reservation.id" v-for="reservation in reservations" :reserve-info="reservation"  :swipeable="swipeable" @decision-made="handleDecision" />
     </div>
 </template>
 
@@ -21,12 +20,14 @@ export default {
         }
     },
     methods:{
-        updateData(){
-            this.reservations.push( {'number':4,'name':'mo7a','dateTime':0});
-        },
-        handleAccept(val){
-            let id = this.reservations.indexOf(val.reservation);
-            this.$set(this.reservations[id],'accepted',val.accepted);
+        handleDecision({borrowing, decision}){
+            // let id = this.reservations.indexOf(val.reservation);
+            console.log("HANDLE DECISION", borrowing, decision);
+            this.$axios.post(`/borrowings/${borrowing.id}/${decision}`).then(res=>{
+                console.log("AFTER AFTER res", res);
+                this.$store.dispatch('loadBorrowings');
+            })
+            // this.$set(this.reservations[id],'accepted',val.accepted);
         }
     }
 }
