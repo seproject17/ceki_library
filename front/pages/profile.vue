@@ -19,11 +19,35 @@
             <p>
                 Заявки на книги
             </p>
-            <div>
-                <div v-for="borrowing in userBorrowings">
-                    {{borrowing}}
-                </div>
-            </div>
+            <el-table :data="userBorrowings"
+                      style="width: 100%">
+                <el-table-column
+                        prop="id"
+                        label="ID"
+                        sortable
+                        align="center"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="book"
+                        label="Книга"
+                        sortable
+                        align="center">
+                    <template slot-scope="scope">
+                        {{`${scope.row.book.title} (id: ${scope.row.book.id})`}}
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        prop="status"
+                        label="Заявка"
+                        sortable
+                        width="200"
+                        align="center">
+                    <template slot-scope="scope">
+                        {{scope.row.status}}
+                    </template>
+                </el-table-column>
+            </el-table>
         </template>
         <div v-else>
             Вы пока не взяли ни одной книги

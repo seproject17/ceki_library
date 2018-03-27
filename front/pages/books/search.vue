@@ -6,7 +6,7 @@
                        :key="book.id">
                 <div class="book-image" :style="`background-image: url(${book.cover.url})`"></div>
                 <p>
-                    {{book.title}} {{$route.query}}
+                    {{book.title}}
                 </p>
                 <p>
                     {{book.author}}
@@ -53,18 +53,32 @@
 export default {
     middleware: ['logged'],
     created() {
-       this.loadBooksWithQuery(this.$route.params.query);
+       this.loadBooksWithQuery(this.$route.query.query);
+
     },
     methods:{
       loadBooksWithQuery(query){
           console.log("loading book with query", query);
           this.$axios.$get('/books', {
               params: {
-                  name: query
+                  query: query
               }
           }).then(res => {
-              console.log("RES IS ", res, res.length);
-              this.books = res;
+              console.log("RES" , res);
+             // console.log("RES IS ", res, res.length);
+              //et found = [];
+              // res.forEach(el=>{
+              //     console.log('ssss', el, query);
+              //     if (el.isbn && el.isbn.indexOf(query) !== -1)
+              //         found.push(el);
+              //     if (el.author && el.author.indexOf(query) !== -1)
+              //         found.push(el);
+              //     if (el.title && el.title.indexOf(query) !== -1)
+              //         found.push(el);
+              //
+              // });
+              // console.log("RESULT IS BOOKS", found);
+              this.books = res;//(!query || query.length === 0)? res : found;
           });
       }
     },
