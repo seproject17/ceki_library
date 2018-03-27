@@ -26,7 +26,7 @@
 | :warning: [POST /users/recover_account](#get-users) | Recover an account in case if password was forgotten |
 | :warning: [POST /users/reset_password](#get-users) | Reset password |
 
-### Books
+### Tags
 
 | URL  | Description |
 | ---  | ----------- |
