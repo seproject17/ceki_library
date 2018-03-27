@@ -5,10 +5,10 @@
                  class="book-item" v-for="book in books"
                  :key="book.id">
         <div class="book-image" :style="`background-image: url(${book.cover.url})`"></div>
-        <p>
+        <p style="color:black;">
           {{book.title}}
         </p>
-        <p>
+        <p style="color:black;">
           {{book.author}}
         </p>
       </nuxt-link>

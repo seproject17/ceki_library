@@ -5,6 +5,9 @@
                 <div class="cover" :style="`background-image: url(${book.cover.url})`"/>
                 <div class="title">{{ book.title }}</div>
                 <div class="author">{{ book.author }}</div>
+                <div>Теги:
+                    <el-tag v-for="tag in book.tags" style="margin:10px;">{{tag.name}}</el-tag>
+                </div>
             </div>
             <div class="flex-2">
                 <div class="annotations">

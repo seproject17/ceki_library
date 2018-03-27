@@ -80,7 +80,7 @@
                 <template slot-scope="scope">
                     <template v-if="scope.row.tags.length>0">
                         <el-tag v-for="tag in scope.row.tags">
-                            {{tag}}
+                            {{tag.name}}
                         </el-tag>
                     </template>
                     <div v-else>
@@ -102,6 +102,17 @@
                 <el-input v-model="props.values.publisher" :placeholder="props.placeholders.publisher"></el-input>
                 ISBN
                 <el-input v-model="props.values.isbn" :placeholder="props.placeholders.isbn"></el-input>
+                Теги
+                <div>
+                    <el-select
+                            v-model="props.values.tags"
+                            multiple
+                            filterable
+                            allow-create
+                            default-first-option
+                            placeholder="выберите теги">
+                    </el-select>
+                </div>
             </template>
         </smart-modal>
         <smart-modal ref="update_book_modal" v-model="updateBookModalData">
@@ -115,8 +126,19 @@
                           :placeholder="props.placeholders.description"></el-input>
                 Издательство
                 <el-input v-model="props.values.publisher" :placeholder="props.placeholders.publisher"></el-input>
-                ISBN
+                <div>ISBN</div>
                 <el-input v-model="props.values.isbn" :placeholder="props.placeholders.isbn"></el-input>
+                Теги
+                <div>
+                    <el-select
+                            v-model="props.values.tags"
+                            multiple
+                            filterable
+                            allow-create
+                            default-first-option
+                            placeholder="выберите теги">
+                    </el-select>
+                </div>
             </template>
         </smart-modal>
     </div>
@@ -144,19 +166,21 @@ export default {
                     author: { value: '', placeholder: 'Укажите автора' },
                     description: { value: '', placeholder: 'Напишите описание' },
                     isbn: { value: '', placeholder: 'ISBN' },
-                    publisher: { value: '', placeholder: 'Издательство' }
+                    publisher: { value: '', placeholder: 'Издательство' },
+                    tags: { value: [] }
                 },
                 buttons: [
                     {
                         label: 'Создать',
-                        success({ title, author, description, isbn, publisher }, store, modal) {
+                        success({ title, author, description, isbn, publisher, tags }, store, modal) {
 
                             modal.$axios.$post('/books', {
                                 title,
                                 author,
                                 annotations: description,
                                 isbn,
-                                publisher
+                                publisher,
+                                tags
                             }).then((l) => {
                                 console.log(l);
                                 modal.close();
@@ -172,19 +196,21 @@ export default {
                     annotations: { value: '', placeholder: 'Напишите описание' },
                     isbn: { value: '', placeholder: 'ISBN' },
                     publisher: { value: '', placeholder: 'Издательство' },
-                    id: { value: 0 }
+                    id: { value: 0 },
+                    tags: { value: [] }
                 },
                 buttons: [
                     {
                         label: 'Сохранить',
-                        success({ title, author, annotations, isbn, publisher, id }, store, modal) {
+                        success({ title, author, annotations, isbn, publisher, id, tags }, store, modal) {
 
                             modal.$axios.$put(`/books/${id}`, {
                                 title,
                                 author,
                                 annotations,
                                 isbn,
-                                publisher
+                                publisher,
+                                tags
                             }).then((l) => {
                                 console.log(l);
                                 modal.$message({
@@ -207,13 +233,16 @@ export default {
             console.log('JJ', this.$refs);
             this.$refs.create_book_modal.updateInitialValues({
                 title: '',
-                author: ''
+                author: '',
+                tags: []
             });
             this.$refs.create_book_modal.show();
         },
-        showUpdateBookModal({ title, author, annotations, isbn, publisher, id }) {
-            console.log('SHOW update book MODAL', { title, author, annotations, isbn, publisher,id });
-            this.$refs.update_book_modal.updateInitialValues({ title, author, annotations, isbn, publisher, id});
+        showUpdateBookModal({ title, author, annotations, isbn, publisher, id, tags }) {
+            console.log('SHOW update book MODAL', { title, author, annotations, isbn, publisher, id, tags });
+            let tagss = [];
+            tags.forEach(tag=>tagss.push(tag.name));
+            this.$refs.update_book_modal.updateInitialValues({ title, author, annotations, isbn, publisher, id, tags:tagss });
             this.$refs.update_book_modal.show();
         }
 

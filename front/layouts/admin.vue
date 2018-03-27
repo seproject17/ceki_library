@@ -50,7 +50,7 @@ export default {
 
 <style lang="scss">
     body {
-        background-color: rgb(200, 180, 230);
+        background-color: white;
     }
     .top-bar-container {
         display: flex;
