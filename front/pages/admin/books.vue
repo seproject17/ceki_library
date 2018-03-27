@@ -178,19 +178,24 @@ export default {
                 buttons: [
                     {
                         label: 'Сохранить',
-                        success({ title, author, description, isbn, publisher, id }, store, modal) {
+                        success({ title, author, annotations, isbn, publisher, id }, store, modal) {
 
                             modal.$axios.$put(`/books/${id}`, {
                                 title,
                                 author,
-                                annotations: description,
+                                annotations,
                                 isbn,
                                 publisher
                             }).then((l) => {
                                 console.log(l);
+                                modal.$message({
+                                    message: 'Книга обновлена успешно',
+                                    type: 'success'
+                                });
+                                store.dispatch('loadBooks');
                                 modal.close();
                             });
-                            console.log('Создано', title, author, description, modal, store);
+                            console.log('Создано', title, author, annotations, modal, store);
                         }
                     }
                 ]
